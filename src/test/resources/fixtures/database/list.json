@@ -1,0 +1,18 @@
+{
+  "databases": [
+    {
+      "Name": "example-database",
+      "DbId": "a2f1d1c8-bfd7-11ee-897f-822b15a0bd8c",
+      "Hostname": "example-database-a2xchip.turso.io",
+      "regions": [
+        "otp"
+      ],
+      "primaryRegion": "otp",
+      "type": "logical",
+      "hostname": "example-database-a2xchip.turso.io",
+      "version": "0.22.15",
+      "group": "default",
+      "sleeping": false
+    }
+  ]
+}

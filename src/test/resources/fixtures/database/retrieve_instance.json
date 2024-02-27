@@ -1,0 +1,9 @@
+{
+  "instance": {
+    "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+    "name": "otp",
+    "type": "primary",
+    "region": "otp",
+    "hostname": "5683d5d3c0e428-default-a2xchip.turso.io"
+  }
+}

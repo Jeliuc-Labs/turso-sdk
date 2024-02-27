@@ -1,0 +1,32 @@
+{
+  "database": {
+    "uuid": "8e78c7e0-c517-11ee-9386-e26d5524e301",
+    "instances": [
+      {
+        "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096
+        }
+      }
+    ],
+    "usage": {
+      "rows_read": 0,
+      "rows_written": 0,
+      "storage_bytes": 4096
+    }
+  },
+  "instances": {
+    "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+      "rows_read": 0,
+      "rows_written": 0,
+      "storage_bytes": 4096
+    }
+  },
+  "total": {
+    "rows_read": 0,
+    "rows_written": 0,
+    "storage_bytes": 4096
+  }
+}
