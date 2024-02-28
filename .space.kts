@@ -1,5 +1,3 @@
-val gradleContainerVersion = "8.5.0-jdk17"
-
 job("Build and tests") {
 
     startOn {
@@ -8,7 +6,7 @@ job("Build and tests") {
         }
     }
 
-    container(displayName = "Build and test", image = "gradle:$gradleContainerVersion") {
+    container(displayName = "Build and test", image = "gradle:8.5.0-jdk17") {
         kotlinScript { api ->
             api.gradlew("check")
             api.gradlew("test")
