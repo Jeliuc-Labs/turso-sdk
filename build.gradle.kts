@@ -26,7 +26,6 @@ plugins {
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     gradlePluginPortal()
     mavenCentral()
 }
@@ -56,8 +55,6 @@ tasks.test {
 
 ktlint {
     version.set("1.1.1")
-    verbose.set(true)
-    debug.set(true)
 }
 
 kotlin {
