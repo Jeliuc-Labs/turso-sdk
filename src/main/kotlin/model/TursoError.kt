@@ -2,11 +2,6 @@ package com.jeliuc.turso.sdk.models
 
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class TursoError(
-    val message: String,
-)
-
 /**
  * ApiError
  *
@@ -23,6 +18,7 @@ data class TursoError(
  *
  * @param message A message describing the error.
  */
+@Serializable
 class ApiError(override val message: String) : Error(message) {
     override fun toString(): String {
         return "ApiError(message='$message')"

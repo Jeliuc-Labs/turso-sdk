@@ -1,7 +1,6 @@
 package com.jeliuc.turso.sdk.resources
 
 import com.jeliuc.turso.sdk.models.ApiError
-import com.jeliuc.turso.sdk.models.TursoError
 import com.jeliuc.turso.sdk.models.UnexpectedResultError
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
@@ -14,9 +13,9 @@ internal suspend inline fun <reified T> handleResponse(response: HttpResponse): 
     try {
         response.body<T>()
     } catch (e: SerializationException) {
-        response.body<TursoError>().let { throw ApiError(it.message) }
+        response.body<ApiError>().let { throw ApiError(it.message) }
     } catch (e: ContentConvertException) {
-        response.body<TursoError>().let { throw ApiError(it.message) }
+        response.body<ApiError>().let { throw ApiError(it.message) }
     } catch (e: Throwable) {
         throw UnexpectedResultError(e.message)
     }

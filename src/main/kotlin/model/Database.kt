@@ -5,16 +5,6 @@ import kotlinx.serialization.Serializable
 
 /**
  * Database
- *
- * @property name The database name, unique across your organization.
- * @property dbId The database universal unique identifier (UUID).
- * @property hostname The DNS hostname used for client libSQL and HTTP connections.
- * @property regions A list of regions for the group the database belongs to.
- * @property primaryRegion The primary region for the group the database belongs to.
- * @property type The object type. Default logical.
- * @property version The current libSQL version the database is running.
- * @property group The group the database belongs to.
- * @property sleeping Whether the database is sleeping.
  */
 @Serializable
 data class Database(
@@ -31,21 +21,12 @@ data class Database(
 
 /**
  * CreateDatabase
- *
- * @property name The database name, unique across your organization.
- * @property group The group the database belongs to.
  */
 @Serializable
 class CreateDatabase(val name: String, val group: String)
 
 /**
- * CreatedDatabase
- *
- * @property dbId The database universal unique identifier (UUID).
- * @property name The database name, unique across your organization.
- * @property hostname The DNS hostname used for client libSQL and HTTP connections.
- * @property issuedCertCount The number of certificates issued for the database.
- * @property issuedCertLimit The maximum number of certificates that can be issued for the database.
+ * Created Database
  */
 @Serializable
 class CreatedDatabase(
@@ -60,10 +41,6 @@ class CreatedDatabase(
  * CreateDatabaseResponse
  *
  * Represents the result of creating a database.
- *
- * @property database The created database.
- * @property password The password for the database.
- * @property username The username for the database.
  */
 @Serializable
 class CreateDatabaseResponse(
@@ -76,8 +53,6 @@ class CreateDatabaseResponse(
  * ListDatabasesResponse
  *
  * Represents the result of listing databases.
- *
- * @property databases The list of databases.
  */
 @Serializable
 data class ListDatabasesResponse(
@@ -88,8 +63,6 @@ data class ListDatabasesResponse(
  * RetrieveDatabaseResponse
  *
  * Represents the result of retrieving a database.
- *
- * @property database The retrieved database.
  */
 @Serializable
 data class RetrieveDatabaseResponse(
@@ -100,10 +73,6 @@ data class RetrieveDatabaseResponse(
  * Usage
  *
  * Represents the usage of a database, instance or total.
- *
- * @property rowsRead The number of rows read.
- * @property rowsWritten The number of rows written.
- * @property storageBytes The number of storage bytes.
  */
 @Serializable
 data class Usage(
@@ -116,9 +85,6 @@ data class Usage(
  * InstanceUsage
  *
  * Represents the usage of an instance.
- *
- * @property uuid The instance universal unique identifier (UUID).
- * @property usage The usage of the instance.
  */
 @Serializable
 data class InstanceUsage(
@@ -130,10 +96,6 @@ data class InstanceUsage(
  * Instances
  *
  * Represents the usage of a database, instance or total.
- *
- * @property uuid The database universal unique identifier (UUID).
- * @property instances The list of instances usage statistics.
- * @property usage The overall usage of the database.
  */
 @Serializable
 data class Instances<T>(
@@ -146,12 +108,6 @@ data class Instances<T>(
  * Instance
  *
  * Represents a database instance.
- *
- * @property uuid The instance universal unique identifier (UUID).
- * @property name The instance name.
- * @property type The instance type.
- * @property region The instance region.
- * @property hostname The instance hostname.
  */
 @Serializable
 data class Instance(
@@ -166,10 +122,6 @@ data class Instance(
  * DatabaseUsageResponse
  *
  * Represents the result of retrieving the usage of a database.
- *
- * @property database The usage of the database.
- * @property instances The usage of the database instances.
- * @property total The overall usage of the database.
  */
 @Serializable
 data class DatabaseUsageResponse(
@@ -222,7 +174,7 @@ data class QueryStatistics(
 /**
  * CreateTokenResponse
  *
- * Represents the result of creating a token.
+ * Represents the result of the token creation.
  */
 @Serializable
 data class CreateTokenResponse(
@@ -233,8 +185,6 @@ data class CreateTokenResponse(
  * UploadDumpResponse
  *
  * Represents the result of uploading a dump.
- *
- * @property dumpUrl The URL of the uploaded dump.
  */
 @Serializable
 data class UploadDumpResponse(
@@ -245,8 +195,6 @@ data class UploadDumpResponse(
  * DatabaseAuthorization
  *
  * The authorization level for a database.
- *
- * @property value The value of the authorization level.
  */
 enum class DatabaseAuthorization(val value: String) {
     FULL_ACCESS("full-access"),

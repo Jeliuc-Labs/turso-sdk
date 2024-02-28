@@ -26,21 +26,27 @@ import io.ktor.http.contentType
 import java.io.File
 import java.time.LocalDateTime
 
-fun TursoClient.databases(): Databases = Databases(this)
+val TursoClient.databases: Databases
+    get() = Databases(this)
 
 /**
  * Turso Databases API Resource
+ *
+ * Example usage:
+ *
+ * ```Kotlin
+ * // client: TursoClient
+ * val databases: ListDatabasesResponse = client.databases.list("organization_name")
+ * ```
  */
 class Databases(private val client: TursoClient) : ResponseHandler {
     /**
-     * List databases
+     * Lists databases
      *
-     * [See](https://docs.turso.tech/api-reference/databases/list)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/list).
      *
-     * @param organizationName The name of the organization
-     * @return ListDatabasesResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(
@@ -52,15 +58,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
         }
 
     /**
-     * Create a database
+     * Creates a database
      *
-     * [See](https://docs.turso.tech/api-reference/databases/create)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/create)
      *
-     * @param organizationName The name of the organization
-     * @param database The database to create
-     * @return CreateDatabaseResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun create(
         organizationName: String,
@@ -75,15 +78,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Retrieve a database
+     * Retrieves a database
      *
-     * [See](https://docs.turso.tech/api-reference/databases/retrieve)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/retrieve)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @return RetrieveDatabaseResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun retrieve(
         organizationName: String,
@@ -95,15 +95,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Get database usage
+     * Gets database usage
      *
-     * [See](https://docs.turso.tech/api-reference/databases/usage)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/usage)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @return DatabaseUsageResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun usage(
         organizationName: String,
@@ -121,15 +118,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Delete a database
+     * Deletes a database
      *
-     * [See](https://docs.turso.tech/api-reference/databases/delete)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/delete)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @return DatabaseDeleteResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun delete(
         organizationName: String,
@@ -141,15 +135,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * List instances
+     * Lists instances
      *
-     * [See](https://docs.turso.tech/api-reference/databases/list-instances)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/list-instances)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @return ListInstancesResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun listInstances(
         organizationName: String,
@@ -163,16 +154,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Retrieve an instance
+     * Retrieves an instance of the database
      *
-     * [See](https://docs.turso.tech/api-reference/databases/retrieve-instance)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/retrieve-instance)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @param instanceName The name of the instance
-     * @return InstanceResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun retrieveInstance(
         organizationName: String,
@@ -185,17 +172,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Create a token
+     * Creates a token
      *
-     * [See](https://docs.turso.tech/api-reference/databases/create-token)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/create-token)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @param expiration The expiration date of the token
-     * @param authorization The authorization level of the token
-     * @return CreateTokenResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun createToken(
         organizationName: String,
@@ -213,15 +195,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Invalidate all tokens
+     * Invalidates all tokens
      *
-     * [See](https://docs.turso.tech/api-reference/databases/invalidate-tokens)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/invalidate-tokens)
      *
-     * @param organizationName The name of the organization
-     * @param databaseName The name of the database
-     * @return Unit Returns empty result if successful
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun invalidateTokens(
         organizationName: String,
@@ -233,15 +212,12 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
-     * Upload a database dump
+     * Uploads a database dump
      *
-     * [See](https://docs.turso.tech/api-reference/databases/upload-dump)
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/upload-dump)
      *
-     * @param organizationName The name of the organization
-     * @param file The file to upload
-     * @return UploadDumpResponse
-     * @throws ApiError
-     * @throws UnexpectedResultError
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun uploadDump(
         organizationName: String,

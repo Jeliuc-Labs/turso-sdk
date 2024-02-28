@@ -137,7 +137,7 @@ class DatabasesTest {
     @Test
     fun `can list databases`() {
         runBlocking {
-            val databases: ListDatabasesResponse = client(mockEngine()).databases().list("test")
+            val databases: ListDatabasesResponse = client(mockEngine()).databases.list("test")
             assertIs<ListDatabasesResponse>(databases)
         }
     }
@@ -145,7 +145,7 @@ class DatabasesTest {
     @Test
     fun `can create a database`() {
         runBlocking {
-            val newDatabase = client(mockEngine()).databases().create("test", CreateDatabase("test-database", "default"))
+            val newDatabase = client(mockEngine()).databases.create("test", CreateDatabase("test-database", "default"))
             assertIs<CreateDatabaseResponse>(newDatabase)
         }
     }
@@ -153,7 +153,7 @@ class DatabasesTest {
     @Test
     fun `can retrieve a database`() {
         runBlocking {
-            val database = client(mockEngine()).databases().retrieve("test", "test-database")
+            val database = client(mockEngine()).databases.retrieve("test", "test-database")
             assertIs<RetrieveDatabaseResponse>(database)
         }
     }
@@ -161,7 +161,7 @@ class DatabasesTest {
     @Test
     fun `can get a database usage`() {
         runBlocking {
-            val usage = client(mockEngine()).databases().usage("test", "test-database")
+            val usage = client(mockEngine()).databases.usage("test", "test-database")
             assertIs<DatabaseUsageResponse>(usage)
         }
     }
@@ -169,7 +169,7 @@ class DatabasesTest {
     @Test
     fun `can delete a database`() {
         runBlocking {
-            val response = client(mockEngine()).databases().delete("test", "test-database")
+            val response = client(mockEngine()).databases.delete("test", "test-database")
             assertIs<DatabaseDeleteResponse>(response)
         }
     }
@@ -177,7 +177,7 @@ class DatabasesTest {
     @Test
     fun `can list instances`() {
         runBlocking {
-            val response = client(mockEngine()).databases().listInstances("test", "test-database")
+            val response = client(mockEngine()).databases.listInstances("test", "test-database")
             assertIs<ListInstancesResponse>(response)
         }
     }
@@ -185,7 +185,7 @@ class DatabasesTest {
     @Test
     fun `can retrieve an instance`() {
         runBlocking {
-            val response = client(mockEngine()).databases().retrieveInstance("test", "test-database", "test-instance")
+            val response = client(mockEngine()).databases.retrieveInstance("test", "test-database", "test-instance")
             assertIs<InstanceResponse>(response)
         }
     }
@@ -193,7 +193,7 @@ class DatabasesTest {
     @Test
     fun `can create a token`() {
         runBlocking {
-            val response = client(mockEngine()).databases().createToken("test", "test-database")
+            val response = client(mockEngine()).databases.createToken("test", "test-database")
             assertIs<CreateTokenResponse>(response)
         }
     }
@@ -201,7 +201,7 @@ class DatabasesTest {
     @Test
     fun `can invalidate tokens`() {
         runBlocking {
-            val response = client(mockEngine()).databases().invalidateTokens("test", "test-database")
+            val response = client(mockEngine()).databases.invalidateTokens("test", "test-database")
             assertIs<Unit>(response)
         }
     }
@@ -212,7 +212,7 @@ class DatabasesTest {
             val response =
                 client(
                     mockEngine(),
-                ).databases().uploadDump("test", Fixture.file("/fixtures/database/test.sql"))
+                ).databases.uploadDump("test", Fixture.file("/fixtures/database/test.sql"))
             assertIs<UploadDumpResponse>(response)
         }
     }
