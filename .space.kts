@@ -1,5 +1,4 @@
 job("Build and tests") {
-
     startOn {
         gitPush {
             anyBranch()
