@@ -1,4 +1,4 @@
-package com.jeliuc.turso.sdk.models
+package com.jeliuc.turso.sdk.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -23,13 +23,35 @@ data class Database(
  * CreateDatabase
  */
 @Serializable
-class CreateDatabase(val name: String, val group: String)
+data class CreateDatabase(
+    @SerialName("name") val name: String,
+    @SerialName("group") val group: String,
+    @SerialName("size_limit") val sizeLimit: String? = null,
+    @SerialName("seed") val seed: Seed? = null,
+)
+
+@Serializable
+sealed class Seed
+
+@Serializable
+@SerialName("database")
+data class DatabaseSeed(
+    @SerialName("name") val name: String,
+    @SerialName("timestamp") val timestamp: String?,
+) : Seed()
+
+@Suppress("unused")
+@Serializable
+@SerialName("dump")
+data class DumpSeed(
+    @SerialName("url") val url: String,
+) : Seed()
 
 /**
  * Created Database
  */
 @Serializable
-class CreatedDatabase(
+data class CreatedDatabase(
     @SerialName("DbId") val dbId: String,
     @SerialName("Name") val name: String,
     @SerialName("Hostname") val hostname: String,
@@ -43,7 +65,7 @@ class CreatedDatabase(
  * Represents the result of creating a database.
  */
 @Serializable
-class CreateDatabaseResponse(
+data class CreateDatabaseResponse(
     @SerialName("database") val database: CreatedDatabase,
     @SerialName("password") val password: String,
     @SerialName("username") val username: String,
@@ -172,16 +194,6 @@ data class QueryStatistics(
 )
 
 /**
- * CreateTokenResponse
- *
- * Represents the result of the token creation.
- */
-@Serializable
-data class CreateTokenResponse(
-    @SerialName("jwt") val jwt: String,
-)
-
-/**
  * UploadDumpResponse
  *
  * Represents the result of uploading a dump.
@@ -190,15 +202,3 @@ data class CreateTokenResponse(
 data class UploadDumpResponse(
     @SerialName("dump_url") val dumpUrl: String,
 )
-
-/**
- * DatabaseAuthorization
- *
- * The authorization level for a database.
- */
-enum class DatabaseAuthorization(val value: String) {
-    FULL_ACCESS("full-access"),
-
-    @Suppress("unused")
-    READ_ONLY("read-only"),
-}

@@ -1,7 +1,7 @@
 package com.jeliuc.turso.sdk.resources
 
-import com.jeliuc.turso.sdk.models.ApiError
-import com.jeliuc.turso.sdk.models.UnexpectedResultError
+import com.jeliuc.turso.sdk.model.ApiError
+import com.jeliuc.turso.sdk.model.UnexpectedResultError
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.ktor.serialization.ContentConvertException

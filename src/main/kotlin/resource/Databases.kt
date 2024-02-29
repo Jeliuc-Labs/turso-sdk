@@ -1,17 +1,18 @@
 package com.jeliuc.turso.sdk.resources
 
 import com.jeliuc.turso.sdk.TursoClient
-import com.jeliuc.turso.sdk.models.CreateDatabase
-import com.jeliuc.turso.sdk.models.CreateDatabaseResponse
-import com.jeliuc.turso.sdk.models.CreateTokenResponse
-import com.jeliuc.turso.sdk.models.DatabaseAuthorization
-import com.jeliuc.turso.sdk.models.DatabaseDeleteResponse
-import com.jeliuc.turso.sdk.models.DatabaseUsageResponse
-import com.jeliuc.turso.sdk.models.InstanceResponse
-import com.jeliuc.turso.sdk.models.ListDatabasesResponse
-import com.jeliuc.turso.sdk.models.ListInstancesResponse
-import com.jeliuc.turso.sdk.models.RetrieveDatabaseResponse
-import com.jeliuc.turso.sdk.models.UploadDumpResponse
+import com.jeliuc.turso.sdk.model.Authorization
+import com.jeliuc.turso.sdk.model.CreateDatabase
+import com.jeliuc.turso.sdk.model.CreateDatabaseResponse
+import com.jeliuc.turso.sdk.model.DatabaseDeleteResponse
+import com.jeliuc.turso.sdk.model.DatabaseUsageResponse
+import com.jeliuc.turso.sdk.model.InstanceResponse
+import com.jeliuc.turso.sdk.model.ListDatabasesResponse
+import com.jeliuc.turso.sdk.model.ListInstancesResponse
+import com.jeliuc.turso.sdk.model.RetrieveDatabaseResponse
+import com.jeliuc.turso.sdk.model.StatsResponse
+import com.jeliuc.turso.sdk.model.TokenResponse
+import com.jeliuc.turso.sdk.model.UploadDumpResponse
 import io.ktor.client.request.delete
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
@@ -118,6 +119,25 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     }
 
     /**
+     * Gets database stats
+     *
+     * [See official documentation page](https://docs.turso.tech/api-reference/databases/stats)
+     *
+     * @throws [com.jeliuc.turso.sdk.models.ApiError]
+     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     */
+    suspend fun stats(
+        organizationName: String,
+        databaseName: String,
+    ) = client.httpClient.get(
+        Resources.databaseStats(organizationName, databaseName),
+    ) {
+        contentType(ContentType.Application.Json)
+    }.let { response ->
+        handleResponse<StatsResponse>(response)
+    }
+
+    /**
      * Deletes a database
      *
      * [See official documentation page](https://docs.turso.tech/api-reference/databases/delete)
@@ -183,7 +203,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
         organizationName: String,
         databaseName: String,
         expiration: String = "never",
-        authorization: DatabaseAuthorization = DatabaseAuthorization.FULL_ACCESS,
+        authorization: Authorization = Authorization.FULL_ACCESS,
     ) = client.httpClient.post(
         Resources.createTokenPath(organizationName, databaseName),
     ) {
@@ -191,7 +211,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
         parameter("expiration", expiration)
         parameter("authorization", authorization.value)
     }.let { response ->
-        handleResponse<CreateTokenResponse>(response)
+        handleResponse<TokenResponse>(response)
     }
 
     /**
@@ -259,6 +279,11 @@ class Databases(private val client: TursoClient) : ResponseHandler {
             organizationName: String,
             databaseName: String,
         ) = databasePath(organizationName, databaseName) + "/usage"
+
+        fun databaseStats(
+            organizationName: String,
+            databaseName: String,
+        ) = databasePath(organizationName, databaseName) + "/stats"
 
         fun baseInstancesPath(
             organizationName: String,

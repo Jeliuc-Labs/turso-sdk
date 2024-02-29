@@ -1,4 +1,4 @@
-package com.jeliuc.turso.sdk.models
+package com.jeliuc.turso.sdk.model
 
 import kotlinx.serialization.Serializable
 

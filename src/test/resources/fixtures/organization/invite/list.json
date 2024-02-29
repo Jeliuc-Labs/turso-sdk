@@ -1,0 +1,23 @@
+{
+  "invites": [
+    {
+      "Accepted": true,
+      "CreatedAt": "2023-01-01T00:00:00Z",
+      "DeletedAt": "2023-01-01T00:00:00Z",
+      "Email": "iku@turso.tech",
+      "ID": 1,
+      "Organization": {
+        "blocked_reads": true,
+        "blocked_writes": true,
+        "name": "personal",
+        "overages": true,
+        "slug": "iku",
+        "type": "personal"
+      },
+      "OrganizationID": 1,
+      "Role": "member",
+      "Token": "3e393245b91b41ebad0980bc98349c9d",
+      "UpdatedAt": "2023-01-01T00:00:00Z"
+    }
+  ]
+}

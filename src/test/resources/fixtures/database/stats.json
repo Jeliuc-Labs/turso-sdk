@@ -1,0 +1,9 @@
+{
+  "top_queries": [
+    {
+      "query": "SELECT COUNT(*), CustomerID FROM Orders GROUP BY CustomerID HAVING COUNT(*) > 5;",
+      "rows_read": 123,
+      "rows_written": 4567
+    }
+  ]
+}

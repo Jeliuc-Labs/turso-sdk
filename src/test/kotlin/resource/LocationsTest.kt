@@ -2,10 +2,11 @@ package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.Fixture
 import com.jeliuc.turso.sdk.client
-import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
+import com.jeliuc.turso.sdk.model.ListLocationsResponse
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.headersOf
@@ -17,10 +18,10 @@ private fun mockEngine(): HttpClientEngine =
     MockEngine { request ->
         val url = request.url
         val method = request.method
-        val fixturesBasePath = "/fixtures/audit_log"
+        val fixturesBasePath = "/fixtures/location"
 
         when (url.encodedPath) {
-            AuditLogs.Resources.listPath("test") -> {
+            Locations.Resources.listPath() -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture().content("$fixturesBasePath/list.json")
@@ -38,13 +39,12 @@ private fun mockEngine(): HttpClientEngine =
         }
     }
 
-class AuditLogsTest {
+class LocationsTest {
     @Test
-    fun `can list audit logs`() {
+    fun `can list locations`() {
         runBlocking {
-            client(mockEngine()).auditLogs.list("test").let { page ->
-                assertIs<ListAuditLogsResponse>(page)
-            }
+            val response = client(mockEngine()).locations.list()
+            assertIs<ListLocationsResponse>(response)
         }
     }
 }

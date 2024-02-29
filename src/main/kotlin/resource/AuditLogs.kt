@@ -39,7 +39,7 @@ class AuditLogs(private val client: TursoClient) : ResponseHandler {
             handleResponse<ListAuditLogsResponse>(response)
         }
 
-    object Resources {
+    internal object Resources {
         fun listPath(organization: String) = "/v1/organizations/$organization/audit-logs"
     }
 }

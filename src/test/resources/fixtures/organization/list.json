@@ -1,0 +1,10 @@
+[
+  {
+    "blocked_reads": true,
+    "blocked_writes": true,
+    "name": "personal",
+    "overages": true,
+    "slug": "iku",
+    "type": "personal"
+  }
+]

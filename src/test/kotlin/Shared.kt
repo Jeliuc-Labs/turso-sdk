@@ -8,7 +8,7 @@ val client: (HttpClientEngine) -> TursoClient = {
     TursoClient.of(engine, "test-token")
 }
 
-object Fixture {
+class Fixture {
     private fun path(path: String) = this::class.java.getResource(path)!!.path
 
     fun file(path: String) = File(path(path))
