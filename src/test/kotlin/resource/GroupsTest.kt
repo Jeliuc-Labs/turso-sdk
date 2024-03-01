@@ -26,14 +26,14 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/list.json"),
+                            Fixture.content("$fixturesBasePath/list.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
 
                     HttpMethod.Post -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/group.json"),
+                            Fixture.content("$fixturesBasePath/group.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -46,14 +46,14 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/group.json"),
+                            Fixture.content("$fixturesBasePath/group.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
 
                     HttpMethod.Delete -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/group.json"),
+                            Fixture.content("$fixturesBasePath/group.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -66,7 +66,7 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/group.json"),
+                            Fixture.content("$fixturesBasePath/group.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -79,14 +79,14 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/group.json"),
+                            Fixture.content("$fixturesBasePath/group.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
 
                     HttpMethod.Delete -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/group.json"),
+                            Fixture.content("$fixturesBasePath/group.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -112,7 +112,7 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/token.json"),
+                            Fixture.content("$fixturesBasePath/token.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }

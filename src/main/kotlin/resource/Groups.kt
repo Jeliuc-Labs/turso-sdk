@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.TursoClient
@@ -7,7 +12,7 @@ import com.jeliuc.turso.sdk.model.GroupResponse
 import com.jeliuc.turso.sdk.model.ListGroupsResponse
 import com.jeliuc.turso.sdk.model.TokenResponse
 import com.jeliuc.turso.sdk.model.TransferGroupRequest
-import com.jeliuc.turso.sdk.resources.handleResponse
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -19,7 +24,20 @@ import io.ktor.http.contentType
 val TursoClient.groups: Groups
     get() = Groups(this)
 
-class Groups(private val client: TursoClient) {
+/**
+ * Turso Groups API Resource
+ *
+ * ```kotlin
+ * // client: TursoClient
+ * val groups = client.groups.list("organizationName")
+ * ```
+ */
+class Groups(private val client: TursoClient) : ResponseHandler() {
+    /**
+     * Lists all groups
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/list]
+     */
     suspend fun list(organization: String) =
         client.httpClient.get(Resources.basePath(organization)) {
             contentType(ContentType.Application.Json)
@@ -27,25 +45,43 @@ class Groups(private val client: TursoClient) {
             handleResponse<ListGroupsResponse>(response)
         }
 
+    /**
+     * Retrieves a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/retrieve]
+     */
     suspend fun retrieve(
         organization: String,
         groupName: String,
+        timeoutMillis: Long = 60000,
     ) = client.httpClient.get(Resources.groupPath(organization, groupName)) {
         contentType(ContentType.Application.Json)
+        timeout { requestTimeoutMillis = timeoutMillis }
     }.let { response ->
         handleResponse<GroupResponse>(response)
     }
 
+    /**
+     * Creates a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/create]
+     */
     suspend fun create(
         organization: String,
         group: CreateGroup,
     ) = client.httpClient.post(Resources.basePath(organization)) {
+        // 30 seconds timeout, because groups creation takes longer than standard requests
         contentType(ContentType.Application.Json)
         setBody(group)
     }.let { response ->
         handleResponse<GroupResponse>(response)
     }
 
+    /**
+     * Deletes a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/delete]
+     */
     suspend fun delete(
         organizationName: String,
         groupName: String,
@@ -55,6 +91,11 @@ class Groups(private val client: TursoClient) {
         handleResponse<GroupResponse>(response)
     }
 
+    /**
+     * Transfers a group to another organization
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/transfer]
+     */
     suspend fun transfer(
         groupName: String,
         fromOrganization: String,
@@ -66,6 +107,11 @@ class Groups(private val client: TursoClient) {
         handleResponse<GroupResponse>(response)
     }
 
+    /**
+     * Adds a location to a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/add-location]
+     */
     suspend fun addLocation(
         organizationName: String,
         groupName: String,
@@ -78,6 +124,11 @@ class Groups(private val client: TursoClient) {
         handleResponse<GroupResponse>(response)
     }
 
+    /**
+     * Removes a location from a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/remove-location]
+     */
     suspend fun removeLocation(
         organizationName: String,
         groupName: String,
@@ -88,6 +139,11 @@ class Groups(private val client: TursoClient) {
         handleResponse<GroupResponse>(response)
     }
 
+    /**
+     * Updates the LibSql version for all databases in the group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/update-database-versions]
+     */
     suspend fun updateVersion(
         organizationName: String,
         groupName: String,
@@ -98,11 +154,11 @@ class Groups(private val client: TursoClient) {
     }
 
     /**
-     * Create an auth token for a group
+     * Creates an auth token for a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/create-token]
      *
      * @param expiration Expiration time for the token (e.g., "2w1d30m"). Default: "never".
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
      */
     suspend fun createToken(
         organizationName: String,
@@ -117,6 +173,11 @@ class Groups(private val client: TursoClient) {
         handleResponse<TokenResponse>(response)
     }
 
+    /**
+     * Invalidates all auth tokens of a group
+     *
+     * @see [https://docs.turso.tech/api-reference/groups/invalidate-tokens]
+     */
     suspend fun invalidateTokens(
         organizationName: String,
         groupName: String,

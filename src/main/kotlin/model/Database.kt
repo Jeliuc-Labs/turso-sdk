@@ -1,11 +1,13 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * Database
- */
 @Serializable
 data class Database(
     @SerialName("Name") val name: String,
@@ -19,9 +21,6 @@ data class Database(
     @SerialName("sleeping") val sleeping: Boolean,
 )
 
-/**
- * CreateDatabase
- */
 @Serializable
 data class CreateDatabase(
     @SerialName("name") val name: String,
@@ -47,9 +46,6 @@ data class DumpSeed(
     @SerialName("url") val url: String,
 ) : Seed()
 
-/**
- * Created Database
- */
 @Serializable
 data class CreatedDatabase(
     @SerialName("DbId") val dbId: String,
@@ -59,11 +55,6 @@ data class CreatedDatabase(
     @SerialName("IssuedCertLimit") val issuedCertLimit: Int,
 )
 
-/**
- * CreateDatabaseResponse
- *
- * Represents the result of creating a database.
- */
 @Serializable
 data class CreateDatabaseResponse(
     @SerialName("database") val database: CreatedDatabase,
@@ -71,31 +62,16 @@ data class CreateDatabaseResponse(
     @SerialName("username") val username: String,
 )
 
-/**
- * ListDatabasesResponse
- *
- * Represents the result of listing databases.
- */
 @Serializable
 data class ListDatabasesResponse(
     @SerialName("databases") val databases: List<Database>,
 )
 
-/**
- * RetrieveDatabaseResponse
- *
- * Represents the result of retrieving a database.
- */
 @Serializable
 data class RetrieveDatabaseResponse(
     @SerialName("database") val database: Database,
 )
 
-/**
- * Usage
- *
- * Represents the usage of a database, instance or total.
- */
 @Serializable
 data class Usage(
     @SerialName("rows_read") val rowsRead: Int,
@@ -103,22 +79,12 @@ data class Usage(
     @SerialName("storage_bytes") val storageBytes: Int,
 )
 
-/**
- * InstanceUsage
- *
- * Represents the usage of an instance.
- */
 @Serializable
 data class InstanceUsage(
     @SerialName("uuid") val uuid: String,
     @SerialName("usage") val usage: Usage,
 )
 
-/**
- * Instances
- *
- * Represents the usage of a database, instance or total.
- */
 @Serializable
 data class Instances<T>(
     @SerialName("uuid") val uuid: String,
@@ -126,11 +92,6 @@ data class Instances<T>(
     @SerialName("usage") val usage: Usage,
 )
 
-/**
- * Instance
- *
- * Represents a database instance.
- */
 @Serializable
 data class Instance(
     @SerialName("uuid") val uuid: String,
@@ -140,11 +101,6 @@ data class Instance(
     @SerialName("hostname") val hostname: String,
 )
 
-/**
- * DatabaseUsageResponse
- *
- * Represents the result of retrieving the usage of a database.
- */
 @Serializable
 data class DatabaseUsageResponse(
     @SerialName("database") val database: Instances<InstanceUsage>,
@@ -153,29 +109,15 @@ data class DatabaseUsageResponse(
 )
 
 @Serializable
-data class DatabaseDeleteResponse(
+data class DeleteDatabaseResponse(
     @SerialName("database") val database: String,
 )
 
-/**
- * ListInstancesResponse
- *
- * Represents the result of instances.
- *
- * @property instances The list of instances.
- */
 @Serializable
 data class ListInstancesResponse(
     @SerialName("instances") val instances: List<Instance>,
 )
 
-/**
- * InstanceResponse
- *
- * Represents the result of retrieving an instance.
- *
- * @property instance The retrieved instance.
- */
 @Serializable
 data class InstanceResponse(
     @SerialName("instance") val instance: Instance,
@@ -193,11 +135,6 @@ data class QueryStatistics(
     @SerialName("rows_written") val rowsWritten: Long,
 )
 
-/**
- * UploadDumpResponse
- *
- * Represents the result of uploading a dump.
- */
 @Serializable
 data class UploadDumpResponse(
     @SerialName("dump_url") val dumpUrl: String,

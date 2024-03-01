@@ -33,7 +33,7 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/list.json"),
+                            Fixture.content("$fixturesBasePath/list.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -46,7 +46,7 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Patch -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/organization.json"),
+                            Fixture.content("$fixturesBasePath/organization.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -59,14 +59,14 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/member/list.json"),
+                            Fixture.content("$fixturesBasePath/member/list.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
 
                     HttpMethod.Post -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/member/create.json"),
+                            Fixture.content("$fixturesBasePath/member/create.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -79,7 +79,7 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Delete -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/member/delete.json"),
+                            Fixture.content("$fixturesBasePath/member/delete.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -92,14 +92,14 @@ private fun mockEngine() =
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/invite/list.json"),
+                            Fixture.content("$fixturesBasePath/invite/list.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
 
                     HttpMethod.Post -> {
                         respond(
-                            Fixture().content("$fixturesBasePath/invite/create.json"),
+                            Fixture.content("$fixturesBasePath/invite/create.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }

@@ -23,7 +23,7 @@ private fun mockEngine(): HttpClientEngine =
             AuditLogs.Resources.listPath("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
-                        val data = Fixture().content("$fixturesBasePath/list.json")
+                        val data = Fixture.content("$fixturesBasePath/list.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),

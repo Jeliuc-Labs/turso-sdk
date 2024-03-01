@@ -25,7 +25,7 @@ private fun mockEngine() =
             ApiTokens.Resources.tokenPath("test-token") -> {
                 when (method) {
                     HttpMethod.Post -> {
-                        val data = Fixture().content("$fixturesBasePath/create.json")
+                        val data = Fixture.content("$fixturesBasePath/create.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
@@ -33,7 +33,7 @@ private fun mockEngine() =
                     }
 
                     HttpMethod.Delete -> {
-                        val data = Fixture().content("$fixturesBasePath/revoke.json")
+                        val data = Fixture.content("$fixturesBasePath/revoke.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
@@ -47,7 +47,7 @@ private fun mockEngine() =
             ApiTokens.Resources.validatePath() -> {
                 when (method) {
                     HttpMethod.Get -> {
-                        val data = Fixture().content("$fixturesBasePath/validate.json")
+                        val data = Fixture.content("$fixturesBasePath/validate.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
@@ -60,7 +60,7 @@ private fun mockEngine() =
             ApiTokens.Resources.basePath() -> {
                 when (method) {
                     HttpMethod.Get -> {
-                        val data = Fixture().content("$fixturesBasePath/list.json")
+                        val data = Fixture.content("$fixturesBasePath/list.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),

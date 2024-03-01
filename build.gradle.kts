@@ -9,16 +9,17 @@ val ktorVersion: String by project
 
 val spaceUsername: String? by project
 val spacePassword: String? by project
-val clientVersion: String by project
+val sdkVersion: String by project
+val spaceMavenRepositoryUrl: String by project
 
 group = "com.jeliuc"
-version = clientVersion
+version = System.getenv("SDK_VERSION") ?: sdkVersion
 
 plugins {
     kotlin("jvm").version("1.9.20")
-    id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
     kotlin("plugin.serialization").version("1.9.20")
 
+    id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
     id("org.jetbrains.dokka") version "1.9.10"
 
     `maven-publish`
@@ -43,8 +44,6 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
-    implementation("io.ktor:ktor-client-resources:$ktorVersion")
-    implementation("io.ktor:ktor-client-auth:$ktorVersion")
 }
 
 tasks.test {
@@ -59,6 +58,10 @@ ktlint {
 
 kotlin {
     jvmToolchain(17)
+
+    java {
+        withJavadocJar()
+    }
 }
 
 sourceSets.main {
@@ -84,10 +87,33 @@ tasks.withType<DokkaTask>().configureEach {
     }
 }
 
+tasks.named<Jar>("javadocJar") {
+    from(tasks.named("dokkaJavadoc"))
+}
+
 tasks.dokkaHtml {
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
         version = "0.2.0"
         olderVersionsDir = file("documentation/version")
         renderVersionsNavigationOnAllPages = true
+    }
+}
+
+gradlePlugin { isAutomatedPublishing = false }
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            from(components["java"])
+        }
+    }
+
+    repositories {
+        maven {
+            url = uri(spaceMavenRepositoryUrl)
+            credentials {
+                username = System.getenv("SPACE_USERNAME") ?: spaceUsername
+                password = System.getenv("SPACE_PASSWORD") ?: spacePassword
+            }
+        }
     }
 }

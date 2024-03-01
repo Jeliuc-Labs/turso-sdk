@@ -5,10 +5,10 @@ import java.io.File
 
 val client: (HttpClientEngine) -> TursoClient = {
         engine ->
-    TursoClient.of(engine, "test-token")
+    TursoClient.using(engine, "test-token")
 }
 
-class Fixture {
+object Fixture {
     private fun path(path: String) = this::class.java.getResource(path)!!.path
 
     fun file(path: String) = File(path(path))

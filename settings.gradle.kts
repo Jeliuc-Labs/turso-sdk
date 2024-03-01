@@ -1,1 +1,1 @@
-rootProject.name = "turso-kotlin-sdk"
+rootProject.name = "turso-sdk-jvm"

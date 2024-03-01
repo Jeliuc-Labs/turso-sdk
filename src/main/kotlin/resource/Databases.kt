@@ -1,11 +1,16 @@
-package com.jeliuc.turso.sdk.resources
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
+package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.TursoClient
 import com.jeliuc.turso.sdk.model.Authorization
 import com.jeliuc.turso.sdk.model.CreateDatabase
 import com.jeliuc.turso.sdk.model.CreateDatabaseResponse
-import com.jeliuc.turso.sdk.model.DatabaseDeleteResponse
 import com.jeliuc.turso.sdk.model.DatabaseUsageResponse
+import com.jeliuc.turso.sdk.model.DeleteDatabaseResponse
 import com.jeliuc.turso.sdk.model.InstanceResponse
 import com.jeliuc.turso.sdk.model.ListDatabasesResponse
 import com.jeliuc.turso.sdk.model.ListInstancesResponse
@@ -40,14 +45,11 @@ val TursoClient.databases: Databases
  * val databases: ListDatabasesResponse = client.databases.list("organization_name")
  * ```
  */
-class Databases(private val client: TursoClient) : ResponseHandler {
+class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists databases
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/list).
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/list]
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(
@@ -61,10 +63,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Creates a database
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/create)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * [https://docs.turso.tech/api-reference/databases/create]
      */
     suspend fun create(
         organizationName: String,
@@ -81,10 +80,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Retrieves a database
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/retrieve)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/retrieve]
      */
     suspend fun retrieve(
         organizationName: String,
@@ -98,10 +94,10 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Gets database usage
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/usage)
+     * @see [https://docs.turso.tech/api-reference/databases/usage]
      *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @throws [com.jeliuc.turso.sdk.model.ApiError]
+     * @throws [com.jeliuc.turso.sdk.model.UnexpectedResultError]
      */
     suspend fun usage(
         organizationName: String,
@@ -121,10 +117,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Gets database stats
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/stats)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/stats]
      */
     suspend fun stats(
         organizationName: String,
@@ -140,10 +133,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Deletes a database
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/delete)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/delete]
      */
     suspend fun delete(
         organizationName: String,
@@ -151,16 +141,13 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     ) = client.httpClient.delete(
         Resources.databasePath(organizationName, databaseName),
     ).let { response ->
-        handleResponse<DatabaseDeleteResponse>(response)
+        handleResponse<DeleteDatabaseResponse>(response)
     }
 
     /**
      * Lists instances
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/list-instances)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/list-instances]
      */
     suspend fun listInstances(
         organizationName: String,
@@ -176,10 +163,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Retrieves an instance of the database
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/retrieve-instance)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/retrieve-instance]
      */
     suspend fun retrieveInstance(
         organizationName: String,
@@ -194,10 +178,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Creates a token
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/create-token)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/create-token]
      */
     suspend fun createToken(
         organizationName: String,
@@ -217,10 +198,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Invalidates all tokens
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/invalidate-tokens)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/invalidate-tokens]
      */
     suspend fun invalidateTokens(
         organizationName: String,
@@ -234,10 +212,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
     /**
      * Uploads a database dump
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/databases/upload-dump)
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/databases/upload-dump]
      */
     suspend fun uploadDump(
         organizationName: String,
@@ -294,7 +269,7 @@ class Databases(private val client: TursoClient) : ResponseHandler {
             organizationName: String,
             databaseName: String,
             instanceName: String,
-        ) = baseInstancesPath(organizationName, databaseName) + "/instances/$instanceName"
+        ) = baseInstancesPath(organizationName, databaseName) + "/$instanceName"
 
         fun createTokenPath(
             organizationName: String,

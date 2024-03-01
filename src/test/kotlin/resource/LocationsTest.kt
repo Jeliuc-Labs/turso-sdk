@@ -24,7 +24,7 @@ private fun mockEngine(): HttpClientEngine =
             Locations.Resources.listPath() -> {
                 when (method) {
                     HttpMethod.Get -> {
-                        val data = Fixture().content("$fixturesBasePath/list.json")
+                        val data = Fixture.content("$fixturesBasePath/list.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),

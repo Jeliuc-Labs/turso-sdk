@@ -1,9 +1,12 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.TursoClient
 import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
-import com.jeliuc.turso.sdk.resources.ResponseHandler
-import com.jeliuc.turso.sdk.resources.handleResponse
 import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
@@ -23,14 +26,11 @@ val TursoClient.auditLogs: AuditLogs
  * val auditLogs = client.auditLogs.list("organizationName")
  * ```
  */
-class AuditLogs(private val client: TursoClient) : ResponseHandler {
+class AuditLogs(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists audit logs
      *
-     * [See official documentation page](https://docs.turso.tech/api-reference/audit-logs/list).
-     *
-     * @throws [com.jeliuc.turso.sdk.models.ApiError]
-     * @throws [com.jeliuc.turso.sdk.models.UnexpectedResultError]
+     * @see [https://docs.turso.tech/api-reference/audit-logs/list]
      */
     suspend fun list(organization: String) =
         this.client.httpClient.get(Resources.listPath(organization)) {
