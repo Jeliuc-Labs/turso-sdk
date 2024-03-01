@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.Fixture
@@ -43,6 +48,7 @@ private fun mockEngine(): HttpClientEngine =
                     else -> error("Unhandled ${method.value} ${url.encodedPath}")
                 }
             }
+
             Databases.Resources.databasePath("test", "test-database") -> {
                 when (method) {
                     HttpMethod.Get -> {
@@ -62,10 +68,12 @@ private fun mockEngine(): HttpClientEngine =
                     else -> error("Unhandled ${method.value} ${url.encodedPath}")
                 }
             }
+
             Databases.Resources.databaseUsagePath("test", "test-database") -> {
                 val data = Fixture.content("$fixturesBasePath/usage.json")
                 respond(data, headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())))
             }
+
             Databases.Resources.baseInstancesPath("test", "test-database") -> {
                 val data = Fixture.content("$fixturesBasePath/list_instances.json")
                 respond(
@@ -73,6 +81,7 @@ private fun mockEngine(): HttpClientEngine =
                     headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                 )
             }
+
             Databases.Resources.instancePath("test", "test-database", "test-instance") -> {
                 val data = Fixture.content("$fixturesBasePath/retrieve_instance.json")
                 respond(
@@ -80,6 +89,7 @@ private fun mockEngine(): HttpClientEngine =
                     headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                 )
             }
+
             Databases.Resources.createTokenPath("test", "test-database") -> {
                 when (method) {
                     HttpMethod.Post -> {

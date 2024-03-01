@@ -32,8 +32,8 @@ class AuditLogs(private val client: TursoClient) : ResponseHandler() {
      *
      * @see [https://docs.turso.tech/api-reference/audit-logs/list]
      */
-    suspend fun list(organization: String) =
-        this.client.httpClient.get(Resources.listPath(organization)) {
+    suspend fun list(organizationName: String) =
+        this.client.httpClient.get(Resources.listPath(organizationName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<ListAuditLogsResponse>(response)

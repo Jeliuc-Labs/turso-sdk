@@ -42,7 +42,7 @@ val TursoClient.databases: Databases
  *
  * ```Kotlin
  * // client: TursoClient
- * val databases: ListDatabasesResponse = client.databases.list("organization_name")
+ * val databases: ListDatabasesResponse = client.databases.list("organizationName")
  * ```
  */
 class Databases(private val client: TursoClient) : ResponseHandler() {

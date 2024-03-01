@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.Fixture
@@ -172,7 +177,7 @@ class GroupsTest {
     }
 
     @Test
-    fun `can transfer the group from organization to another organization`() {
+    fun `can transfer the group to another organization`() {
         runBlocking {
             val response = client(mockEngine()).groups.transfer("test-group", "from-org", "to-org")
             assertIs<GroupResponse>(response)

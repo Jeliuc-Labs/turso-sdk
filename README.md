@@ -62,7 +62,7 @@ organizations.forEach { org ->
 
 ## Future Plans
 
-* [ ] 
+* [ ] Use `kotlinx.datetime` for date and time handling
 * [ ] Transform into a multiplatform library (KMP) - and support JVM, JS, and Native
 
 ## Contribution

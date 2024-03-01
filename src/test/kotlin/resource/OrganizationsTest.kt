@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.Fixture
@@ -123,7 +128,7 @@ class OrganizationsTest {
     }
 
     @Test
-    fun `can update organization`() {
+    fun `can update the organization`() {
         runBlocking {
             client(mockEngine()).organizations.update("test", UpdateOrganizationRequest(true)).let { response ->
                 assertIs<OrganizationResponse>(response)
@@ -141,7 +146,7 @@ class OrganizationsTest {
     }
 
     @Test
-    fun `can add a member of an organization`() {
+    fun `can add a member to an organization`() {
         runBlocking {
             client(mockEngine()).organizations.members.add("test", CreateMember("Alex", MemberRole.ADMIN)).let { response ->
                 assertIs<CreateMemberResponse>(response)
@@ -154,7 +159,7 @@ class OrganizationsTest {
     }
 
     @Test
-    fun `can remove a member of the organization`() {
+    fun `can remove a member from the organization`() {
         runBlocking {
             client(mockEngine()).organizations.members.remove("test", "test-member").let { response ->
                 assertIs<DeleteMemberResponse>(response)

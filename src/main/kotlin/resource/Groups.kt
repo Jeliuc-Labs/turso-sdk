@@ -38,8 +38,8 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
      *
      * @see [https://docs.turso.tech/api-reference/groups/list]
      */
-    suspend fun list(organization: String) =
-        client.httpClient.get(Resources.basePath(organization)) {
+    suspend fun list(organizationName: String) =
+        client.httpClient.get(Resources.basePath(organizationName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<ListGroupsResponse>(response)
@@ -51,10 +51,10 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/groups/retrieve]
      */
     suspend fun retrieve(
-        organization: String,
+        organizationName: String,
         groupName: String,
         timeoutMillis: Long = 60000,
-    ) = client.httpClient.get(Resources.groupPath(organization, groupName)) {
+    ) = client.httpClient.get(Resources.groupPath(organizationName, groupName)) {
         contentType(ContentType.Application.Json)
         timeout { requestTimeoutMillis = timeoutMillis }
     }.let { response ->
@@ -67,9 +67,9 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/groups/create]
      */
     suspend fun create(
-        organization: String,
+        organizationName: String,
         group: CreateGroup,
-    ) = client.httpClient.post(Resources.basePath(organization)) {
+    ) = client.httpClient.post(Resources.basePath(organizationName)) {
         // 30 seconds timeout, because groups creation takes longer than standard requests
         contentType(ContentType.Application.Json)
         setBody(group)
