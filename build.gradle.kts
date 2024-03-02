@@ -94,7 +94,7 @@ tasks.named<Jar>("javadocJar") {
 tasks.dokkaHtml {
     pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
         version = "0.2.0"
-        olderVersionsDir = file("documentation/version")
+        olderVersionsDir = file("documentation/api/version")
         renderVersionsNavigationOnAllPages = true
     }
 }
