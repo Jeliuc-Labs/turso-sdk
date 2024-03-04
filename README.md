@@ -8,62 +8,101 @@ Learn more about the [Turso](https://turso.tech/about-us).
 
 Checkout what **libSQL** can do for you at [https://turso.tech/libsql](https://turso.tech/libsql).
 
-## Getting Started
+## Reference Turso SDK in your project
 
-### Install gradle dependencies
+### Define version variables 
 
-```kts
-TODO()
+Add package versions in `gradle.properties`
+
+Example:
+
+```
+ktorVersion=2.3.6
+logbackVersion=1.5.1
+tursoSdkVersion=0.1.11 // currently published version
 ```
 
-### Create and instance of the client
+### Add dependencies
 
-```kotlin
+Add dependencies to `build.gradle.kts`
 
-val token = "your-api-key" 
+```Kotlin
+// define version variables
+val ktorVersion: String by project
+val logbackVersion: String by project
+val tursoSdkVersion: String by project
 
-val client = TursoClient.using(CIO, token)
-// Interact with the client.
-// And close it when you are done.
+// add maven central to repositories
+repositories {
+    // other repositories
+    mavenCentral()
+}
+
+dependencies {
+    // ...
+    implementation("io.ktor:ktor-client-core:$ktorVersion")
+    implementation("io.ktor:ktor-client-cio:$ktorVersion")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation ("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("com.jeliuc:turso-sdk-jvm:$tursoSdkVersion")
+    // ...
+}
+```
+
+## Create Turso auth token
+
+Generate auth token. And copy it somewhere.
+
+```Bash
+turso auth api-tokens mint quickstart
+```
+
+See official [documentation](https://docs.turso.tech/api-reference/quickstart).
+
+## Use client 
+
+### Create TursoClient.
+
+```Kotlin
+val token = "you-api-access-token"
+
+val client = TursoClient.using(CIO.create(), token)
+```
+
+### Make your first call 
+
+Example: listing databases for an organization.
+
+```Kotlin
+val organization = "myorg"
+val databases = client.databases.list(organization)
+```
+
+Example: creating new database.
+
+```Kotlin
+val createDatabase = CreateDatabase("databaseName", "databaseGroup")
+
+val databaseCreationResponse = client.databases().create(organization, createDatabase)
+```
+
+### Free resources
+
+Don't forget to close the client to free resources when you are done.
+
+```Kotlin
 client.close()
-
-// Optionally you can provide some optional parameters
-val client = TursoClient.using(
-    CIO,
-    token,
-    baseUri = "https://custom-api-url.com",
-    maxRetries = 5
-)
 ```
 
-### Create your first request
-
-```kotlin
-runBlocking {
-    val organizations: List<Organization> = client.organizations.list()
-}
-
-organizations.forEach { org ->
-    println("${org.slug} ${org.name}") 
-}
-```
-
-### Resources
-
-* [x] Organizations
-  * [x] Members
-  * [x] Invites
-* [x] Groups
-* [x] Databases
-* [x] Locations
-* [x] Audit Logs
-* [x] API Tokens
-
+**For full list of examples, check tests.**
 
 ## Future Plans
 
 * [ ] Use `kotlinx.datetime` for date and time handling
 * [ ] Transform into a multiplatform library (KMP) - and support JVM, JS, and Native
+* [ ] HRANA3 protocol implementation (WIP)
+* [ ] libSQL JDBC driver (WIP)
 
 ## Contribution
 If you've found an error in this sample, please file an issue. <br>
