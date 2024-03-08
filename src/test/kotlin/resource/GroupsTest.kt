@@ -27,7 +27,7 @@ private fun mockEngine() =
         val fixturesBasePath = "/fixtures/group"
 
         when (url.encodedPath) {
-            Groups.Resources.basePath("test") -> {
+            Groups.Path.groups("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
@@ -47,7 +47,7 @@ private fun mockEngine() =
                 }
             }
 
-            Groups.Resources.groupPath("test", "test-group") -> {
+            Groups.Path.groups("test", "test-group") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
@@ -67,7 +67,7 @@ private fun mockEngine() =
                 }
             }
 
-            Groups.Resources.transferPath("from-org", "test-group") -> {
+            Groups.Path.transfer("from-org", "test-group") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
@@ -80,7 +80,7 @@ private fun mockEngine() =
                 }
             }
 
-            Groups.Resources.locationPath("test", "test-group", "ams") -> {
+            Groups.Path.locations("test", "test-group", "ams") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
@@ -100,7 +100,7 @@ private fun mockEngine() =
                 }
             }
 
-            Groups.Resources.updatePath("test", "test-group") -> {
+            Groups.Path.update("test", "test-group") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
@@ -113,7 +113,7 @@ private fun mockEngine() =
                 }
             }
 
-            Groups.Resources.tokenPath("test", "test-group") -> {
+            Groups.Path.tokens("test", "test-group") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
@@ -126,7 +126,7 @@ private fun mockEngine() =
                 }
             }
 
-            Groups.Resources.authRotatePath("test", "test-group") -> {
+            Groups.Path.invalidateTokens("test", "test-group") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         respond(

@@ -11,7 +11,6 @@ import com.jeliuc.turso.sdk.model.ListLocationsResponse
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
-import io.ktor.client.request.get
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.headersOf
@@ -26,7 +25,7 @@ private fun mockEngine(): HttpClientEngine =
         val fixturesBasePath = "/fixtures/location"
 
         when (url.encodedPath) {
-            Locations.Resources.listPath() -> {
+            Locations.Path.locations() -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/list.json")

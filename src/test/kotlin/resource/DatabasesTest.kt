@@ -35,7 +35,7 @@ private fun mockEngine(): HttpClientEngine =
         val fixturesBasePath = "/fixtures/database"
 
         when (url.encodedPath) {
-            Databases.Resources.organizationPath("test") -> {
+            Databases.Path.organizationPath("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/list.json")
@@ -49,7 +49,7 @@ private fun mockEngine(): HttpClientEngine =
                 }
             }
 
-            Databases.Resources.databasePath("test", "test-database") -> {
+            Databases.Path.databases("test", "test-database") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/retrieve.json")
@@ -69,12 +69,12 @@ private fun mockEngine(): HttpClientEngine =
                 }
             }
 
-            Databases.Resources.databaseUsagePath("test", "test-database") -> {
+            Databases.Path.usage("test", "test-database") -> {
                 val data = Fixture.content("$fixturesBasePath/usage.json")
                 respond(data, headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())))
             }
 
-            Databases.Resources.baseInstancesPath("test", "test-database") -> {
+            Databases.Path.instances("test", "test-database") -> {
                 val data = Fixture.content("$fixturesBasePath/list_instances.json")
                 respond(
                     data,
@@ -82,7 +82,7 @@ private fun mockEngine(): HttpClientEngine =
                 )
             }
 
-            Databases.Resources.instancePath("test", "test-database", "test-instance") -> {
+            Databases.Path.instances("test", "test-database", "test-instance") -> {
                 val data = Fixture.content("$fixturesBasePath/retrieve_instance.json")
                 respond(
                     data,
@@ -90,7 +90,7 @@ private fun mockEngine(): HttpClientEngine =
                 )
             }
 
-            Databases.Resources.createTokenPath("test", "test-database") -> {
+            Databases.Path.tokens("test", "test-database") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         val data = Fixture.content("$fixturesBasePath/create_token.json")
@@ -107,7 +107,7 @@ private fun mockEngine(): HttpClientEngine =
                 }
             }
 
-            Databases.Resources.invalidateAuthTokensPath("test", "test-database") -> {
+            Databases.Path.invalidateTokens("test", "test-database") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         respond(
@@ -123,7 +123,7 @@ private fun mockEngine(): HttpClientEngine =
                 }
             }
 
-            Databases.Resources.uploadDumpPath("test") -> {
+            Databases.Path.dumps("test") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         val data = Fixture.content("$fixturesBasePath/upload_dump.json")
@@ -140,7 +140,7 @@ private fun mockEngine(): HttpClientEngine =
                 }
             }
 
-            Databases.Resources.databaseStats("test", "test-database") -> {
+            Databases.Path.stats("test", "test-database") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/stats.json")

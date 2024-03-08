@@ -34,7 +34,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/tokens/create]
      */
     suspend fun create(tokenName: String) =
-        client.httpClient.post(Resources.tokenPath(tokenName)) {
+        client.httpClient.post(Path.tokens(tokenName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<CreateApiTokenResponse>(response)
@@ -46,7 +46,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/tokens/validate]
      */
     suspend fun validate() =
-        client.httpClient.get(Resources.validatePath()) {
+        client.httpClient.get(Path.validate()) {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<ValidateTokenResponse>(response)
@@ -58,7 +58,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/tokens/list]
      */
     suspend fun list() =
-        client.httpClient.get(Resources.basePath()) {
+        client.httpClient.get(Path.tokens()) {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<ListApiTokensResponse>(response)
@@ -70,19 +70,19 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/tokens/revoke]
      */
     suspend fun revoke(tokenName: String) =
-        client.httpClient.delete(Resources.tokenPath(tokenName)) {
+        client.httpClient.delete(Path.tokens(tokenName)) {
             contentType(ContentType.Application.Json)
         }.let {
             handleResponse<RevokeApiTokenResponse>(it)
         }
 
-    internal object Resources {
+    internal object Path {
         private const val BASE_PATH = "/v1/auth/api-tokens"
 
-        fun basePath() = BASE_PATH
+        fun tokens() = BASE_PATH
 
-        fun tokenPath(tokenName: String) = "$BASE_PATH/$tokenName"
+        fun tokens(tokenName: String) = "$BASE_PATH/$tokenName"
 
-        fun validatePath() = "/v1/auth/validate"
+        fun validate() = "/v1/auth/validate"
     }
 }

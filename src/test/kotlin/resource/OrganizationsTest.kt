@@ -34,7 +34,7 @@ private fun mockEngine() =
         val fixturesBasePath = "/fixtures/organization"
 
         when (url.encodedPath) {
-            Organizations.Resources.basePath() -> {
+            Organizations.Path.organizations() -> {
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
@@ -47,7 +47,7 @@ private fun mockEngine() =
                 }
             }
 
-            Organizations.Resources.organizationPath("test") -> {
+            Organizations.Path.organizations("test") -> {
                 when (method) {
                     HttpMethod.Patch -> {
                         respond(
@@ -60,7 +60,7 @@ private fun mockEngine() =
                 }
             }
 
-            Members.Resources.basePath("test") -> {
+            Members.Path.members("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         respond(
@@ -80,7 +80,7 @@ private fun mockEngine() =
                 }
             }
 
-            Members.Resources.memberPath("test", "test-member") -> {
+            Members.Path.members("test", "test-member") -> {
                 when (method) {
                     HttpMethod.Delete -> {
                         respond(
@@ -93,7 +93,7 @@ private fun mockEngine() =
                 }
             }
 
-            Invites.Resources.basePath("test") -> {
+            Invites.Path.invites("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         respond(

@@ -25,7 +25,7 @@ private fun mockEngine(): HttpClientEngine =
         val fixturesBasePath = "/fixtures/audit_log"
 
         when (url.encodedPath) {
-            AuditLogs.Resources.listPath("test") -> {
+            AuditLogs.Path.logs("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/list.json")
