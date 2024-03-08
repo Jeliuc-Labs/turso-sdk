@@ -53,7 +53,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(
-            Resources.organizationPath(organizationName),
+            Path.organizationPath(organizationName),
         ) {
             contentType(ContentType.Application.Json)
         }.let { response ->
@@ -69,7 +69,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         database: CreateDatabase,
     ) = client.httpClient.post(
-        Resources.organizationPath(organizationName),
+        Path.organizationPath(organizationName),
     ) {
         contentType(ContentType.Application.Json)
         setBody(database)
@@ -86,7 +86,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         databaseName: String,
     ) = client.httpClient.get(
-        Resources.databasePath(organizationName, databaseName),
+        Path.databases(organizationName, databaseName),
     ) { contentType(ContentType.Application.Json) }.let {
         handleResponse<RetrieveDatabaseResponse>(it)
     }
@@ -105,7 +105,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         from: LocalDateTime? = null,
         to: LocalDateTime? = null,
     ) = client.httpClient.get(
-        Resources.databaseUsagePath(organizationName, databaseName),
+        Path.usage(organizationName, databaseName),
     ) {
         contentType(ContentType.Application.Json)
         from?.let { parameter("from", it) }
@@ -123,7 +123,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         databaseName: String,
     ) = client.httpClient.get(
-        Resources.databaseStats(organizationName, databaseName),
+        Path.stats(organizationName, databaseName),
     ) {
         contentType(ContentType.Application.Json)
     }.let { response ->
@@ -139,7 +139,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         databaseName: String,
     ) = client.httpClient.delete(
-        Resources.databasePath(organizationName, databaseName),
+        Path.databases(organizationName, databaseName),
     ).let { response ->
         handleResponse<DeleteDatabaseResponse>(response)
     }
@@ -153,7 +153,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         databaseName: String,
     ) = client.httpClient.get(
-        Resources.baseInstancesPath(organizationName, databaseName),
+        Path.instances(organizationName, databaseName),
     ) {
         contentType(ContentType.Application.Json)
     }.let { response ->
@@ -170,7 +170,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         databaseName: String,
         instanceName: String,
     ) = client.httpClient.get(
-        Resources.instancePath(organizationName, databaseName, instanceName),
+        Path.instances(organizationName, databaseName, instanceName),
     ) { contentType(ContentType.Application.Json) }.let { response ->
         handleResponse<InstanceResponse>(response)
     }
@@ -186,7 +186,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         expiration: String = "never",
         authorization: Authorization = Authorization.FULL_ACCESS,
     ) = client.httpClient.post(
-        Resources.createTokenPath(organizationName, databaseName),
+        Path.tokens(organizationName, databaseName),
     ) {
         contentType(ContentType.Application.Json)
         parameter("expiration", expiration)
@@ -204,7 +204,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         databaseName: String,
     ) = client.httpClient.post(
-        Resources.invalidateAuthTokensPath(organizationName, databaseName),
+        Path.invalidateTokens(organizationName, databaseName),
     ) { contentType(ContentType.Application.Json) }.let { response ->
         handleResponse<Unit>(response)
     }
@@ -218,7 +218,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         file: File,
     ) = client.httpClient.post(
-        Resources.uploadDumpPath(organizationName),
+        Path.dumps(organizationName),
     ) {
         contentType(ContentType.MultiPart.FormData)
         setBody(
@@ -240,47 +240,47 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         handleResponse<UploadDumpResponse>(response)
     }
 
-    internal object Resources {
+    internal object Path {
         private const val RESOURCE_PATH = "/v1/organizations/{organizationName}/databases"
 
         fun organizationPath(organizationName: String) = RESOURCE_PATH.replace("{organizationName}", organizationName)
 
-        fun databasePath(
+        fun databases(
             organizationName: String,
             databaseName: String,
         ) = RESOURCE_PATH.replace("{organizationName}", organizationName) + "/$databaseName"
 
-        fun databaseUsagePath(
+        fun usage(
             organizationName: String,
             databaseName: String,
-        ) = databasePath(organizationName, databaseName) + "/usage"
+        ) = databases(organizationName, databaseName) + "/usage"
 
-        fun databaseStats(
+        fun stats(
             organizationName: String,
             databaseName: String,
-        ) = databasePath(organizationName, databaseName) + "/stats"
+        ) = databases(organizationName, databaseName) + "/stats"
 
-        fun baseInstancesPath(
+        fun instances(
             organizationName: String,
             databaseName: String,
-        ) = databasePath(organizationName, databaseName) + "/instances"
+        ) = databases(organizationName, databaseName) + "/instances"
 
-        fun instancePath(
+        fun instances(
             organizationName: String,
             databaseName: String,
             instanceName: String,
-        ) = baseInstancesPath(organizationName, databaseName) + "/$instanceName"
+        ) = instances(organizationName, databaseName) + "/$instanceName"
 
-        fun createTokenPath(
+        fun tokens(
             organizationName: String,
             databaseName: String,
-        ) = databasePath(organizationName, databaseName) + "/auth/tokens"
+        ) = databases(organizationName, databaseName) + "/auth/tokens"
 
-        fun invalidateAuthTokensPath(
+        fun invalidateTokens(
             organizationName: String,
             databaseName: String,
-        ) = databasePath(organizationName, databaseName) + "/auth/rotate"
+        ) = databases(organizationName, databaseName) + "/auth/rotate"
 
-        fun uploadDumpPath(organizationName: String) = RESOURCE_PATH.replace("{organizationName}", organizationName) + "/dumps"
+        fun dumps(organizationName: String) = RESOURCE_PATH.replace("{organizationName}", organizationName) + "/dumps"
     }
 }

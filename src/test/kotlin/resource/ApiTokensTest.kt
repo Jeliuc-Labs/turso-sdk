@@ -27,7 +27,7 @@ private fun mockEngine() =
         val fixturesBasePath = "/fixtures/api_token"
 
         when (url.encodedPath) {
-            ApiTokens.Resources.tokenPath("test-token") -> {
+            ApiTokens.Path.tokens("test-token") -> {
                 when (method) {
                     HttpMethod.Post -> {
                         val data = Fixture.content("$fixturesBasePath/create.json")
@@ -49,7 +49,7 @@ private fun mockEngine() =
                 }
             }
 
-            ApiTokens.Resources.validatePath() -> {
+            ApiTokens.Path.validate() -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/validate.json")
@@ -62,7 +62,7 @@ private fun mockEngine() =
                 }
             }
 
-            ApiTokens.Resources.basePath() -> {
+            ApiTokens.Path.tokens() -> {
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/list.json")

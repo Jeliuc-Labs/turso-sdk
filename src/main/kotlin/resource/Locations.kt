@@ -30,13 +30,13 @@ class Locations(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/locations/list]
      */
     suspend fun list() =
-        this.client.httpClient.get(Resources.listPath()) {
+        this.client.httpClient.get(Path.locations()) {
             contentType(ContentType.Application.Json)
         }.let {
             handleResponse<ListLocationsResponse>(it)
         }
 
-    object Resources {
-        fun listPath() = "/v1/locations"
+    object Path {
+        fun locations() = "/v1/locations"
     }
 }

@@ -39,7 +39,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
      * @see [https://docs.turso.tech/api-reference/groups/list]
      */
     suspend fun list(organizationName: String) =
-        client.httpClient.get(Resources.basePath(organizationName)) {
+        client.httpClient.get(Path.groups(organizationName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<ListGroupsResponse>(response)
@@ -54,7 +54,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         groupName: String,
         timeoutMillis: Long = 60000,
-    ) = client.httpClient.get(Resources.groupPath(organizationName, groupName)) {
+    ) = client.httpClient.get(Path.groups(organizationName, groupName)) {
         contentType(ContentType.Application.Json)
         timeout { requestTimeoutMillis = timeoutMillis }
     }.let { response ->
@@ -69,7 +69,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun create(
         organizationName: String,
         group: CreateGroup,
-    ) = client.httpClient.post(Resources.basePath(organizationName)) {
+    ) = client.httpClient.post(Path.groups(organizationName)) {
         // 30 seconds timeout, because groups creation takes longer than standard requests
         contentType(ContentType.Application.Json)
         setBody(group)
@@ -85,7 +85,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun delete(
         organizationName: String,
         groupName: String,
-    ) = client.httpClient.delete(Resources.groupPath(organizationName, groupName)) {
+    ) = client.httpClient.delete(Path.groups(organizationName, groupName)) {
         contentType(ContentType.Application.Json)
     }.let { response ->
         handleResponse<GroupResponse>(response)
@@ -100,7 +100,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         groupName: String,
         fromOrganization: String,
         toOrganization: String,
-    ) = client.httpClient.post(Resources.transferPath(fromOrganization, groupName)) {
+    ) = client.httpClient.post(Path.transfer(fromOrganization, groupName)) {
         contentType(ContentType.Application.Json)
         setBody(TransferGroupRequest(toOrganization))
     }.let { response ->
@@ -117,7 +117,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         groupName: String,
         location: String,
     ) = client.httpClient.post(
-        Resources.locationPath(organizationName, groupName, location),
+        Path.locations(organizationName, groupName, location),
     ) {
         contentType(ContentType.Application.Json)
     }.let { response ->
@@ -133,7 +133,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         groupName: String,
         location: String,
-    ) = client.httpClient.delete(Resources.locationPath(organizationName, groupName, location)) {
+    ) = client.httpClient.delete(Path.locations(organizationName, groupName, location)) {
         contentType(ContentType.Application.Json)
     }.let { response ->
         handleResponse<GroupResponse>(response)
@@ -147,7 +147,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun updateVersion(
         organizationName: String,
         groupName: String,
-    ) = client.httpClient.post(Resources.updatePath(organizationName, groupName)) {
+    ) = client.httpClient.post(Path.update(organizationName, groupName)) {
         contentType(ContentType.Application.Json)
     }.let { response ->
         handleResponse<Unit>(response)
@@ -165,7 +165,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         groupName: String,
         expiration: String? = null,
         authorization: Authorization? = null,
-    ) = client.httpClient.post(Resources.tokenPath(organizationName, groupName)) {
+    ) = client.httpClient.post(Path.tokens(organizationName, groupName)) {
         expiration?.let { parameter("expiration", it) }
         authorization?.let { parameter("authorization", it) }
         contentType(ContentType.Application.Json)
@@ -181,49 +181,49 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun invalidateTokens(
         organizationName: String,
         groupName: String,
-    ) = client.httpClient.post(Resources.authRotatePath(organizationName, groupName)) {
+    ) = client.httpClient.post(Path.invalidateTokens(organizationName, groupName)) {
         contentType(ContentType.Application.Json)
     }.let { response ->
         handleResponse<Unit>(response)
     }
 
-    internal object Resources {
+    internal object Path {
         private const val BASE_PATH = "/v1/organizations/{organizationName}/groups"
 
-        fun basePath(organizationName: String) = BASE_PATH.replace("{organizationName}", organizationName)
+        fun groups(organizationName: String) = BASE_PATH.replace("{organizationName}", organizationName)
 
-        fun groupPath(
+        fun groups(
             organizationName: String,
             groupName: String,
-        ) = basePath(organizationName) + "/$groupName"
+        ) = groups(organizationName) + "/$groupName"
 
-        fun transferPath(
+        fun transfer(
             fromOrganization: String,
             groupName: String,
-        ) = groupPath(fromOrganization, groupName) + "/transfer"
+        ) = groups(fromOrganization, groupName) + "/transfer"
 
-        fun locationPath(
+        fun locations(
             organizationName: String,
             groupName: String,
             location: String,
-        ) = groupPath(
+        ) = groups(
             organizationName,
             groupName,
         ) + "/locations/$location"
 
-        fun updatePath(
+        fun update(
             organizationName: String,
             groupName: String,
-        ) = groupPath(organizationName, groupName) + "/update"
+        ) = groups(organizationName, groupName) + "/update"
 
-        fun tokenPath(
+        fun tokens(
             organizationName: String,
             groupName: String,
-        ) = groupPath(organizationName, groupName) + "/auth/tokens"
+        ) = groups(organizationName, groupName) + "/auth/tokens"
 
-        fun authRotatePath(
+        fun invalidateTokens(
             organizationName: String,
             groupName: String,
-        ) = groupPath(organizationName, groupName) + "/auth/rotate"
+        ) = groups(organizationName, groupName) + "/auth/rotate"
     }
 }
