@@ -22,7 +22,7 @@ plugins {
     kotlin("plugin.serialization").version("1.9.20")
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
-    id("org.jetbrains.dokka") version "1.9.10"
+    id("org.jetbrains.dokka") version "1.9.20"
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.3"
 
     `maven-publish`
@@ -78,7 +78,7 @@ sourceSets.test {
 
 buildscript {
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:1.9.10")
+        classpath("org.jetbrains.dokka:dokka-base:1.9.20")
         classpath("org.jetbrains.dokka:versioning-plugin:1.9.20")
     }
 }
