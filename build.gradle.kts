@@ -23,7 +23,7 @@ plugins {
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
     id("org.jetbrains.dokka") version "1.9.10"
-    id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.2"
+    id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.3"
 
     `maven-publish`
     `kotlin-dsl`
