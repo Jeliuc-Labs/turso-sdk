@@ -30,7 +30,7 @@ class AuditLogs(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists audit logs
      *
-     * @see [https://docs.turso.tech/api-reference/audit-logs/list]
+     * @see <a href="https://docs.turso.tech/api-reference/audit-logs/list">API Reference</a>
      */
     suspend fun list(organizationName: String) =
         this.client.httpClient.get(Path.logs(organizationName)) {

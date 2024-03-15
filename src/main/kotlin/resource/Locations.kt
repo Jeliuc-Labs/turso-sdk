@@ -27,7 +27,7 @@ class Locations(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists locations
      *
-     * @see [https://docs.turso.tech/api-reference/locations/list]
+     * @see <a href="https://docs.turso.tech/api-reference/locations/list">API Reference</a>
      */
     suspend fun list() =
         this.client.httpClient.get(Path.locations()) {

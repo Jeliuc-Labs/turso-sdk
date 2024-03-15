@@ -46,7 +46,7 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
     /**
      * Lists all organizations
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/list]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/list">API Reference</a>
      */
     suspend fun list() =
         client.httpClient.get(Path.organizations()) {
@@ -58,7 +58,7 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
     /**
      * Updates an organization
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/update]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/update">API Reference</a>
      */
     suspend fun update(
         organizationName: String,
@@ -95,7 +95,7 @@ class Members(val client: TursoClient) : ResponseHandler() {
     /**
      * Lists all members of an organization
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/members/list]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/members/list">API Reference</a>
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(Path.members(organizationName)) {
@@ -107,7 +107,7 @@ class Members(val client: TursoClient) : ResponseHandler() {
     /**
      * Adds a member to an organization
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/members/add]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/members/add">API Reference</a>
      */
     suspend fun add(
         organizationName: String,
@@ -122,7 +122,7 @@ class Members(val client: TursoClient) : ResponseHandler() {
     /**
      * Removes a member from an organization
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/members/remove]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/members/remove">API Reference</a>
      */
     suspend fun remove(
         organizationName: String,
@@ -157,7 +157,7 @@ class Invites(val client: TursoClient) : ResponseHandler() {
     /**
      * Lists all invites of an organization
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/invites/list]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/invites/list">API Reference</a>
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(Path.invites(organizationName)) {
@@ -169,7 +169,7 @@ class Invites(val client: TursoClient) : ResponseHandler() {
     /**
      * Creates the user invitation to an organization
      *
-     * @see [https://docs.turso.tech/api-reference/organizations/invites/create]
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/invites/create">API Reference</a>
      */
     suspend fun create(
         organizationName: String,
