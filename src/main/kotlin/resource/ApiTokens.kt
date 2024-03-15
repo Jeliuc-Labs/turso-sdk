@@ -31,7 +31,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
     /**
      * Creates API token
      *
-     * @see [https://docs.turso.tech/api-reference/tokens/create]
+     * @see <a href="https://docs.turso.tech/api-reference/tokens/create">API Reference</a>
      */
     suspend fun create(tokenName: String) =
         client.httpClient.post(Path.tokens(tokenName)) {
@@ -43,7 +43,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
     /**
      * Validates the current API token
      *
-     * @see [https://docs.turso.tech/api-reference/tokens/validate]
+     * @see <a href="https://docs.turso.tech/api-reference/tokens/validate">API Reference</a>
      */
     suspend fun validate() =
         client.httpClient.get(Path.validate()) {
@@ -55,7 +55,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists all API tokens
      *
-     * @see [https://docs.turso.tech/api-reference/tokens/list]
+     * @see <a href="https://docs.turso.tech/api-reference/tokens/list">API Reference</a>
      */
     suspend fun list() =
         client.httpClient.get(Path.tokens()) {
@@ -67,7 +67,7 @@ class ApiTokens(private val client: TursoClient) : ResponseHandler() {
     /**
      * Revokes an API token
      *
-     * @see [https://docs.turso.tech/api-reference/tokens/revoke]
+     * @see <a href="https://docs.turso.tech/api-reference/tokens/revoke">API Reference</a>
      */
     suspend fun revoke(tokenName: String) =
         client.httpClient.delete(Path.tokens(tokenName)) {

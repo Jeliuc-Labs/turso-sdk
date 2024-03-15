@@ -49,7 +49,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists databases
      *
-     * @see [https://docs.turso.tech/api-reference/databases/list]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/list">API Reference</a>
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(
@@ -63,7 +63,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Creates a database
      *
-     * [https://docs.turso.tech/api-reference/databases/create]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/create">API Reference</a>
      */
     suspend fun create(
         organizationName: String,
@@ -80,7 +80,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Retrieves a database
      *
-     * @see [https://docs.turso.tech/api-reference/databases/retrieve]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/retrieve">API Reference</a>
      */
     suspend fun retrieve(
         organizationName: String,
@@ -94,7 +94,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Gets database usage
      *
-     * @see [https://docs.turso.tech/api-reference/databases/usage]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/usage">API Reference</a>
      *
      * @throws [com.jeliuc.turso.sdk.model.ApiError]
      * @throws [com.jeliuc.turso.sdk.model.UnexpectedResultError]
@@ -117,7 +117,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Gets database stats
      *
-     * @see [https://docs.turso.tech/api-reference/databases/stats]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/stats">API Reference</a>
      */
     suspend fun stats(
         organizationName: String,
@@ -133,7 +133,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Deletes a database
      *
-     * @see [https://docs.turso.tech/api-reference/databases/delete]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/delete">API Reference</a>
      */
     suspend fun delete(
         organizationName: String,
@@ -147,7 +147,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists instances
      *
-     * @see [https://docs.turso.tech/api-reference/databases/list-instances]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/list-instances">API Reference</a>
      */
     suspend fun listInstances(
         organizationName: String,
@@ -163,7 +163,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Retrieves an instance of the database
      *
-     * @see [https://docs.turso.tech/api-reference/databases/retrieve-instance]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/retrieve-instance">API Reference</a>
      */
     suspend fun retrieveInstance(
         organizationName: String,
@@ -178,7 +178,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Creates a token
      *
-     * @see [https://docs.turso.tech/api-reference/databases/create-token]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/create-token">API Reference</a>
      */
     suspend fun createToken(
         organizationName: String,
@@ -198,7 +198,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Invalidates all tokens
      *
-     * @see [https://docs.turso.tech/api-reference/databases/invalidate-tokens]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/invalidate-tokens">API Reference</a>
      */
     suspend fun invalidateTokens(
         organizationName: String,
@@ -212,7 +212,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     /**
      * Uploads a database dump
      *
-     * @see [https://docs.turso.tech/api-reference/databases/upload-dump]
+     * @see <a href="https://docs.turso.tech/api-reference/databases/upload-dump">API Reference</a>
      */
     suspend fun uploadDump(
         organizationName: String,

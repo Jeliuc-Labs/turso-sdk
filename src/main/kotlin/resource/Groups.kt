@@ -36,7 +36,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Lists all groups
      *
-     * @see [https://docs.turso.tech/api-reference/groups/list]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/list">API Reference</a>
      */
     suspend fun list(organizationName: String) =
         client.httpClient.get(Path.groups(organizationName)) {
@@ -48,7 +48,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Retrieves a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/retrieve]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/retrieve">API Reference</a>
      */
     suspend fun retrieve(
         organizationName: String,
@@ -64,7 +64,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Creates a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/create]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/create">API Reference</a>
      */
     suspend fun create(
         organizationName: String,
@@ -80,7 +80,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Deletes a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/delete]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/delete">API Reference</a>
      */
     suspend fun delete(
         organizationName: String,
@@ -94,7 +94,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Transfers a group to another organization
      *
-     * @see [https://docs.turso.tech/api-reference/groups/transfer]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/transfer">API Reference</a>
      */
     suspend fun transfer(
         groupName: String,
@@ -110,7 +110,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Adds a location to a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/add-location]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/add-location">API Reference</a>
      */
     suspend fun addLocation(
         organizationName: String,
@@ -127,7 +127,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Removes a location from a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/remove-location]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/remove-location">API Reference</a>
      */
     suspend fun removeLocation(
         organizationName: String,
@@ -142,7 +142,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Updates the LibSql version for all databases in the group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/update-database-versions]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/update-database-versions">API Reference</a>
      */
     suspend fun updateVersion(
         organizationName: String,
@@ -156,7 +156,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Creates an auth token for a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/create-token]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/create-token">API Reference</a>
      *
      * @param expiration Expiration time for the token (e.g., "2w1d30m"). Default: "never".
      */
@@ -176,7 +176,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     /**
      * Invalidates all auth tokens of a group
      *
-     * @see [https://docs.turso.tech/api-reference/groups/invalidate-tokens]
+     * @see <a href="https://docs.turso.tech/api-reference/groups/invalidate-tokens">API Reference</a>
      */
     suspend fun invalidateTokens(
         organizationName: String,
