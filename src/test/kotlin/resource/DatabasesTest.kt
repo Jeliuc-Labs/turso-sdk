@@ -24,9 +24,9 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.headersOf
-import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertIs
+import kotlinx.coroutines.runBlocking
 
 private fun mockEngine(): HttpClientEngine =
     MockEngine { request ->
@@ -39,12 +39,20 @@ private fun mockEngine(): HttpClientEngine =
                 when (method) {
                     HttpMethod.Get -> {
                         val data = Fixture.content("$fixturesBasePath/list.json")
-                        respond(data, headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())))
+                        respond(
+                            data,
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
+                        )
                     }
+
                     HttpMethod.Post -> {
                         val data = Fixture.content("$fixturesBasePath/create.json")
-                        respond(data, headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())))
+                        respond(
+                            data,
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString()))
+                        )
                     }
+
                     else -> error("Unhandled ${method.value} ${url.encodedPath}")
                 }
             }
@@ -58,6 +66,7 @@ private fun mockEngine(): HttpClientEngine =
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
+
                     HttpMethod.Delete -> {
                         val data = Fixture.content("$fixturesBasePath/delete.json")
                         respond(
@@ -65,6 +74,7 @@ private fun mockEngine(): HttpClientEngine =
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
+
                     else -> error("Unhandled ${method.value} ${url.encodedPath}")
                 }
             }
@@ -97,9 +107,9 @@ private fun mockEngine(): HttpClientEngine =
                         respond(
                             data,
                             headers =
-                                headersOf(
-                                    "Content-Type" to listOf(ContentType.Application.Json.toString()),
-                                ),
+                            headersOf(
+                                "Content-Type" to listOf(ContentType.Application.Json.toString()),
+                            ),
                         )
                     }
 
@@ -113,9 +123,9 @@ private fun mockEngine(): HttpClientEngine =
                         respond(
                             "",
                             headers =
-                                headersOf(
-                                    "Content-Type" to listOf(ContentType.Application.Json.toString()),
-                                ),
+                            headersOf(
+                                "Content-Type" to listOf(ContentType.Application.Json.toString()),
+                            ),
                         )
                     }
 
@@ -130,9 +140,9 @@ private fun mockEngine(): HttpClientEngine =
                         respond(
                             data,
                             headers =
-                                headersOf(
-                                    "Content-Type" to listOf(ContentType.Application.Json.toString()),
-                                ),
+                            headersOf(
+                                "Content-Type" to listOf(ContentType.Application.Json.toString()),
+                            ),
                         )
                     }
 
@@ -147,9 +157,9 @@ private fun mockEngine(): HttpClientEngine =
                         respond(
                             data,
                             headers =
-                                headersOf(
-                                    "Content-Type" to listOf(ContentType.Application.Json.toString()),
-                                ),
+                            headersOf(
+                                "Content-Type" to listOf(ContentType.Application.Json.toString()),
+                            ),
                         )
                     }
 

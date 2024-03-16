@@ -6,9 +6,9 @@
 package com.jeliuc.turso.sdk.model
 
 import com.jeliuc.turso.sdk.serializer.LocalDateTimeSerializer
+import java.time.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
 
 @Serializable
 data class Organization(
@@ -25,6 +25,7 @@ data class OrganizationResponse(
     @SerialName("organization") val organization: Organization,
 )
 
+@Suppress("unused")
 @Serializable
 enum class OrganizationType {
     @SerialName("personal")
@@ -59,6 +60,8 @@ enum class MemberRole {
     @SerialName("admin")
     ADMIN,
 
+
+    @Suppress("unused")
     @SerialName("member")
     MEMBER,
 }

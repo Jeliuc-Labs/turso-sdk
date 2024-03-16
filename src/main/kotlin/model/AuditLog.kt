@@ -6,10 +6,10 @@
 package com.jeliuc.turso.sdk.model
 
 import com.jeliuc.turso.sdk.serializer.LocalDateTimeSerializer
+import java.time.LocalDateTime
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
-import java.time.LocalDateTime
 
 @Serializable
 data class ListAuditLogsResponse(

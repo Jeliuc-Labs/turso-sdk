@@ -48,7 +48,7 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
      *
      * @see <a href="https://docs.turso.tech/api-reference/organizations/list">API Reference</a>
      */
-    suspend fun list() =
+    suspend fun list(): List<Organization> =
         client.httpClient.get(Path.organizations()) {
             contentType(ContentType.Application.Json)
         }.let { response ->
@@ -63,14 +63,15 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
     suspend fun update(
         organizationName: String,
         organizationUpdate: UpdateOrganizationRequest,
-    ) = client.httpClient.patch(
-        Path.organizations(organizationName),
-    ) {
-        contentType(ContentType.Application.Json)
-        setBody(organizationUpdate)
-    }.let { response ->
-        handleResponse<OrganizationResponse>(response)
-    }
+    ): OrganizationResponse =
+        client.httpClient.patch(
+            Path.organizations(organizationName),
+        ) {
+            contentType(ContentType.Application.Json)
+            setBody(organizationUpdate)
+        }.let { response ->
+            handleResponse<OrganizationResponse>(response)
+        }
 
     internal object Path {
         private const val BASE_PATH = "/v1/organizations"
@@ -97,7 +98,7 @@ class Members(val client: TursoClient) : ResponseHandler() {
      *
      * @see <a href="https://docs.turso.tech/api-reference/organizations/members/list">API Reference</a>
      */
-    suspend fun list(organizationName: String) =
+    suspend fun list(organizationName: String): ListMembersResponse =
         client.httpClient.get(Path.members(organizationName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
@@ -112,12 +113,13 @@ class Members(val client: TursoClient) : ResponseHandler() {
     suspend fun add(
         organizationName: String,
         member: CreateMember,
-    ) = client.httpClient.post(Path.members(organizationName)) {
-        contentType(ContentType.Application.Json)
-        setBody(member)
-    }.let { response ->
-        handleResponse<CreateMemberResponse>(response)
-    }
+    ): CreateMemberResponse =
+        client.httpClient.post(Path.members(organizationName)) {
+            contentType(ContentType.Application.Json)
+            setBody(member)
+        }.let { response ->
+            handleResponse<CreateMemberResponse>(response)
+        }
 
     /**
      * Removes a member from an organization
@@ -127,11 +129,12 @@ class Members(val client: TursoClient) : ResponseHandler() {
     suspend fun remove(
         organizationName: String,
         username: String,
-    ) = client.httpClient.delete(Path.members(organizationName, username)) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<DeleteMemberResponse>(response)
-    }
+    ): DeleteMemberResponse =
+        client.httpClient.delete(Path.members(organizationName, username)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<DeleteMemberResponse>(response)
+        }
 
     internal object Path {
         fun members(organizationName: String) = "${Organizations.Path.organizations()}/$organizationName/members"
@@ -159,7 +162,7 @@ class Invites(val client: TursoClient) : ResponseHandler() {
      *
      * @see <a href="https://docs.turso.tech/api-reference/organizations/invites/list">API Reference</a>
      */
-    suspend fun list(organizationName: String) =
+    suspend fun list(organizationName: String): ListInvitesResponse =
         client.httpClient.get(Path.invites(organizationName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
@@ -174,12 +177,13 @@ class Invites(val client: TursoClient) : ResponseHandler() {
     suspend fun create(
         organizationName: String,
         invite: CreateMember,
-    ) = client.httpClient.post(Path.invites(organizationName)) {
-        contentType(ContentType.Application.Json)
-        setBody(invite)
-    }.let { response ->
-        handleResponse<CreateInviteResponse>(response)
-    }
+    ): CreateInviteResponse =
+        client.httpClient.post(Path.invites(organizationName)) {
+            contentType(ContentType.Application.Json)
+            setBody(invite)
+        }.let { response ->
+            handleResponse<CreateInviteResponse>(response)
+        }
 
     internal object Path {
         fun invites(organizationName: String) = "${Organizations.Path.organizations()}/$organizationName/invites"

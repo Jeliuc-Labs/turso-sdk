@@ -51,7 +51,7 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
      *
      * @see <a href="https://docs.turso.tech/api-reference/databases/list">API Reference</a>
      */
-    suspend fun list(organizationName: String) =
+    suspend fun list(organizationName: String): ListDatabasesResponse =
         client.httpClient.get(
             Path.organizationPath(organizationName),
         ) {
@@ -68,14 +68,15 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun create(
         organizationName: String,
         database: CreateDatabase,
-    ) = client.httpClient.post(
-        Path.organizationPath(organizationName),
-    ) {
-        contentType(ContentType.Application.Json)
-        setBody(database)
-    }.let { response ->
-        handleResponse<CreateDatabaseResponse>(response)
-    }
+    ): CreateDatabaseResponse =
+        client.httpClient.post(
+            Path.organizationPath(organizationName),
+        ) {
+            contentType(ContentType.Application.Json)
+            setBody(database)
+        }.let { response ->
+            handleResponse<CreateDatabaseResponse>(response)
+        }
 
     /**
      * Retrieves a database
@@ -85,11 +86,12 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun retrieve(
         organizationName: String,
         databaseName: String,
-    ) = client.httpClient.get(
-        Path.databases(organizationName, databaseName),
-    ) { contentType(ContentType.Application.Json) }.let {
-        handleResponse<RetrieveDatabaseResponse>(it)
-    }
+    ): RetrieveDatabaseResponse =
+        client.httpClient.get(
+            Path.databases(organizationName, databaseName),
+        ) { contentType(ContentType.Application.Json) }.let {
+            handleResponse<RetrieveDatabaseResponse>(it)
+        }
 
     /**
      * Gets database usage
@@ -104,15 +106,16 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         databaseName: String,
         from: LocalDateTime? = null,
         to: LocalDateTime? = null,
-    ) = client.httpClient.get(
-        Path.usage(organizationName, databaseName),
-    ) {
-        contentType(ContentType.Application.Json)
-        from?.let { parameter("from", it) }
-        to?.let { parameter("to", it) }
-    }.let { response ->
-        handleResponse<DatabaseUsageResponse>(response)
-    }
+    ): DatabaseUsageResponse =
+        client.httpClient.get(
+            Path.usage(organizationName, databaseName),
+        ) {
+            contentType(ContentType.Application.Json)
+            from?.let { parameter("from", it) }
+            to?.let { parameter("to", it) }
+        }.let { response ->
+            handleResponse<DatabaseUsageResponse>(response)
+        }
 
     /**
      * Gets database stats
@@ -122,13 +125,14 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun stats(
         organizationName: String,
         databaseName: String,
-    ) = client.httpClient.get(
-        Path.stats(organizationName, databaseName),
-    ) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<StatsResponse>(response)
-    }
+    ): StatsResponse =
+        client.httpClient.get(
+            Path.stats(organizationName, databaseName),
+        ) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<StatsResponse>(response)
+        }
 
     /**
      * Deletes a database
@@ -138,11 +142,12 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun delete(
         organizationName: String,
         databaseName: String,
-    ) = client.httpClient.delete(
-        Path.databases(organizationName, databaseName),
-    ).let { response ->
-        handleResponse<DeleteDatabaseResponse>(response)
-    }
+    ): DeleteDatabaseResponse =
+        client.httpClient.delete(
+            Path.databases(organizationName, databaseName),
+        ).let { response ->
+            handleResponse<DeleteDatabaseResponse>(response)
+        }
 
     /**
      * Lists instances
@@ -152,13 +157,14 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun listInstances(
         organizationName: String,
         databaseName: String,
-    ) = client.httpClient.get(
-        Path.instances(organizationName, databaseName),
-    ) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<ListInstancesResponse>(response)
-    }
+    ): ListInstancesResponse =
+        client.httpClient.get(
+            Path.instances(organizationName, databaseName),
+        ) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<ListInstancesResponse>(response)
+        }
 
     /**
      * Retrieves an instance of the database
@@ -169,11 +175,12 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         databaseName: String,
         instanceName: String,
-    ) = client.httpClient.get(
-        Path.instances(organizationName, databaseName, instanceName),
-    ) { contentType(ContentType.Application.Json) }.let { response ->
-        handleResponse<InstanceResponse>(response)
-    }
+    ): InstanceResponse =
+        client.httpClient.get(
+            Path.instances(organizationName, databaseName, instanceName),
+        ) { contentType(ContentType.Application.Json) }.let { response ->
+            handleResponse<InstanceResponse>(response)
+        }
 
     /**
      * Creates a token
@@ -185,15 +192,16 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
         databaseName: String,
         expiration: String = "never",
         authorization: Authorization = Authorization.FULL_ACCESS,
-    ) = client.httpClient.post(
-        Path.tokens(organizationName, databaseName),
-    ) {
-        contentType(ContentType.Application.Json)
-        parameter("expiration", expiration)
-        parameter("authorization", authorization.value)
-    }.let { response ->
-        handleResponse<TokenResponse>(response)
-    }
+    ): TokenResponse =
+        client.httpClient.post(
+            Path.tokens(organizationName, databaseName),
+        ) {
+            contentType(ContentType.Application.Json)
+            parameter("expiration", expiration)
+            parameter("authorization", authorization.value)
+        }.let { response ->
+            handleResponse<TokenResponse>(response)
+        }
 
     /**
      * Invalidates all tokens
@@ -203,11 +211,12 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun invalidateTokens(
         organizationName: String,
         databaseName: String,
-    ) = client.httpClient.post(
-        Path.invalidateTokens(organizationName, databaseName),
-    ) { contentType(ContentType.Application.Json) }.let { response ->
-        handleResponse<Unit>(response)
-    }
+    ): Unit =
+        client.httpClient.post(
+            Path.invalidateTokens(organizationName, databaseName),
+        ) { contentType(ContentType.Application.Json) }.let { response ->
+            handleResponse<Unit>(response)
+        }
 
     /**
      * Uploads a database dump
@@ -217,12 +226,13 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
     suspend fun uploadDump(
         organizationName: String,
         file: File,
-    ) = client.httpClient.post(
-        Path.dumps(organizationName),
-    ) {
-        contentType(ContentType.MultiPart.FormData)
-        setBody(
-            body =
+    ): UploadDumpResponse =
+        client.httpClient.post(
+            Path.dumps(organizationName),
+        ) {
+            contentType(ContentType.MultiPart.FormData)
+            setBody(
+                body =
                 MultiPartFormDataContent(
                     formData {
                         append(
@@ -235,10 +245,10 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
                         )
                     },
                 ),
-        )
-    }.let { response ->
-        handleResponse<UploadDumpResponse>(response)
-    }
+            )
+        }.let { response ->
+            handleResponse<UploadDumpResponse>(response)
+        }
 
     internal object Path {
         private const val RESOURCE_PATH = "/v1/organizations/{organizationName}/databases"

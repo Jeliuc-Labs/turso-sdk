@@ -16,9 +16,9 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.headersOf
-import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertIs
+import kotlinx.coroutines.runBlocking
 
 private fun mockEngine() =
     MockEngine { request ->
