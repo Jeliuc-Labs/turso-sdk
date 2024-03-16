@@ -233,18 +233,18 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
             contentType(ContentType.MultiPart.FormData)
             setBody(
                 body =
-                MultiPartFormDataContent(
-                    formData {
-                        append(
-                            "file",
-                            file.readBytes(),
-                            Headers.build {
-                                append(HttpHeaders.ContentType, ContentType.Application.OctetStream.toString())
-                                append(HttpHeaders.ContentDisposition, "form-data; name=file; filename=${file.name}")
-                            },
-                        )
-                    },
-                ),
+                    MultiPartFormDataContent(
+                        formData {
+                            append(
+                                "file",
+                                file.readBytes(),
+                                Headers.build {
+                                    append(HttpHeaders.ContentType, ContentType.Application.OctetStream.toString())
+                                    append(HttpHeaders.ContentDisposition, "form-data; name=file; filename=${file.name}")
+                                },
+                            )
+                        },
+                    ),
             )
         }.let { response ->
             handleResponse<UploadDumpResponse>(response)
