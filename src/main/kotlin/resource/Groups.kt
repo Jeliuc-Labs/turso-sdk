@@ -38,7 +38,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
      *
      * @see <a href="https://docs.turso.tech/api-reference/groups/list">API Reference</a>
      */
-    suspend fun list(organizationName: String) =
+    suspend fun list(organizationName: String): ListGroupsResponse =
         client.httpClient.get(Path.groups(organizationName)) {
             contentType(ContentType.Application.Json)
         }.let { response ->
@@ -54,12 +54,13 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         groupName: String,
         timeoutMillis: Long = 60000,
-    ) = client.httpClient.get(Path.groups(organizationName, groupName)) {
-        contentType(ContentType.Application.Json)
-        timeout { requestTimeoutMillis = timeoutMillis }
-    }.let { response ->
-        handleResponse<GroupResponse>(response)
-    }
+    ): GroupResponse =
+        client.httpClient.get(Path.groups(organizationName, groupName)) {
+            contentType(ContentType.Application.Json)
+            timeout { requestTimeoutMillis = timeoutMillis }
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
 
     /**
      * Creates a group
@@ -69,13 +70,14 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun create(
         organizationName: String,
         group: CreateGroup,
-    ) = client.httpClient.post(Path.groups(organizationName)) {
-        // 30 seconds timeout, because groups creation takes longer than standard requests
-        contentType(ContentType.Application.Json)
-        setBody(group)
-    }.let { response ->
-        handleResponse<GroupResponse>(response)
-    }
+    ): GroupResponse =
+        client.httpClient.post(Path.groups(organizationName)) {
+            // 30 seconds timeout, because groups creation takes longer than standard requests
+            contentType(ContentType.Application.Json)
+            setBody(group)
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
 
     /**
      * Deletes a group
@@ -85,11 +87,12 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun delete(
         organizationName: String,
         groupName: String,
-    ) = client.httpClient.delete(Path.groups(organizationName, groupName)) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<GroupResponse>(response)
-    }
+    ): GroupResponse =
+        client.httpClient.delete(Path.groups(organizationName, groupName)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
 
     /**
      * Transfers a group to another organization
@@ -100,12 +103,13 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         groupName: String,
         fromOrganization: String,
         toOrganization: String,
-    ) = client.httpClient.post(Path.transfer(fromOrganization, groupName)) {
-        contentType(ContentType.Application.Json)
-        setBody(TransferGroupRequest(toOrganization))
-    }.let { response ->
-        handleResponse<GroupResponse>(response)
-    }
+    ): GroupResponse =
+        client.httpClient.post(Path.transfer(fromOrganization, groupName)) {
+            contentType(ContentType.Application.Json)
+            setBody(TransferGroupRequest(toOrganization))
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
 
     /**
      * Adds a location to a group
@@ -116,13 +120,14 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         groupName: String,
         location: String,
-    ) = client.httpClient.post(
-        Path.locations(organizationName, groupName, location),
-    ) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<GroupResponse>(response)
-    }
+    ): GroupResponse =
+        client.httpClient.post(
+            Path.locations(organizationName, groupName, location),
+        ) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
 
     /**
      * Removes a location from a group
@@ -133,11 +138,12 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         organizationName: String,
         groupName: String,
         location: String,
-    ) = client.httpClient.delete(Path.locations(organizationName, groupName, location)) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<GroupResponse>(response)
-    }
+    ): GroupResponse =
+        client.httpClient.delete(Path.locations(organizationName, groupName, location)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
 
     /**
      * Updates the LibSql version for all databases in the group
@@ -147,11 +153,12 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun updateVersion(
         organizationName: String,
         groupName: String,
-    ) = client.httpClient.post(Path.update(organizationName, groupName)) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<Unit>(response)
-    }
+    ): Unit =
+        client.httpClient.post(Path.update(organizationName, groupName)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<Unit>(response)
+        }
 
     /**
      * Creates an auth token for a group
@@ -165,13 +172,14 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         groupName: String,
         expiration: String? = null,
         authorization: Authorization? = null,
-    ) = client.httpClient.post(Path.tokens(organizationName, groupName)) {
-        expiration?.let { parameter("expiration", it) }
-        authorization?.let { parameter("authorization", it) }
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<TokenResponse>(response)
-    }
+    ): TokenResponse =
+        client.httpClient.post(Path.tokens(organizationName, groupName)) {
+            expiration?.let { parameter("expiration", it) }
+            authorization?.let { parameter("authorization", it) }
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<TokenResponse>(response)
+        }
 
     /**
      * Invalidates all auth tokens of a group
@@ -181,11 +189,12 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
     suspend fun invalidateTokens(
         organizationName: String,
         groupName: String,
-    ) = client.httpClient.post(Path.invalidateTokens(organizationName, groupName)) {
-        contentType(ContentType.Application.Json)
-    }.let { response ->
-        handleResponse<Unit>(response)
-    }
+    ): Unit =
+        client.httpClient.post(Path.invalidateTokens(organizationName, groupName)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<Unit>(response)
+        }
 
     internal object Path {
         private const val BASE_PATH = "/v1/organizations/{organizationName}/groups"

@@ -16,7 +16,7 @@ val client: (HttpClientEngine) -> TursoClient = {
 object Fixture {
     private fun path(path: String) = this::class.java.getResource(path)!!.path
 
-    fun file(path: String) = File(path(path))
+    fun file(path: String): File = File(path(path))
 
-    fun content(path: String) = file(path).readText(Charsets.UTF_8).trimIndent()
+    fun content(path: String): String = file(path).readText(Charsets.UTF_8).trimIndent()
 }
