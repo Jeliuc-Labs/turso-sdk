@@ -5,10 +5,9 @@
 
 package com.jeliuc.turso.sdk.model
 
-import com.jeliuc.turso.sdk.serializer.LocalDateTimeSerializer
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
 
 @Serializable
 data class Organization(
@@ -94,15 +93,15 @@ data class ListInvitesResponse(
 @Serializable
 data class Invite(
     @SerialName("Accepted") val accepted: Boolean,
-    @SerialName("CreatedAt") @Serializable(with = LocalDateTimeSerializer::class) val createdAt: LocalDateTime,
-    @SerialName("DeletedAt") @Serializable(with = LocalDateTimeSerializer::class) val deletedAt: LocalDateTime,
+    @SerialName("CreatedAt") val createdAt: Instant,
+    @SerialName("DeletedAt") val deletedAt: Instant,
     @SerialName("Email") val email: String,
     @SerialName("ID") val id: Int,
     @SerialName("Organization") val organization: Organization,
     @SerialName("OrganizationID") val organizationID: Int,
     @SerialName("Role") val role: MemberRole,
     @SerialName("Token") val token: String,
-    @SerialName("UpdatedAt") @Serializable(with = LocalDateTimeSerializer::class) val updatedAt: LocalDateTime,
+    @SerialName("UpdatedAt") val updatedAt: Instant,
 )
 
 @Serializable

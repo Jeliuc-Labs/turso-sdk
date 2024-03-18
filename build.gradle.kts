@@ -6,13 +6,14 @@ import org.jetbrains.dokka.versioning.VersioningConfiguration
 import org.jetbrains.dokka.versioning.VersioningPlugin
 
 val ktorVersion: String by project
+val dateTimeVersion: String by project
 
 val spaceUsername: String? by project
 val spacePassword: String? by project
-val sdkVersion: String by project
 val spaceMavenRepositoryUrl: String by project
 val sonatypeUsername: String by project
 val sonatypePassword: String by project
+val sdkVersion: String by project
 
 group = "com.jeliuc"
 version = System.getenv("SDK_VERSION") ?: sdkVersion
@@ -48,6 +49,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:$dateTimeVersion")
 }
 
 tasks.test {

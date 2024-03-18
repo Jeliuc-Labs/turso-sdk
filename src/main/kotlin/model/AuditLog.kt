@@ -5,11 +5,10 @@
 
 package com.jeliuc.turso.sdk.model
 
-import com.jeliuc.turso.sdk.serializer.LocalDateTimeSerializer
+import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
-import java.time.LocalDateTime
 
 @Serializable
 data class ListAuditLogsResponse(
@@ -21,7 +20,7 @@ data class ListAuditLogsResponse(
 data class AuditLog(
     @SerialName("author") val author: String,
     @SerialName("code") val code: String,
-    @SerialName("created_at") @Serializable(with = LocalDateTimeSerializer::class) val createdAt: LocalDateTime,
+    @SerialName("created_at") val createdAt: Instant,
     @SerialName("data") val data: JsonElement,
     @SerialName("message") val message: String,
     @SerialName("origin") val origin: String,
