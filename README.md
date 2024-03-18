@@ -18,6 +18,7 @@ Example:
 
 ```
 ktorVersion=2.3.6
+dateTimeVersion=0.6.0-RC.2
 logbackVersion=1.5.1
 tursoSdkVersion=0.1.11 // currently published version
 ```
@@ -29,6 +30,7 @@ Add dependencies to `build.gradle.kts`
 ```Kotlin
 // define version variables
 val ktorVersion: String by project
+val dateTimeVersion: String by project
 val logbackVersion: String by project
 val tursoSdkVersion: String by project
 
@@ -44,6 +46,7 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:$dateTimeVersion")
     implementation ("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("com.jeliuc:turso-sdk-jvm:$tursoSdkVersion")
     // ...
@@ -99,7 +102,7 @@ client.close()
 
 ## Future Plans
 
-* [ ] Use `kotlinx.datetime` for date and time handling
+* [x] Use `kotlinx.datetime` for date and time handling
 * [ ] Transform into a multiplatform library (KMP) - and support JVM, JS, and Native
 * [ ] HRANA3 protocol implementation (WIP)
 * [ ] libSQL JDBC driver (WIP)
