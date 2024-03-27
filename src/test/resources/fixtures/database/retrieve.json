@@ -1,15 +1,20 @@
 {
   "database": {
     "Name": "new-database",
-    "DbId": "8e78c7e0-c517-11ee-9386-e26d5524e301",
+    "DbId": "ec97c157-5c8e-47ad-abe3-2b0af4079af8",
     "Hostname": "new-database-a2xchip.turso.io",
+    "is_schema": false,
+    "schema": "",
+    "block_reads": false,
+    "block_writes": false,
+    "allow_attach": false,
     "regions": [
       "otp"
     ],
     "primaryRegion": "otp",
     "type": "logical",
     "hostname": "new-database-a2xchip.turso.io",
-    "version": "0.22.15",
+    "version": "0.24.2",
     "group": "default",
     "sleeping": false
   }

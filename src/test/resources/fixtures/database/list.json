@@ -4,13 +4,37 @@
       "Name": "example-database",
       "DbId": "a2f1d1c8-bfd7-11ee-897f-822b15a0bd8c",
       "Hostname": "example-database-a2xchip.turso.io",
+      "is_schema": false,
+      "schema": "",
+      "block_reads": false,
+      "block_writes": false,
+      "allow_attach": false,
       "regions": [
         "otp"
       ],
       "primaryRegion": "otp",
       "type": "logical",
       "hostname": "example-database-a2xchip.turso.io",
-      "version": "0.22.15",
+      "version": "0.22.19",
+      "group": "default",
+      "sleeping": false
+    },
+    {
+      "Name": "new-database",
+      "DbId": "ec97c157-5c8e-47ad-abe3-2b0af4079af8",
+      "Hostname": "new-database-a2xchip.turso.io",
+      "is_schema": false,
+      "schema": "",
+      "block_reads": false,
+      "block_writes": false,
+      "allow_attach": false,
+      "regions": [
+        "otp"
+      ],
+      "primaryRegion": "otp",
+      "type": "logical",
+      "hostname": "new-database-a2xchip.turso.io",
+      "version": "0.22.19",
       "group": "default",
       "sleeping": false
     }
