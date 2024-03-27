@@ -40,6 +40,7 @@ class TursoClient(val httpClient: HttpClient) {
     companion object {
         private const val DEFAULT_MAX_RETRIES = 3
         private const val DEFAULT_BASE_URI = "https://api.turso.tech"
+        private const val DEFAULT_REQUEST_TIMEOUT_MILLIS = 30_000L
 
         private val jsonBuilder =
             Json {
@@ -53,6 +54,7 @@ class TursoClient(val httpClient: HttpClient) {
             authToken: String,
             baseUri: String = DEFAULT_BASE_URI,
             maxRetries: Int = DEFAULT_MAX_RETRIES,
+            requestTimeout: Long = DEFAULT_REQUEST_TIMEOUT_MILLIS,
         ): TursoClient {
             val httpClient =
                 HttpClient(engine) {
@@ -61,7 +63,7 @@ class TursoClient(val httpClient: HttpClient) {
                     }
 
                     install(HttpTimeout) {
-                        requestTimeoutMillis = 30000
+                        requestTimeoutMillis = requestTimeout
                     }
 
                     install(HttpRequestRetry) {

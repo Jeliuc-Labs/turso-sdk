@@ -13,13 +13,8 @@ import io.ktor.serialization.ContentConvertException
 import kotlinx.serialization.SerializationException
 
 abstract class ResponseHandler {
-    /**
-     * Handles the response and returns the body T
-     *
-     * @throws ApiError if the response is an error
-     * @throws UnexpectedResultError if the response is not expected
-     */
-    internal suspend inline fun <reified T> handleResponse(response: HttpResponse): T =
+    @Throws(ApiError::class, UnexpectedResultError::class)
+    protected suspend inline fun <reified T> handleResponse(response: HttpResponse): T =
         try {
             response.body<T>()
         } catch (e: SerializationException) {

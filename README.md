@@ -87,7 +87,7 @@ Example: creating new database.
 ```Kotlin
 val createDatabase = CreateDatabase("databaseName", "databaseGroup")
 
-val databaseCreationResponse = client.databases().create(organization, createDatabase)
+val databaseCreationResponse = client.databases.create(organization, createDatabase)
 ```
 
 ### Free resources

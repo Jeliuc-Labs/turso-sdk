@@ -13,6 +13,11 @@ data class Database(
     @SerialName("Name") val name: String,
     @SerialName("DbId") val dbId: String,
     @SerialName("Hostname") val hostname: String,
+    @SerialName("is_schema") val isSchema: Boolean,
+    @SerialName("schema") val schema: String,
+    @SerialName("block_reads") val blockReads: Boolean,
+    @SerialName("block_writes") val blockWrites: Boolean,
+    @SerialName("allow_attach") val allowAttach: String,
     @SerialName("regions") val regions: List<String>,
     @SerialName("primaryRegion") val primaryRegion: String,
     @SerialName("type") val type: String,
@@ -27,6 +32,8 @@ data class CreateDatabase(
     @SerialName("group") val group: String,
     @SerialName("size_limit") val sizeLimit: String? = null,
     @SerialName("seed") val seed: Seed? = null,
+    @SerialName("schema") val schema: String? = null,
+    @SerialName("is_schema") val isSchema: Boolean = false,
 )
 
 @Serializable
