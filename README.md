@@ -17,10 +17,10 @@ Add package versions in `gradle.properties`
 Example:
 
 ```
-ktorVersion=2.3.6
+ktorVersion=2.3.9
 dateTimeVersion=0.6.0-RC.2
 logbackVersion=1.5.1
-tursoSdkVersion=0.1.11 // currently published version
+tursoSdkVersion=0.2.0 // currently published version
 ```
 
 ### Add dependencies
