@@ -23,7 +23,7 @@ plugins {
     kotlin("plugin.serialization").version("1.9.20")
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
-    id("org.jetbrains.dokka") version "1.9.20"
+    id("org.jetbrains.dokka") version "2.0.0"
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
 
     `maven-publish`
