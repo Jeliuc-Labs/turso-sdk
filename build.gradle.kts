@@ -43,7 +43,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
-    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:1.9.20")
+    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.0.0")
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
@@ -81,7 +81,7 @@ sourceSets.test {
 buildscript {
     dependencies {
         classpath("org.jetbrains.dokka:dokka-base:1.9.20")
-        classpath("org.jetbrains.dokka:versioning-plugin:1.9.20")
+        classpath("org.jetbrains.dokka:versioning-plugin:2.0.0")
     }
 }
 
