@@ -1,0 +1,15 @@
+[
+  {
+    "name": "starter",
+    "price": "0",
+    "quotas": {
+      "rowsRead": 1000000000,
+      "rowsWritten": 25000000,
+      "databases": 500,
+      "locations": 3,
+      "storage": 9000000000,
+      "groups": 1,
+      "bytesSynced": 3000000000
+    }
+  }
+]

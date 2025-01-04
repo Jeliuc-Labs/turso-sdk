@@ -16,6 +16,7 @@ import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.MemberRole
 import com.jeliuc.turso.sdk.model.Organization
+import com.jeliuc.turso.sdk.model.OrganizationPlan
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.UpdateOrganizationRequest
 import io.ktor.client.engine.mock.MockEngine
@@ -53,6 +54,19 @@ private fun mockEngine() =
                     HttpMethod.Patch -> {
                         respond(
                             Fixture.content("$fixturesBasePath/organization.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
+            Organizations.Path.plans("test") -> {
+                when (method) {
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/plans.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -146,6 +160,15 @@ class OrganizationsTest {
         runBlocking {
             client(mockEngine()).organizations.update("test", UpdateOrganizationRequest(true)).let { response ->
                 assertIs<OrganizationResponse>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can list organization plans`() {
+        runBlocking {
+            client(mockEngine()).organizations.plans("test").let { response ->
+                assertIs<List<OrganizationPlan>>(response)
             }
         }
     }

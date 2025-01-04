@@ -17,6 +17,9 @@ data class Organization(
     @SerialName("blocked_reads") val blockedReads: Boolean,
     @SerialName("blocked_writes") val blockedWrites: Boolean,
     @SerialName("overages") val overages: Boolean,
+    @SerialName("plan_id") val planId: String? = null,
+    @SerialName("plan_timeline") val planTimeline: String? = null,
+    @SerialName("platform") val platform: String? = null,
 )
 
 @Serializable
@@ -37,6 +40,24 @@ enum class OrganizationType {
 @Serializable
 data class UpdateOrganizationRequest(
     @SerialName("overages") val overages: Boolean,
+)
+
+@Serializable
+data class OrganizationPlan(
+    @SerialName("name") val name: String,
+    @SerialName("price") val price: String,
+    @SerialName("quotas") val quotas: PlanQuotas,
+)
+
+@Serializable
+data class PlanQuotas(
+    @SerialName("rowsRead") val rowRead: Long,
+    @SerialName("rowsWritten") val rowsWritten: Long,
+    @SerialName("databases") val databases: Int,
+    @SerialName("locations") val locations: Int,
+    @SerialName("storage") val storage: Long,
+    @SerialName("groups") val groups: Int,
+    @SerialName("bytesSynced") val bytesSynced: Long,
 )
 
 @Serializable

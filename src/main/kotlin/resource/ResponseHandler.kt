@@ -18,9 +18,9 @@ abstract class ResponseHandler {
         try {
             response.body<T>()
         } catch (e: SerializationException) {
-            response.body<ApiError>().let { throw ApiError(it.message) }
+            response.body<ApiError>().let { throw ApiError(e.message.toString()) }
         } catch (e: ContentConvertException) {
-            response.body<ApiError>().let { throw ApiError(it.message) }
+            response.body<ApiError>().let { throw ApiError(e.message.toString()) }
         } catch (e: Throwable) {
             throw UnexpectedResultError(e.message)
         }
