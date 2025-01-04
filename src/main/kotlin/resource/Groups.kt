@@ -188,7 +188,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
      */
     suspend fun unarchive(
         organizationName: String,
-        groupName: String
+        groupName: String,
     ): GroupResponse =
         client.httpClient.post(Path.unarchive(organizationName, groupName)) {
             contentType(ContentType.Application.Json)
@@ -252,7 +252,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
 
         fun unarchive(
             organizationName: String,
-            groupName: String
+            groupName: String,
         ) = groups(organizationName, groupName) + "/unarchive"
     }
 }
