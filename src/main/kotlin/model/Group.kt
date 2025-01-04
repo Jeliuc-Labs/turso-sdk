@@ -20,6 +20,7 @@ data class Group(
     @SerialName("primary") val primary: String,
     @SerialName("locations") val locations: List<String>,
     @SerialName("archived") val archived: Boolean,
+    @SerialName("version") val version: String
 )
 
 @Serializable
@@ -39,9 +40,6 @@ data class CreateGroup(
 enum class LibSqlExtension {
     @SerialName("vector")
     VECTOR,
-
-    @SerialName("vss")
-    VSS,
 
     @SerialName("crypto")
     CRYPTO,
@@ -66,6 +64,9 @@ enum class LibSqlExtension {
 
     @SerialName("regexp")
     REGEXP,
+
+    @SerialName("vec")
+    VEC,
 }
 
 @Serializable
