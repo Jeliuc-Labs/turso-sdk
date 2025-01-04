@@ -8,6 +8,7 @@
     ],
     "name": "default",
     "primary": "lhr",
-    "uuid": "0a28102d-6906-11ee-8553-eaa7715aeaf2"
+    "uuid": "0a28102d-6906-11ee-8553-eaa7715aeaf2",
+    "version": "v0.23.7"
   }
 }

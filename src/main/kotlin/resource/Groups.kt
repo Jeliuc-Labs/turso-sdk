@@ -126,7 +126,7 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         ) {
             contentType(ContentType.Application.Json)
         }.let { response ->
-            handleResponse<GroupResponse>(response)
+            handleResponse<GroupResponse>(response) // todo check if group response doesn't have the `version` entry
         }
 
     /**
@@ -182,6 +182,21 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
         }
 
     /**
+     * Unarchive a group that has been archived due to inactivity.
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/groups/unarchive">API Reference</a>
+     */
+    suspend fun unarchive(
+        organizationName: String,
+        groupName: String
+    ): GroupResponse =
+        client.httpClient.post(Path.unarchive(organizationName, groupName)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<GroupResponse>(response)
+        }
+
+    /**
      * Invalidates all auth tokens of a group
      *
      * @see <a href="https://docs.turso.tech/api-reference/groups/invalidate-tokens">API Reference</a>
@@ -234,5 +249,10 @@ class Groups(private val client: TursoClient) : ResponseHandler() {
             organizationName: String,
             groupName: String,
         ) = groups(organizationName, groupName) + "/auth/rotate"
+
+        fun unarchive(
+            organizationName: String,
+            groupName: String
+        ) = groups(organizationName, groupName) + "/unarchive"
     }
 }

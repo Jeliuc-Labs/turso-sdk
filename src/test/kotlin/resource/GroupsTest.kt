@@ -100,6 +100,19 @@ private fun mockEngine() =
                 }
             }
 
+            Groups.Path.unarchive("test", "test-group") -> {
+                when (method) {
+                    HttpMethod.Post -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/group.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
             Groups.Path.update("test", "test-group") -> {
                 when (method) {
                     HttpMethod.Post -> {
@@ -221,6 +234,14 @@ class GroupsTest {
         runBlocking {
             val response = client(mockEngine()).groups.invalidateTokens("test", "test-group")
             assertIs<Unit>(response)
+        }
+    }
+
+    @Test
+    fun `can unarchive group`() {
+        runBlocking {
+            val response = client(mockEngine()).groups.unarchive("test", "test-group")
+            assertIs<GroupResponse>(response)
         }
     }
 }
