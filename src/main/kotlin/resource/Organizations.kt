@@ -13,6 +13,7 @@ import com.jeliuc.turso.sdk.model.DeleteMemberResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.Organization
+import com.jeliuc.turso.sdk.model.OrganizationPlan
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.UpdateOrganizationRequest
 import io.ktor.client.request.delete
@@ -73,12 +74,23 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
             handleResponse<OrganizationResponse>(response)
         }
 
+    suspend fun plans(organizationName: String): List<OrganizationPlan> =
+        client.httpClient.get(
+            Path.plans(organizationName),
+        ) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<List<OrganizationPlan>>(response)
+        }
+
     internal object Path {
         private const val BASE_PATH = "/v1/organizations"
 
         fun organizations() = BASE_PATH
 
         fun organizations(organizationName: String) = "$BASE_PATH/$organizationName"
+
+        fun plans(organizationName: String) = organizations(organizationName) + "/plans"
     }
 }
 

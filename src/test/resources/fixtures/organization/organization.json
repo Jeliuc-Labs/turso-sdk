@@ -1,10 +1,13 @@
 {
-  "organization": {
-    "blocked_reads": true,
-    "blocked_writes": true,
-    "name": "personal",
-    "overages": true,
-    "slug": "iku",
-    "type": "personal"
-  }
+    "organization": {
+        "name": "personal",
+        "slug": "iku",
+        "type": "personal",
+        "overages": false,
+        "blocked_reads": false,
+        "blocked_writes": false,
+        "plan_id": "hobby",
+        "plan_timeline": "monthly",
+        "platform": "vercel"
+    }
 }
