@@ -10,11 +10,13 @@ import com.jeliuc.turso.sdk.model.CreateInviteResponse
 import com.jeliuc.turso.sdk.model.CreateMember
 import com.jeliuc.turso.sdk.model.CreateMemberResponse
 import com.jeliuc.turso.sdk.model.DeleteMemberResponse
+import com.jeliuc.turso.sdk.model.InvoicesResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationPlan
 import com.jeliuc.turso.sdk.model.OrganizationResponse
+import com.jeliuc.turso.sdk.model.SubscriptionResponse
 import com.jeliuc.turso.sdk.model.UpdateOrganizationRequest
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -74,6 +76,11 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
             handleResponse<OrganizationResponse>(response)
         }
 
+    /**
+     * List Plans
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/plans">API Reference</a>
+     */
     suspend fun plans(organizationName: String): List<OrganizationPlan> =
         client.httpClient.get(
             Path.plans(organizationName),
@@ -81,6 +88,32 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
             contentType(ContentType.Application.Json)
         }.let { response ->
             handleResponse<List<OrganizationPlan>>(response)
+        }
+
+    /**
+     * Current Subscription
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/subscription">API Reference</a>
+     */
+    suspend fun subscription(organizationName: String): SubscriptionResponse =
+        client.httpClient.get(
+            Path.subscription(organizationName),
+        ) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<SubscriptionResponse>(response)
+        }
+
+    /**
+     * List invoices
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/invoices">API Reference</a>
+     */
+    suspend fun listInvoices(organizationName: String): InvoicesResponse =
+        client.httpClient.get(
+            Path.invoices(organizationName),
+        ).let { response ->
+            handleResponse<InvoicesResponse>(response)
         }
 
     internal object Path {
@@ -91,6 +124,10 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
         fun organizations(organizationName: String) = "$BASE_PATH/$organizationName"
 
         fun plans(organizationName: String) = organizations(organizationName) + "/plans"
+
+        fun subscription(organisationName: String) = organizations(organisationName) + "/subscription"
+
+        fun invoices(organizationName: String) = organizations(organizationName) + "/invoices"
     }
 }
 

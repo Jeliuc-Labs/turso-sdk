@@ -12,12 +12,14 @@ import com.jeliuc.turso.sdk.model.CreateInviteResponse
 import com.jeliuc.turso.sdk.model.CreateMember
 import com.jeliuc.turso.sdk.model.CreateMemberResponse
 import com.jeliuc.turso.sdk.model.DeleteMemberResponse
+import com.jeliuc.turso.sdk.model.InvoicesResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.MemberRole
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationPlan
 import com.jeliuc.turso.sdk.model.OrganizationResponse
+import com.jeliuc.turso.sdk.model.SubscriptionResponse
 import com.jeliuc.turso.sdk.model.UpdateOrganizationRequest
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -67,6 +69,32 @@ private fun mockEngine() =
                     HttpMethod.Get -> {
                         respond(
                             Fixture.content("$fixturesBasePath/plans.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
+            Organizations.Path.subscription("test") -> {
+                when (method) {
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/subscription.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
+            Organizations.Path.invoices("test") -> {
+                when (method) {
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/invoices.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -165,10 +193,28 @@ class OrganizationsTest {
     }
 
     @Test
-    fun `can list organization plans`() {
+    fun `can list available plans`() {
         runBlocking {
             client(mockEngine()).organizations.plans("test").let { response ->
                 assertIs<List<OrganizationPlan>>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can return current subscription`() {
+        runBlocking {
+            client(mockEngine()).organizations.subscription("test").let { response ->
+                assertIs<SubscriptionResponse>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can list invoices`() {
+        runBlocking {
+            client(mockEngine()).organizations.listInvoices("test").let { response ->
+                assertIs<InvoicesResponse>(response)
             }
         }
     }
