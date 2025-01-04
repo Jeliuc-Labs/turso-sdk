@@ -20,7 +20,7 @@ data class Group(
     @SerialName("primary") val primary: String,
     @SerialName("locations") val locations: List<String>,
     @SerialName("archived") val archived: Boolean,
-    @SerialName("version") val version: String
+    @SerialName("version") val version: String,
 )
 
 @Serializable
