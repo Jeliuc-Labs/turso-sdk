@@ -61,6 +61,29 @@ data class PlanQuotas(
 )
 
 @Serializable
+data class SubscriptionResponse(
+    @SerialName("subscription") val subscription: String,
+    @SerialName("overages") val overages: Boolean,
+    @SerialName("plan") val plan: String,
+    @SerialName("timeline") val timeline: String,
+)
+
+@Serializable
+data class InvoicesResponse(
+    @SerialName("invoices") val invoices: List<Invoice>,
+)
+
+@Serializable
+data class Invoice(
+    @SerialName("invoice_number") val invoiceNumber: String,
+    @SerialName("amount_due") val amountDue: String,
+    @SerialName("due_date") val dueDate: String,
+    @SerialName("paid_at") val paidAt: String,
+    @SerialName("payment_failed_at") val paymentFailedAt: String,
+    @SerialName("invoice_pdf") val invoicePdf: String,
+)
+
+@Serializable
 data class ListMembersResponse(
     @SerialName("members") val members: List<Member>,
 )

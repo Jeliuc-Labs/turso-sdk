@@ -1,0 +1,12 @@
+{
+  "invoices": [
+    {
+      "invoice_number": "LFONTK-00001",
+      "amount_due": "10.29",
+      "due_date": "2024-01-01T05:00:00+00:00",
+      "paid_at": "2024-01-01T05:00:00+00:00",
+      "payment_failed_at": "2024-01-01T05:00:00+00:00",
+      "invoice_pdf": "https://assets.withorb.com/invoice/..."
+    }
+  ]
+}
