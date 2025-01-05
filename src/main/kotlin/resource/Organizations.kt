@@ -11,12 +11,17 @@ import com.jeliuc.turso.sdk.model.CreateMember
 import com.jeliuc.turso.sdk.model.CreateMemberResponse
 import com.jeliuc.turso.sdk.model.DeleteMemberResponse
 import com.jeliuc.turso.sdk.model.InvoicesResponse
+import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
+import com.jeliuc.turso.sdk.model.MemberResponse
 import com.jeliuc.turso.sdk.model.Organization
+import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
 import com.jeliuc.turso.sdk.model.OrganizationPlan
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.SubscriptionResponse
+import com.jeliuc.turso.sdk.model.UpdateMemberRequest
+import com.jeliuc.turso.sdk.model.UpdateMemberResponse
 import com.jeliuc.turso.sdk.model.UpdateOrganizationRequest
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -45,6 +50,9 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
 
     val invites: Invites
         get() = Invites(this.client)
+
+    val auditLogs: AuditLogs
+        get() = AuditLogs(this.client)
 
     /**
      * Lists all organizations
@@ -105,7 +113,7 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
         }
 
     /**
-     * List invoices
+     * Lists invoices
      *
      * @see <a href="https://docs.turso.tech/api-reference/organizations/invoices">API Reference</a>
      */
@@ -114,6 +122,18 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
             Path.invoices(organizationName),
         ).let { response ->
             handleResponse<InvoicesResponse>(response)
+        }
+
+    /**
+     * Gets organization usage
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/usage">API Reference</a>
+     */
+    suspend fun usage(organizationName: String): OrganizationDatabaseUsageResponse =
+        client.httpClient.get(
+            Path.usage(organizationName),
+        ).let { response ->
+            handleResponse(response)
         }
 
     internal object Path {
@@ -128,6 +148,8 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
         fun subscription(organisationName: String) = organizations(organisationName) + "/subscription"
 
         fun invoices(organizationName: String) = organizations(organizationName) + "/invoices"
+
+        fun usage(organizationName: String) = organizations(organizationName) + "/usage"
     }
 }
 
@@ -155,6 +177,21 @@ class Members(val client: TursoClient) : ResponseHandler() {
         }
 
     /**
+     * Retrieves member of an organization
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/members/retrieve">API Reference</a>
+     */
+    suspend fun retrieve(
+        organizationName: String,
+        username: String,
+    ): MemberResponse =
+        client.httpClient.get(Path.members(organizationName, username)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<MemberResponse>(response)
+        }
+
+    /**
      * Adds a member to an organization
      *
      * @see <a href="https://docs.turso.tech/api-reference/organizations/members/add">API Reference</a>
@@ -168,6 +205,23 @@ class Members(val client: TursoClient) : ResponseHandler() {
             setBody(member)
         }.let { response ->
             handleResponse<CreateMemberResponse>(response)
+        }
+
+    /**
+     * Updates a member of an organization
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/members/add">API Reference</a>
+     */
+    suspend fun update(
+        organizationName: String,
+        username: String,
+        updateMemberRequest: UpdateMemberRequest,
+    ): UpdateMemberResponse =
+        client.httpClient.patch(Path.members(organizationName, username)) {
+            contentType(ContentType.Application.Json)
+            setBody(updateMemberRequest)
+        }.let { response ->
+            handleResponse<UpdateMemberResponse>(response)
         }
 
     /**
@@ -186,12 +240,12 @@ class Members(val client: TursoClient) : ResponseHandler() {
         }
 
     internal object Path {
-        fun members(organizationName: String) = "${Organizations.Path.organizations()}/$organizationName/members"
+        fun members(organizationName: String) = "${Organizations.Path.organizations(organizationName)}/members"
 
         fun members(
             organizationName: String,
-            memberName: String,
-        ) = "${members(organizationName)}/$memberName"
+            username: String,
+        ) = "${members(organizationName)}/$username"
     }
 }
 
@@ -234,7 +288,57 @@ class Invites(val client: TursoClient) : ResponseHandler() {
             handleResponse<CreateInviteResponse>(response)
         }
 
+    /**
+     * Deletes the invitation to an organization
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/invites/create">API Reference</a>
+     */
+    suspend fun delete(
+        organizationName: String,
+        email: String,
+    ): Unit =
+        client.httpClient.delete(Path.delete(organizationName, email)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<Unit>(response)
+        }
+
     internal object Path {
-        fun invites(organizationName: String) = "${Organizations.Path.organizations()}/$organizationName/invites"
+        fun invites(organizationName: String) = "${Organizations.Path.organizations(organizationName)}/invites"
+
+        fun delete(
+            organizationName: String,
+            email: String,
+        ) = "${invites(organizationName)}/$email"
+    }
+}
+
+/**
+ * Turso AuditLogs API Resource
+ *
+ * [See official documentation page](https://docs.turso.tech/api-reference/audit-logs)
+ *
+ * Example usage:
+ *
+ * ```kotlin
+ * // client: TursoClient
+ * val auditLogs = client.auditLogs.list("organizationName")
+ * ```
+ */
+class AuditLogs(val client: TursoClient) : ResponseHandler() {
+    /**
+     * Lists audit logs
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/audit-logs/list">API Reference</a>
+     */
+    suspend fun list(organizationName: String): ListAuditLogsResponse =
+        client.httpClient.get(Path.auditLogs(organizationName)) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<ListAuditLogsResponse>(response)
+        }
+
+    internal object Path {
+        fun auditLogs(organizationName: String) = "${Organizations.Path.organizations(organizationName)}/audit-logs"
     }
 }

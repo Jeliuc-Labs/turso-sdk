@@ -13,13 +13,18 @@ import com.jeliuc.turso.sdk.model.CreateMember
 import com.jeliuc.turso.sdk.model.CreateMemberResponse
 import com.jeliuc.turso.sdk.model.DeleteMemberResponse
 import com.jeliuc.turso.sdk.model.InvoicesResponse
+import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
+import com.jeliuc.turso.sdk.model.MemberResponse
 import com.jeliuc.turso.sdk.model.MemberRole
 import com.jeliuc.turso.sdk.model.Organization
+import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
 import com.jeliuc.turso.sdk.model.OrganizationPlan
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.SubscriptionResponse
+import com.jeliuc.turso.sdk.model.UpdateMemberRequest
+import com.jeliuc.turso.sdk.model.UpdateMemberResponse
 import com.jeliuc.turso.sdk.model.UpdateOrganizationRequest
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
@@ -103,6 +108,19 @@ private fun mockEngine() =
                 }
             }
 
+            Organizations.Path.usage("test") -> {
+                when (method) {
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/usage.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
             Members.Path.members("test") -> {
                 when (method) {
                     HttpMethod.Get -> {
@@ -128,6 +146,20 @@ private fun mockEngine() =
                     HttpMethod.Delete -> {
                         respond(
                             Fixture.content("$fixturesBasePath/member/delete.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/member/member.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    HttpMethod.Patch -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/member/update_member.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -161,6 +193,32 @@ private fun mockEngine() =
                     HttpMethod.Get -> {
                         respond(
                             """{"message": "organization not found"}""",
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
+            Invites.Path.delete("test", "email") -> {
+                when (method) {
+                    HttpMethod.Delete -> {
+                        respond(
+                            "",
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
+            AuditLogs.Path.auditLogs("test") -> {
+                when (method) {
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/audit_log/list.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
@@ -220,10 +278,37 @@ class OrganizationsTest {
     }
 
     @Test
+    fun `can get usage`() {
+        runBlocking {
+            client(mockEngine()).organizations.usage("test").let { response ->
+                assertIs<OrganizationDatabaseUsageResponse>(response)
+            }
+        }
+    }
+
+    @Test
     fun `can list members of an organization`() {
         runBlocking {
             client(mockEngine()).organizations.members.list("test").let { response ->
                 assertIs<ListMembersResponse>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can retrieve the member by username`() {
+        runBlocking {
+            client(mockEngine()).organizations.members.retrieve("test", "test-member").let { response ->
+                assertIs<MemberResponse>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can update the member`() {
+        runBlocking {
+            client(mockEngine()).organizations.members.update("test", "test-member", UpdateMemberRequest(role = "member")).let { response ->
+                assertIs<UpdateMemberResponse>(response)
             }
         }
     }
@@ -276,6 +361,24 @@ class OrganizationsTest {
                 .let { response ->
                     assertIs<CreateInviteResponse>(response)
                 }
+        }
+    }
+
+    @Test
+    fun `can delete invite`() {
+        runBlocking {
+            client(mockEngine()).organizations.invites.delete("test", "email").let { response ->
+                assertIs<Unit>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can list audit logs`() {
+        runBlocking {
+            client(mockEngine()).organizations.auditLogs.list("test").let { response ->
+                assertIs<ListAuditLogsResponse>(response)
+            }
         }
     }
 }

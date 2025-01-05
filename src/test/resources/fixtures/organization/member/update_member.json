@@ -1,0 +1,7 @@
+{
+  "member": {
+    "username": "<string>",
+    "email": "<string>",
+    "role": "admin"
+  }
+}

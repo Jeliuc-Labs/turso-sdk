@@ -81,9 +81,9 @@ data class RetrieveDatabaseResponse(
 
 @Serializable
 data class Usage(
-    @SerialName("rows_read") val rowsRead: Int,
-    @SerialName("rows_written") val rowsWritten: Int,
-    @SerialName("storage_bytes") val storageBytes: Int,
+    @SerialName("rows_read") val rowsRead: Long,
+    @SerialName("rows_written") val rowsWritten: Long,
+    @SerialName("storage_bytes") val storageBytes: Long,
 )
 
 @Serializable

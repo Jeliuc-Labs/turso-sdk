@@ -8,6 +8,7 @@ package com.jeliuc.turso.sdk.model
 import kotlinx.datetime.Instant
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
 
 @Serializable
 data class Organization(
@@ -84,8 +85,43 @@ data class Invoice(
 )
 
 @Serializable
+data class OrganizationDatabaseUsageResponse(
+    @SerialName("organization") val organizationUsageResponse: OrganizationDatabaseUsage,
+)
+
+@Serializable
+data class OrganizationDatabaseUsage(
+    @SerialName("uuid") val uuid: String,
+    @SerialName("usage") val usage: OrganizationUsage,
+    @SerialName("databases") val databases: List<DatabaseUsage>,
+)
+
+@Serializable
+data class DatabaseUsage(
+    @SerialName("uuid") val uuid: String,
+    @SerialName("instances") val instances: List<InstanceUsage>,
+    @SerialName("total") val total: Usage,
+)
+
+@Serializable
+data class OrganizationUsage(
+    @SerialName("rows_read") val rowsRead: Long,
+    @SerialName("rows_written") val rowsWritten: Long,
+    @SerialName("databases") val databases: Int,
+    @SerialName("locations") val locations: Int,
+    @SerialName("storage") val storage: Long,
+    @SerialName("groups") val groups: Int,
+    @SerialName("bytes_synced") val bytesSynced: Long,
+)
+
+@Serializable
 data class ListMembersResponse(
     @SerialName("members") val members: List<Member>,
+)
+
+@Serializable
+data class MemberResponse(
+    @SerialName("member") val member: Member,
 )
 
 @Serializable
@@ -125,6 +161,23 @@ data class CreateMemberResponse(
 )
 
 @Serializable
+data class UpdateMemberRequest(
+    @SerialName("role") val role: String,
+)
+
+@Serializable
+data class UpdateMemberResponse(
+    @SerialName("member") val member: UpdateMemberResponseInner,
+)
+
+@Serializable
+data class UpdateMemberResponseInner(
+    @SerialName("username") val username: String,
+    @SerialName("email") val email: String,
+    @SerialName("role") val role: String,
+)
+
+@Serializable
 data class DeleteMemberResponse(
     @SerialName("member") val member: String,
 )
@@ -136,19 +189,43 @@ data class ListInvitesResponse(
 
 @Serializable
 data class Invite(
-    @SerialName("Accepted") val accepted: Boolean,
-    @SerialName("CreatedAt") val createdAt: Instant,
-    @SerialName("DeletedAt") val deletedAt: Instant,
-    @SerialName("Email") val email: String,
     @SerialName("ID") val id: Int,
-    @SerialName("Organization") val organization: Organization,
-    @SerialName("OrganizationID") val organizationID: Int,
-    @SerialName("Role") val role: MemberRole,
-    @SerialName("Token") val token: String,
+    @SerialName("CreatedAt") val createdAt: Instant,
     @SerialName("UpdatedAt") val updatedAt: Instant,
+    @SerialName("DeletedAt") val deletedAt: Instant,
+    @SerialName("Role") val role: MemberRole,
+    @SerialName("Email") val email: String,
+    @SerialName("OrganizationID") val organizationID: Int,
+    @SerialName("Token") val token: String,
+    @SerialName("Organization") val organization: Organization,
+    @SerialName("Accepted") val accepted: Boolean,
 )
 
 @Serializable
 data class CreateInviteResponse(
     @SerialName("invited") val invited: Invite,
+)
+
+@Serializable
+data class ListAuditLogsResponse(
+    @SerialName("audit_logs") val auditLogs: List<AuditLog>,
+    @SerialName("pagination") val pagination: Pagination,
+)
+
+@Serializable
+data class AuditLog(
+    @SerialName("author") val author: String,
+    @SerialName("code") val code: String,
+    @SerialName("created_at") val createdAt: Instant,
+    @SerialName("data") val data: JsonElement,
+    @SerialName("message") val message: String,
+    @SerialName("origin") val origin: String,
+)
+
+@Serializable
+data class Pagination(
+    @SerialName("page") val page: Int,
+    @SerialName("page_size") val pageSize: Int,
+    @SerialName("total_pages") val totalPages: Int,
+    @SerialName("total_rows") val totalRows: Int,
 )
