@@ -63,8 +63,6 @@ ktlint {
 }
 
 kotlin {
-    jvmToolchain(17)
-
     java {
         withJavadocJar()
     }
