@@ -7,6 +7,7 @@ package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.TursoClient
 import com.jeliuc.turso.sdk.model.Authorization
+import com.jeliuc.turso.sdk.model.ConfigurationResponse
 import com.jeliuc.turso.sdk.model.CreateDatabase
 import com.jeliuc.turso.sdk.model.CreateDatabaseResponse
 import com.jeliuc.turso.sdk.model.DatabaseUsageResponse
@@ -17,12 +18,14 @@ import com.jeliuc.turso.sdk.model.ListInstancesResponse
 import com.jeliuc.turso.sdk.model.RetrieveDatabaseResponse
 import com.jeliuc.turso.sdk.model.StatsResponse
 import com.jeliuc.turso.sdk.model.TokenResponse
+import com.jeliuc.turso.sdk.model.UpdateConfigurationRequest
 import com.jeliuc.turso.sdk.model.UploadDumpResponse
 import io.ktor.client.request.delete
 import io.ktor.client.request.forms.MultiPartFormDataContent
 import io.ktor.client.request.forms.formData
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
+import io.ktor.client.request.patch
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
@@ -91,6 +94,40 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
             Path.databases(organizationName, databaseName),
         ) { contentType(ContentType.Application.Json) }.let {
             handleResponse<RetrieveDatabaseResponse>(it)
+        }
+
+    /**
+     * Retrieve Database Configuration
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/databases/configuration">API Reference</a>
+     */
+    suspend fun retrieveConfiguration(
+        organizationName: String,
+        databaseName: String,
+    ): ConfigurationResponse =
+        client.httpClient.get(
+            Path.configuration(organizationName, databaseName),
+        ) { contentType(ContentType.Application.Json) }.let { response ->
+            handleResponse<ConfigurationResponse>(response)
+        }
+
+    /**
+     * Update Database Configuration
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/databases/update-configuration">API Reference</a>
+     */
+    suspend fun updateConfiguration(
+        organizationName: String,
+        databaseName: String,
+        updateConfiguration: UpdateConfigurationRequest,
+    ): ConfigurationResponse =
+        client.httpClient.patch(
+            Path.configuration(organizationName, databaseName),
+        ) {
+            contentType(ContentType.Application.Json)
+            setBody(updateConfiguration)
+        }.let { response ->
+            handleResponse<ConfigurationResponse>(response)
         }
 
     /**
@@ -259,6 +296,11 @@ class Databases(private val client: TursoClient) : ResponseHandler() {
             organizationName: String,
             databaseName: String,
         ) = RESOURCE_PATH.replace("{organizationName}", organizationName) + "/$databaseName"
+
+        fun configuration(
+            organizationName: String,
+            databaseName: String,
+        ) = databases(organizationName, databaseName) + "/configuration"
 
         fun usage(
             organizationName: String,

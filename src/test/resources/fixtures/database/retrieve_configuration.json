@@ -1,0 +1,6 @@
+{
+  "size_limit": "10000",
+  "allow_attach": true,
+  "block_reads": false,
+  "block_writes": false
+}

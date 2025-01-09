@@ -13,27 +13,27 @@ data class Database(
     @SerialName("Name") val name: String,
     @SerialName("DbId") val dbId: String,
     @SerialName("Hostname") val hostname: String,
-    @SerialName("is_schema") val isSchema: Boolean,
-    @SerialName("schema") val schema: String,
     @SerialName("block_reads") val blockReads: Boolean,
     @SerialName("block_writes") val blockWrites: Boolean,
-    @SerialName("allow_attach") val allowAttach: String,
+    @SerialName("allow_attach") val allowAttach: Boolean,
     @SerialName("regions") val regions: List<String>,
     @SerialName("primaryRegion") val primaryRegion: String,
+    @SerialName("is_schema") val isSchema: Boolean,
     @SerialName("type") val type: String,
     @SerialName("version") val version: String,
     @SerialName("group") val group: String,
-    @SerialName("sleeping") val sleeping: Boolean,
+    @SerialName("schema") val schema: String,
+    @SerialName("archived") val archived: Boolean,
 )
 
 @Serializable
 data class CreateDatabase(
     @SerialName("name") val name: String,
     @SerialName("group") val group: String,
-    @SerialName("size_limit") val sizeLimit: String? = null,
-    @SerialName("seed") val seed: Seed? = null,
-    @SerialName("schema") val schema: String? = null,
     @SerialName("is_schema") val isSchema: Boolean = false,
+    @SerialName("schema") val schema: String? = null,
+    @SerialName("seed") val seed: Seed? = null,
+    @SerialName("size_limit") val sizeLimit: String? = null,
 )
 
 @Serializable
@@ -80,6 +80,20 @@ data class RetrieveDatabaseResponse(
 )
 
 @Serializable
+data class ConfigurationResponse(
+    @SerialName("size_limit") val sizeLimit: String,
+    @SerialName("allow_attach") val allowAttach: Boolean,
+    @SerialName("block_reads") val blockReads: Boolean,
+    @SerialName("block_writes") val blockWrites: Boolean,
+)
+
+@Serializable
+data class UpdateConfigurationRequest(
+    @SerialName("size_limit") val sizeLimit: String,
+    @SerialName("allow_attach") val allowAttach: Boolean,
+)
+
+@Serializable
 data class Usage(
     @SerialName("rows_read") val rowsRead: Long,
     @SerialName("rows_written") val rowsWritten: Long,
@@ -96,7 +110,7 @@ data class InstanceUsage(
 data class Instances<T>(
     @SerialName("uuid") val uuid: String,
     @SerialName("instances") val instances: List<T>,
-    @SerialName("usage") val usage: Usage,
+    @SerialName("total") val total: Usage,
 )
 
 @Serializable
@@ -111,8 +125,6 @@ data class Instance(
 @Serializable
 data class DatabaseUsageResponse(
     @SerialName("database") val database: Instances<InstanceUsage>,
-    @SerialName("instances") val instances: Map<String, Usage>,
-    @SerialName("total") val total: Usage,
 )
 
 @Serializable

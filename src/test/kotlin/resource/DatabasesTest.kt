@@ -7,6 +7,7 @@ package com.jeliuc.turso.sdk.resource
 
 import com.jeliuc.turso.sdk.Fixture
 import com.jeliuc.turso.sdk.client
+import com.jeliuc.turso.sdk.model.ConfigurationResponse
 import com.jeliuc.turso.sdk.model.CreateDatabase
 import com.jeliuc.turso.sdk.model.CreateDatabaseResponse
 import com.jeliuc.turso.sdk.model.DatabaseUsageResponse
@@ -17,6 +18,7 @@ import com.jeliuc.turso.sdk.model.ListInstancesResponse
 import com.jeliuc.turso.sdk.model.RetrieveDatabaseResponse
 import com.jeliuc.turso.sdk.model.StatsResponse
 import com.jeliuc.turso.sdk.model.TokenResponse
+import com.jeliuc.turso.sdk.model.UpdateConfigurationRequest
 import com.jeliuc.turso.sdk.model.UploadDumpResponse
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.mock.MockEngine
@@ -69,6 +71,27 @@ private fun mockEngine(): HttpClientEngine =
 
                     HttpMethod.Delete -> {
                         val data = Fixture.content("$fixturesBasePath/delete.json")
+                        respond(
+                            data,
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
+                    else -> error("Unhandled ${method.value} ${url.encodedPath}")
+                }
+            }
+
+            Databases.Path.configuration("test", "test-database") -> {
+                when (method) {
+                    HttpMethod.Get -> {
+                        val data = Fixture.content("$fixturesBasePath/retrieve_configuration.json")
+                        respond(
+                            data,
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+                    HttpMethod.Patch -> {
+                        val data = Fixture.content("$fixturesBasePath/retrieve_configuration.json")
                         respond(
                             data,
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
@@ -193,6 +216,23 @@ class DatabasesTest {
         runBlocking {
             val database = client(mockEngine()).databases.retrieve("test", "test-database")
             assertIs<RetrieveDatabaseResponse>(database)
+        }
+    }
+
+    @Test
+    fun `can retrieve database configuration`() {
+        runBlocking {
+            val configuration = client(mockEngine()).databases.retrieveConfiguration("test", "test-database")
+            assertIs<ConfigurationResponse>(configuration)
+        }
+    }
+
+    @Test
+    fun `can update database configuration`() {
+        runBlocking {
+            val configurationUpdate = UpdateConfigurationRequest(sizeLimit = "20M", allowAttach = true)
+            val configuration = client(mockEngine()).databases.updateConfiguration("test", "test-database", configurationUpdate)
+            assertIs<ConfigurationResponse>(configuration)
         }
     }
 

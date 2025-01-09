@@ -1,9 +1,17 @@
 {
   "database": {
-    "uuid": "8e78c7e0-c517-11ee-9386-e26d5524e301",
+    "uuid": "0eb771dd-6906-11ee-8553-eaa7715aeaf2",
     "instances": [
       {
-        "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+        "uuid": "cd831986-94e5-11ee-a6fe-7a52e1f7759a",
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096
+        }
+      },
+      {
+        "uuid": "0be90471-6906-11ee-8553-eaa7715aeaf2",
         "usage": {
           "rows_read": 0,
           "rows_written": 0,
@@ -11,22 +19,10 @@
         }
       }
     ],
-    "usage": {
+    "total": {
       "rows_read": 0,
       "rows_written": 0,
-      "storage_bytes": 4096
+      "storage_bytes": 8192
     }
-  },
-  "instances": {
-    "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
-      "rows_read": 0,
-      "rows_written": 0,
-      "storage_bytes": 4096
-    }
-  },
-  "total": {
-    "rows_read": 0,
-    "rows_written": 0,
-    "storage_bytes": 4096
   }
 }

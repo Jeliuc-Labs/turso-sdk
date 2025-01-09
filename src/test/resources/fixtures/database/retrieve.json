@@ -1,21 +1,22 @@
 {
   "database": {
-    "Name": "new-database",
-    "DbId": "ec97c157-5c8e-47ad-abe3-2b0af4079af8",
-    "Hostname": "new-database-a2xchip.turso.io",
-    "is_schema": false,
-    "schema": "",
+    "Name": "my-db",
+    "DbId": "0eb771dd-6906-11ee-8553-eaa7715aeaf2",
+    "Hostname": "[databaseName]-[organizationSlug].turso.io",
     "block_reads": false,
     "block_writes": false,
     "allow_attach": false,
     "regions": [
-      "otp"
+      "lhr",
+      "bos",
+      "nrt"
     ],
-    "primaryRegion": "otp",
+    "primaryRegion": "lhr",
     "type": "logical",
-    "hostname": "new-database-a2xchip.turso.io",
-    "version": "0.24.2",
+    "version": "0.22.22",
     "group": "default",
-    "sleeping": false
+    "is_schema": false,
+    "schema": "",
+    "archived": false
   }
 }
