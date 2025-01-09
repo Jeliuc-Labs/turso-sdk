@@ -1,9 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.base.DokkaBaseConfiguration
-import org.jetbrains.dokka.gradle.DokkaTask
-import org.jetbrains.dokka.versioning.VersioningConfiguration
-import org.jetbrains.dokka.versioning.VersioningPlugin
+import org.gradle.kotlin.dsl.invoke
 
 val ktorVersion: String by project
 val dateTimeVersion: String by project
@@ -35,8 +31,6 @@ repositories {
     gradlePluginPortal()
     mavenCentral()
 }
-
-val dokkaPlugin by configurations
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
@@ -83,24 +77,21 @@ buildscript {
     }
 }
 
-tasks.withType<DokkaTask>().configureEach {
+dokka {
     moduleName.set("Turso API SDK")
-    suppressObviousFunctions.set(true)
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-        footerMessage = "(c) 2024 Jeliuc.com"
+    dokkaSourceSets.main {
+    }
+
+    pluginsConfiguration {
+        version = "0.3.0"
+        html {
+            footerMessage.set("(c) 2025 Jeliuc.com")
+        }
     }
 }
 
 tasks.named<Jar>("javadocJar") {
-    from(tasks.named("dokkaJavadoc"))
-}
-
-tasks.dokkaHtml {
-    pluginConfiguration<VersioningPlugin, VersioningConfiguration> {
-        version = "0.2.0"
-        olderVersionsDir = file("documentation/api/version")
-        renderVersionsNavigationOnAllPages = true
-    }
+    from(tasks.named("dokkaGenerate"))
 }
 
 gradlePlugin { isAutomatedPublishing = false }
