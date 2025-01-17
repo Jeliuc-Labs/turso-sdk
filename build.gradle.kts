@@ -20,6 +20,7 @@ plugins {
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
     id("org.jetbrains.dokka") version "2.0.0"
+    id("org.jetbrains.dokka-javadoc") version "2.0.0"
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
 
     `maven-publish`
@@ -94,6 +95,10 @@ tasks.named<Jar>("javadocJar") {
     from(tasks.named("dokkaGenerate"))
 }
 
+tasks.named("signCentralPortalPublication") {
+    dependsOn("javadocJar")
+}
+
 gradlePlugin { isAutomatedPublishing = false }
 publishing {
     publications {
@@ -122,16 +127,6 @@ centralPortal {
     username = sonatypeUsername
     password = sonatypePassword
     name = "turso-sdk-jvm"
-
-    sourcesJarTask =
-        tasks.create<Jar>("sourcesEmptyJar") {
-            archiveClassifier = "sources"
-        }
-
-    javadocJarTask =
-        tasks.create<Jar>("javadocEmptyJar") {
-            archiveClassifier = "javadoc"
-        }
 
     pom {
         name = "Turso Platform SDK"
