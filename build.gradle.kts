@@ -15,8 +15,9 @@ group = "com.jeliuc"
 version = System.getenv("SDK_VERSION") ?: sdkVersion
 
 plugins {
-    kotlin("jvm").version("1.9.20")
-    kotlin("plugin.serialization").version("1.9.20")
+    `kotlin-dsl`
+    kotlin("jvm") version "2.1.0"
+    kotlin("plugin.serialization").version("2.1.0")
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
     id("org.jetbrains.dokka") version "2.0.0"
@@ -24,7 +25,6 @@ plugins {
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
 
     `maven-publish`
-    `kotlin-dsl`
     signing
 }
 

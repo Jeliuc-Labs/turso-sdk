@@ -1,24 +1,84 @@
 {
   "databases": [
     {
-      "Name": "my-db",
-      "DbId": "0eb771dd-6906-11ee-8553-eaa7715aeaf2",
-      "Hostname": "[databaseName]-[organizationSlug].turso.io",
+      "Name": "example-database",
+      "DbId": "a2f1d1c8-bfd7-11ee-897f-822b15a0bd8c",
+      "Hostname": "example-database-a2xchip.turso.io",
+      "is_schema": false,
       "block_reads": false,
       "block_writes": false,
       "allow_attach": false,
       "regions": [
-        "lhr",
-        "bos",
-        "nrt"
+        "otp"
       ],
-      "primaryRegion": "lhr",
+      "primaryRegion": "otp",
       "type": "logical",
-      "version": "0.22.22",
+      "hostname": "example-database-a2xchip.turso.io",
+      "version": "0.24.29",
       "group": "default",
+      "sleeping": false,
+      "archived": false,
+      "schema": null
+    },
+    {
+      "Name": "new-database",
+      "DbId": "ec97c157-5c8e-47ad-abe3-2b0af4079af8",
+      "Hostname": "new-database-a2xchip.turso.io",
       "is_schema": false,
-      "schema": "",
-      "archived": false
+      "block_reads": false,
+      "block_writes": false,
+      "allow_attach": false,
+      "regions": [
+        "otp"
+      ],
+      "primaryRegion": "otp",
+      "type": "logical",
+      "hostname": "new-database-a2xchip.turso.io",
+      "version": "0.24.29",
+      "group": "default",
+      "sleeping": false,
+      "archived": false,
+      "schema": null
+    },
+    {
+      "Name": "org-db",
+      "DbId": "3ffbf4dd-958d-4c87-b89d-3bf1499c7a94",
+      "Hostname": "org-db-a2xchip.turso.io",
+      "is_schema": true,
+      "block_reads": false,
+      "block_writes": false,
+      "allow_attach": false,
+      "regions": [
+        "otp"
+      ],
+      "primaryRegion": "otp",
+      "type": "logical",
+      "hostname": "org-db-a2xchip.turso.io",
+      "version": "0.24.29",
+      "group": "default",
+      "sleeping": false,
+      "archived": false,
+      "schema": null
+    },
+    {
+      "Name": "some-org",
+      "DbId": "7984ca66-28b0-4244-8ba9-392e5c835fc6",
+      "Hostname": "some-org-a2xchip.turso.io",
+      "is_schema": false,
+      "block_reads": false,
+      "block_writes": false,
+      "allow_attach": false,
+      "regions": [
+        "otp"
+      ],
+      "primaryRegion": "otp",
+      "type": "logical",
+      "hostname": "some-org-a2xchip.turso.io",
+      "version": "0.24.29",
+      "group": "default",
+      "sleeping": false,
+      "archived": false,
+      "schema": "3ffbf4dd-958d-4c87-b89d-3bf1499c7a94"
     }
   ]
 }
