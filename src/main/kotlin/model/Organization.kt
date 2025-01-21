@@ -100,7 +100,6 @@ data class OrganizationDatabaseUsage(
 data class DatabaseUsage(
     @SerialName("uuid") val uuid: String,
     @SerialName("instances") val instances: List<InstanceUsage>,
-    @SerialName("total") val total: Usage,
 )
 
 @Serializable
@@ -109,9 +108,9 @@ data class OrganizationUsage(
     @SerialName("rows_written") val rowsWritten: Long,
     @SerialName("databases") val databases: Int,
     @SerialName("locations") val locations: Int,
-    @SerialName("storage") val storage: Long,
     @SerialName("groups") val groups: Int,
     @SerialName("bytes_synced") val bytesSynced: Long,
+    @SerialName("storage_bytes") val storage: Long,
 )
 
 @Serializable

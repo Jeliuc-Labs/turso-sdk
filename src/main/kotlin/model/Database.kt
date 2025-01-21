@@ -90,6 +90,8 @@ data class ConfigurationResponse(
 
 @Serializable
 data class UpdateConfigurationRequest(
+    @SerialName("block_reads") val blockReads: Boolean,
+    @SerialName("block_writes") val blockWrites: Boolean,
     @SerialName("size_limit") val sizeLimit: String,
     @SerialName("allow_attach") val allowAttach: Boolean,
 )
@@ -99,6 +101,7 @@ data class Usage(
     @SerialName("rows_read") val rowsRead: Long,
     @SerialName("rows_written") val rowsWritten: Long,
     @SerialName("storage_bytes") val storageBytes: Long,
+    @SerialName("bytes_synced") val bytesSynced: Long,
 )
 
 @Serializable
@@ -111,7 +114,7 @@ data class InstanceUsage(
 data class Instances<T>(
     @SerialName("uuid") val uuid: String,
     @SerialName("instances") val instances: List<T>,
-    @SerialName("total") val total: Usage,
+    @SerialName("usage") val usage: InstanceUsage,
 )
 
 @Serializable
@@ -125,7 +128,8 @@ data class Instance(
 
 @Serializable
 data class DatabaseUsageResponse(
-    @SerialName("database") val database: Instances<InstanceUsage>,
+    // @SerialName("database") val database: Instances<InstanceUsage>,
+    @SerialName("total") val total: Usage,
 )
 
 @Serializable
@@ -145,7 +149,7 @@ data class InstanceResponse(
 
 @Serializable
 data class StatsResponse(
-    @SerialName("top_queries") val topQueries: List<QueryStatistics>,
+    @SerialName("top_queries") val topQueries: List<QueryStatistics>? = null,
 )
 
 @Serializable

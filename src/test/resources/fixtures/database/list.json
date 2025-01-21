@@ -59,26 +59,6 @@
       "sleeping": false,
       "archived": false,
       "schema": null
-    },
-    {
-      "Name": "some-org",
-      "DbId": "7984ca66-28b0-4244-8ba9-392e5c835fc6",
-      "Hostname": "some-org-a2xchip.turso.io",
-      "is_schema": false,
-      "block_reads": false,
-      "block_writes": false,
-      "allow_attach": false,
-      "regions": [
-        "otp"
-      ],
-      "primaryRegion": "otp",
-      "type": "logical",
-      "hostname": "some-org-a2xchip.turso.io",
-      "version": "0.24.29",
-      "group": "default",
-      "sleeping": false,
-      "archived": false,
-      "schema": "3ffbf4dd-958d-4c87-b89d-3bf1499c7a94"
     }
   ]
 }

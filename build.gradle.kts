@@ -10,6 +10,7 @@ val spaceMavenRepositoryUrl: String by project
 val sonatypeUsername: String by project
 val sonatypePassword: String by project
 val sdkVersion: String by project
+val junitVersion: String by project
 
 group = "com.jeliuc"
 version = System.getenv("SDK_VERSION") ?: sdkVersion
@@ -33,11 +34,22 @@ repositories {
     mavenCentral()
 }
 
+sourceSets {
+    create("integrationTest") {
+        kotlin.srcDir("src/integrationTest/kotlin")
+        resources.srcDir("src/integrationTest/resources")
+
+        compileClasspath += sourceSets["main"].output
+        runtimeClasspath += output + compileClasspath
+    }
+}
+
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
+
     dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.0.0")
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
@@ -45,6 +57,22 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:$dateTimeVersion")
+
+    add("integrationTestImplementation", kotlin("test"))
+    add("integrationTestImplementation", "org.junit.jupiter:junit-jupiter:5.10.0")
+    add("integrationTestRuntimeOnly", "org.junit.platform:junit-platform-launcher")
+}
+
+configurations["integrationTestImplementation"].extendsFrom(configurations["testImplementation"])
+configurations["integrationTestRuntimeOnly"].extendsFrom(configurations["testRuntimeOnly"])
+
+tasks.register<Test>("integrationTest") {
+    description = "Runs integration tests."
+    group = "verification"
+    testClassesDirs = sourceSets["integrationTest"].output.classesDirs
+    classpath = sourceSets["integrationTest"].runtimeClasspath
+    useJUnitPlatform()
+    shouldRunAfter(tasks.named("test"))
 }
 
 tasks.test {

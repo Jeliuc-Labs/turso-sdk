@@ -230,7 +230,13 @@ class DatabasesTest {
     @Test
     fun `can update database configuration`() {
         runBlocking {
-            val configurationUpdate = UpdateConfigurationRequest(sizeLimit = "20M", allowAttach = true)
+            val configurationUpdate =
+                UpdateConfigurationRequest(
+                    blockReads = true,
+                    blockWrites = false,
+                    sizeLimit = "20M",
+                    allowAttach = true,
+                )
             val configuration = client(mockEngine()).databases.updateConfiguration("test", "test-database", configurationUpdate)
             assertIs<ConfigurationResponse>(configuration)
         }
