@@ -1,42 +1,474 @@
 {
   "organization": {
-    "uuid": "fa72ba58-7db3-436b-bcab-14b83eb1dd88",
+    "uuid": "5852473d-5d99-49bf-80d2-a6843a68c061",
     "usage": {
-      "rows_read": 1000000000,
-      "rows_written": 25000000,
-      "databases": 500,
-      "locations": 3,
-      "storage": 9000000000,
-      "groups": 1,
-      "bytes_synced": 3000000000
+      "rows_read": 9,
+      "rows_written": 0,
+      "storage_bytes": 49152,
+      "bytes_synced": 0,
+      "databases": 5,
+      "locations": 1,
+      "groups": 1
     },
     "databases": [
       {
-        "uuid": "0eb771dd-6906-11ee-8553-eaa7715aeaf2",
+        "uuid": "3ffbf4dd-958d-4c87-b89d-3bf1499c7a94",
         "instances": [
           {
-            "uuid": "cd831986-94e5-11ee-a6fe-7a52e1f7759a",
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
             "usage": {
               "rows_read": 0,
               "rows_written": 0,
-              "storage_bytes": 4096
-            }
-          },
-          {
-            "uuid": "0be90471-6906-11ee-8553-eaa7715aeaf2",
-            "usage": {
-              "rows_read": 0,
-              "rows_written": 0,
-              "storage_bytes": 4096
+              "storage_bytes": 12288,
+              "bytes_synced": 0
             }
           }
         ],
-        "total": {
+        "usage": {
           "rows_read": 0,
           "rows_written": 0,
-          "storage_bytes": 8192
+          "storage_bytes": 12288,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "66d389af-8fdb-11ee-81d8-dad4a36c3ccf",
+        "instances": [
+          {
+            "uuid": "61329d5d-8fdb-11ee-81d8-dad4a36c3ccf",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          },
+          {
+            "uuid": "82a05b76-8fdc-11ee-81d8-dad4a36c3ccf",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "a2f1d1c8-bfd7-11ee-897f-822b15a0bd8c",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 9,
+              "rows_written": 0,
+              "storage_bytes": 12288,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 9,
+          "rows_written": 0,
+          "storage_bytes": 12288,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "ec97c157-5c8e-47ad-abe3-2b0af4079af8",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "f88629b3-caf3-44f7-9f6a-ea8719ad6a25",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "2c00f407-3c64-430d-af15-c16cb12589b1",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "464ac7ea-d4dd-11ee-aff8-920d20afefa2",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "4f0d8f65-e2e8-4ce8-8af5-6da211188b35",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "7984ca66-28b0-4244-8ba9-392e5c835fc6",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 16384,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 16384,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "8e78c7e0-c517-11ee-9386-e26d5524e301",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "abaf9c85-4d55-4cce-9ad0-ebc20c87776e",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
+        }
+      },
+      {
+        "uuid": "fca3e897-6c5d-4975-9f29-e8bbf5f433f5",
+        "instances": [
+          {
+            "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+            "usage": {
+              "rows_read": 0,
+              "rows_written": 0,
+              "storage_bytes": 4096,
+              "bytes_synced": 0
+            }
+          }
+        ],
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 0,
+          "bytes_synced": 0
         }
       }
     ]
+  },
+  "databases": {
+    "2c00f407-3c64-430d-af15-c16cb12589b1": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    },
+    "3ffbf4dd-958d-4c87-b89d-3bf1499c7a94": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 12288,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 12288,
+        "bytes_synced": 0
+      }
+    },
+    "464ac7ea-d4dd-11ee-aff8-920d20afefa2": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    },
+    "4f0d8f65-e2e8-4ce8-8af5-6da211188b35": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 4096,
+        "bytes_synced": 0
+      }
+    },
+    "66d389af-8fdb-11ee-81d8-dad4a36c3ccf": {
+      "instances": {
+        "61329d5d-8fdb-11ee-81d8-dad4a36c3ccf": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        },
+        "82a05b76-8fdc-11ee-81d8-dad4a36c3ccf": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    },
+    "7984ca66-28b0-4244-8ba9-392e5c835fc6": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 16384,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 16384,
+        "bytes_synced": 0
+      }
+    },
+    "8e78c7e0-c517-11ee-9386-e26d5524e301": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    },
+    "a2f1d1c8-bfd7-11ee-897f-822b15a0bd8c": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 9,
+          "rows_written": 0,
+          "storage_bytes": 12288,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 9,
+        "rows_written": 0,
+        "storage_bytes": 12288,
+        "bytes_synced": 0
+      }
+    },
+    "abaf9c85-4d55-4cce-9ad0-ebc20c87776e": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    },
+    "ec97c157-5c8e-47ad-abe3-2b0af4079af8": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 4096,
+        "bytes_synced": 0
+      }
+    },
+    "f88629b3-caf3-44f7-9f6a-ea8719ad6a25": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    },
+    "fca3e897-6c5d-4975-9f29-e8bbf5f433f5": {
+      "instances": {
+        "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      },
+      "total": {
+        "rows_read": 0,
+        "rows_written": 0,
+        "storage_bytes": 0,
+        "bytes_synced": 0
+      }
+    }
+  },
+  "total": {
+    "rows_read": 9,
+    "rows_written": 0,
+    "storage_bytes": 49152,
+    "bytes_synced": 0,
+    "databases": 5,
+    "locations": 1,
+    "groups": 1
   }
 }
