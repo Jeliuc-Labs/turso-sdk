@@ -10,6 +10,7 @@ import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationResponse
+import com.jeliuc.turso.sdk.model.SubscriptionResponse
 import com.jeliuc.turso.sdk.resource.organizations
 import io.ktor.client.engine.cio.CIO
 import kotlinx.coroutines.runBlocking
@@ -44,6 +45,16 @@ class OrganizationsIntegrationTest {
             }
 
         assertIs<OrganizationResponse>(organization)
+    }
+
+    @Test
+    fun `can retrieve current subscription`() {
+        val subscription =
+            runBlocking {
+                getClient().organizations.subscription(organization)
+            }
+
+        assertIs<SubscriptionResponse>(subscription)
     }
 
     @Test

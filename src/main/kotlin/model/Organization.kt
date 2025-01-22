@@ -62,11 +62,16 @@ data class PlanQuotas(
 )
 
 @Serializable
-data class SubscriptionResponse(
-    @SerialName("subscription") val subscription: String,
+data class Subscription(
+    @SerialName("name") val name: String,
     @SerialName("overages") val overages: Boolean,
     @SerialName("plan") val plan: String,
     @SerialName("timeline") val timeline: String,
+)
+
+@Serializable
+data class SubscriptionResponse(
+    @SerialName("subscription") val subscription: Subscription,
 )
 
 @Serializable
