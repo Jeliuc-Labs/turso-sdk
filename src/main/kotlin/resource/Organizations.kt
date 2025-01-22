@@ -84,6 +84,11 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
             handleResponse<OrganizationResponse>(response)
         }
 
+    /**
+     * Retrieves an organization
+     *
+     * @see <a href="https://docs.turso.tech/api-reference/organizations/retrieve">API Reference</a>
+     */
     suspend fun retrieve(organizationName: String): OrganizationResponse =
         client.httpClient.get(
             Path.organizations(organizationName),

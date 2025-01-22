@@ -1,3 +1,8 @@
+/*
+ * Copyright 2024 Jeliuc.com S.R.L. and Turso SDK contributors.
+ * Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
+ */
+
 package com.jeliuc.turso.sdk
 
 import com.jeliuc.turso.sdk.model.ConfigurationResponse
