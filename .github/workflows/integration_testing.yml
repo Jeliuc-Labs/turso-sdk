@@ -1,11 +1,8 @@
-name: Build
+name: Integration tests
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-  workflow_call:
+  schedule:
+    - cron: '0 0 * * 1'
 
 permissions:
   contents: read
@@ -24,14 +21,6 @@ jobs:
       - name: Setup gradle
         uses: gradle/gradle-build-action@v2
 
-      - name: Code quality
+      - name: Run integration tests
         continue-on-error: false
-        run: ./gradlew ktlintCheck
-
-      - name: Unit tests
-        continue-on-error: false
-        run: ./gradlew test
-
-      - name: Build
-        continue-on-error: false
-        run: ./gradlew build
+        run: ./gradlew integrationTest
