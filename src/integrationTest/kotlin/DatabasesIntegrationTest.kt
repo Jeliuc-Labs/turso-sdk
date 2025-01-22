@@ -154,7 +154,7 @@ class DatabasesIntegrationTest {
         assertIs<ListInstancesResponse>(instances, "Can't deserialize list instances response")
         assertTrue(instances.instances.size > 0, "Zero instances")
 
-        val instanceName = instances.instances.first()!!.name
+        val instanceName = instances.instances.first().name
         val retrievedInstance =
             runBlocking {
                 client.databases.retrieveInstance(
