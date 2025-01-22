@@ -2,6 +2,7 @@ package com.jeliuc.turso.sdk
 
 import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
+import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.resource.organizations
 import io.ktor.client.engine.cio.CIO
 import kotlinx.coroutines.runBlocking
@@ -37,6 +38,16 @@ class OrganizationsIntegrationTest {
             }
 
         assertIs<ListAuditLogsResponse>(logs)
+    }
+
+    @Test
+    fun `can list members`() {
+        val members =
+            runBlocking {
+                getClient().organizations.members.list(organization)
+            }
+
+        assertIs<ListMembersResponse>(members)
     }
 
     private fun getClient(): TursoClient = TursoClient.using(CIO.create(), token)
