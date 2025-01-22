@@ -65,6 +65,13 @@ private fun mockEngine() =
                         )
                     }
 
+                    HttpMethod.Get -> {
+                        respond(
+                            Fixture.content("$fixturesBasePath/organization.json"),
+                            headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
+                        )
+                    }
+
                     else -> error("Unhandled ${method.value} ${url.encodedPath}")
                 }
             }
@@ -245,6 +252,15 @@ class OrganizationsTest {
     fun `can update the organization`() {
         runBlocking {
             client(mockEngine()).organizations.update("test", UpdateOrganizationRequest(true)).let { response ->
+                assertIs<OrganizationResponse>(response)
+            }
+        }
+    }
+
+    @Test
+    fun `can retrieve the organization`() {
+        runBlocking {
+            client(mockEngine()).organizations.retrieve("test").let { response ->
                 assertIs<OrganizationResponse>(response)
             }
         }

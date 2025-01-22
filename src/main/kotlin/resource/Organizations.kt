@@ -84,6 +84,15 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
             handleResponse<OrganizationResponse>(response)
         }
 
+    suspend fun retrieve(organizationName: String): OrganizationResponse =
+        client.httpClient.get(
+            Path.organizations(organizationName),
+        ) {
+            contentType(ContentType.Application.Json)
+        }.let { response ->
+            handleResponse<OrganizationResponse>(response)
+        }
+
     /**
      * List Plans
      *
