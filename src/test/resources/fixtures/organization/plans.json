@@ -1,15 +1,91 @@
-[
-  {
-    "name": "starter",
-    "price": "0",
-    "quotas": {
-      "rowsRead": 1000000000,
-      "rowsWritten": 25000000,
-      "databases": 500,
-      "locations": 3,
-      "storage": 9000000000,
-      "groups": 1,
-      "bytesSynced": 3000000000
+{
+  "plans": [
+    {
+      "name": "starter",
+      "price": "0",
+      "prices": [
+        {
+          "value": "0",
+          "timeline": "monthly"
+        }
+      ],
+      "quotas": {
+        "rowsRead": 1000000000,
+        "rowsWritten": 25000000,
+        "databases": 500,
+        "locations": 3,
+        "storage": 9000000000,
+        "groups": 1,
+        "bytesSynced": 3000000000
+      }
+    },
+    {
+      "name": "hobby",
+      "price": "9",
+      "prices": [
+        {
+          "value": "9",
+          "timeline": "monthly"
+        },
+        {
+          "value": "99",
+          "timeline": "yearly"
+        }
+      ],
+      "quotas": {
+        "rowsRead": 1000000000,
+        "rowsWritten": 25000000,
+        "databases": 500,
+        "locations": 3,
+        "storage": 9000000000,
+        "groups": 1,
+        "bytesSynced": 3000000000
+      }
+    },
+    {
+      "name": "scaler",
+      "price": "29",
+      "prices": [
+        {
+          "value": "29",
+          "timeline": "monthly"
+        },
+        {
+          "value": "299",
+          "timeline": "yearly"
+        }
+      ],
+      "quotas": {
+        "rowsRead": 100000000000,
+        "rowsWritten": 100000000,
+        "databases": 10000,
+        "locations": 6,
+        "storage": 24000000000,
+        "groups": 6,
+        "bytesSynced": 12000000000
+      }
+    },
+    {
+      "name": "pro",
+      "price": "499",
+      "prices": [
+        {
+          "value": "499",
+          "timeline": "monthly"
+        },
+        {
+          "value": "4999",
+          "timeline": "yearly"
+        }
+      ],
+      "quotas": {
+        "rowsRead": 500000000000,
+        "rowsWritten": 250000000,
+        "locations": 10,
+        "storage": 50000000000,
+        "groups": 10,
+        "bytesSynced": 50000000000
+      }
     }
-  }
-]
+  ]
+}

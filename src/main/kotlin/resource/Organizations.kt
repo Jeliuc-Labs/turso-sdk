@@ -17,7 +17,7 @@ import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.MemberResponse
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
-import com.jeliuc.turso.sdk.model.OrganizationPlan
+import com.jeliuc.turso.sdk.model.OrganizationPlansResponse
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.SubscriptionResponse
 import com.jeliuc.turso.sdk.model.UpdateMemberRequest
@@ -103,13 +103,13 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
      *
      * @see <a href="https://docs.turso.tech/api-reference/organizations/plans">API Reference</a>
      */
-    suspend fun plans(organizationName: String): List<OrganizationPlan> =
+    suspend fun plans(organizationName: String): OrganizationPlansResponse =
         client.httpClient.get(
             Path.plans(organizationName),
         ) {
             contentType(ContentType.Application.Json)
         }.let { response ->
-            handleResponse<List<OrganizationPlan>>(response)
+            handleResponse<OrganizationPlansResponse>(response)
         }
 
     /**
