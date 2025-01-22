@@ -9,6 +9,7 @@ import com.jeliuc.turso.sdk.model.InvoicesResponse
 import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
+import com.jeliuc.turso.sdk.model.MemberResponse
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
 import com.jeliuc.turso.sdk.model.OrganizationPlansResponse
@@ -113,12 +114,21 @@ class OrganizationsIntegrationTest {
 
     @Test
     fun `can list members`() {
+        val client = getClient()
         val members =
             runBlocking {
-                getClient().organizations.members.list(organization)
+                client.organizations.members.list(organization)
             }
 
         assertIs<ListMembersResponse>(members)
+
+        val username = members.members.first().username
+        val member =
+            runBlocking {
+                client.organizations.members.retrieve(organization, username)
+            }
+
+        assertIs<MemberResponse>(member)
     }
 
     private fun getClient(): TursoClient = TursoClient.using(CIO.create(), token)
