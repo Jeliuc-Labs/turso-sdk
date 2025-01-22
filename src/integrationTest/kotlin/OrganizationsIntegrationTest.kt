@@ -5,6 +5,7 @@
 
 package com.jeliuc.turso.sdk
 
+import com.jeliuc.turso.sdk.model.InvoicesResponse
 import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
@@ -55,6 +56,16 @@ class OrganizationsIntegrationTest {
             }
 
         assertIs<SubscriptionResponse>(subscription)
+    }
+
+    @Test
+    fun `can list invoices`() {
+        val invoices =
+            runBlocking {
+                getClient().organizations.listInvoices(organization)
+            }
+
+        assertIs<InvoicesResponse>(invoices)
     }
 
     @Test
