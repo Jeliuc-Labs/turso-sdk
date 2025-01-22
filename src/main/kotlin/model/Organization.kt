@@ -44,21 +44,33 @@ data class UpdateOrganizationRequest(
 )
 
 @Serializable
+data class OrganizationPlansResponse(
+    @SerialName("plans") val plans: List<OrganizationPlan>,
+)
+
+@Serializable
 data class OrganizationPlan(
     @SerialName("name") val name: String,
     @SerialName("price") val price: String,
+    @SerialName("prices") val prices: List<PlanPrices>,
     @SerialName("quotas") val quotas: PlanQuotas,
+)
+
+@Serializable
+data class PlanPrices(
+    @SerialName("value") val value: String,
+    @SerialName("timeline") val timeline: String,
 )
 
 @Serializable
 data class PlanQuotas(
     @SerialName("rowsRead") val rowRead: Long,
     @SerialName("rowsWritten") val rowsWritten: Long,
-    @SerialName("databases") val databases: Int,
     @SerialName("locations") val locations: Int,
     @SerialName("storage") val storage: Long,
     @SerialName("groups") val groups: Int,
     @SerialName("bytesSynced") val bytesSynced: Long,
+    @SerialName("databases") val databases: Int? = null,
 )
 
 @Serializable

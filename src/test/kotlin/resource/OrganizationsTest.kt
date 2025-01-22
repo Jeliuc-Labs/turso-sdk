@@ -20,7 +20,7 @@ import com.jeliuc.turso.sdk.model.MemberResponse
 import com.jeliuc.turso.sdk.model.MemberRole
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
-import com.jeliuc.turso.sdk.model.OrganizationPlan
+import com.jeliuc.turso.sdk.model.OrganizationPlansResponse
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.SubscriptionResponse
 import com.jeliuc.turso.sdk.model.UpdateMemberRequest
@@ -270,7 +270,7 @@ class OrganizationsTest {
     fun `can list available plans`() {
         runBlocking {
             client(mockEngine()).organizations.plans("test").let { response ->
-                assertIs<List<OrganizationPlan>>(response)
+                assertIs<OrganizationPlansResponse>(response)
             }
         }
     }

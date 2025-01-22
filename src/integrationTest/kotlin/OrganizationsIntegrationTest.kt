@@ -10,6 +10,8 @@ import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.Organization
+import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
+import com.jeliuc.turso.sdk.model.OrganizationPlansResponse
 import com.jeliuc.turso.sdk.model.OrganizationResponse
 import com.jeliuc.turso.sdk.model.SubscriptionResponse
 import com.jeliuc.turso.sdk.resource.organizations
@@ -60,9 +62,10 @@ class OrganizationsIntegrationTest {
 
     @Test
     fun `can get organization usage`() {
-        val usage = runBlocking {
-            getClient().organizations.usage()
-        }
+        val usage =
+            runBlocking {
+                getClient().organizations.usage(organization)
+            }
 
         assertIs<OrganizationDatabaseUsageResponse>(usage)
     }
@@ -79,11 +82,12 @@ class OrganizationsIntegrationTest {
 
     @Test
     fun `can list plans`() {
-        val plans = runBlocking {
-            getClient().organizations.plans(organization)
-        }
+        val plans =
+            runBlocking {
+                getClient().organizations.plans(organization)
+            }
 
-        assertIs<List<OrganizationPlan>>(plans)
+        assertIs<OrganizationPlansResponse>(plans)
     }
 
     @Test
