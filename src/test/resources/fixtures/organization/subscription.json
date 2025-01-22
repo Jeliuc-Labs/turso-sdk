@@ -1,6 +1,8 @@
 {
-  "subscription": "scaler",
-  "overages": true,
-  "plan": "scaler",
-  "timeline": "monthly"
+  "subscription": {
+    "name": "starter",
+    "overages": false,
+    "plan": "starter",
+    "timeline": "monthly"
+  }
 }
