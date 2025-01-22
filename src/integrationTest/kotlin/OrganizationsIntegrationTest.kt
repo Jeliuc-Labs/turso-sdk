@@ -59,6 +59,15 @@ class OrganizationsIntegrationTest {
     }
 
     @Test
+    fun `can get organization usage`() {
+        val usage = runBlocking {
+            getClient().organizations.usage()
+        }
+
+        assertIs<OrganizationDatabaseUsageResponse>(usage)
+    }
+
+    @Test
     fun `can list invoices`() {
         val invoices =
             runBlocking {
@@ -66,6 +75,15 @@ class OrganizationsIntegrationTest {
             }
 
         assertIs<InvoicesResponse>(invoices)
+    }
+
+    @Test
+    fun `can list plans`() {
+        val plans = runBlocking {
+            getClient().organizations.plans(organization)
+        }
+
+        assertIs<List<OrganizationPlan>>(plans)
     }
 
     @Test
