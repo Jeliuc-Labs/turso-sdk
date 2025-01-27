@@ -3,6 +3,7 @@ name: Integration tests
 on:
   schedule:
     - cron: '0 0 * * 1'
+  workflow_call:
 
 permissions:
   contents: read
