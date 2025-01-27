@@ -1,1 +1,36 @@
-{"database":{"uuid":"4f0d8f65-e2e8-4ce8-8af5-6da211188b35","instances":[{"uuid":"9f182703-bfd7-11ee-897f-822b15a0bd8c","usage":{"rows_read":0,"rows_written":0,"storage_bytes":4096,"bytes_synced":0}}],"usage":{"rows_read":0,"rows_written":0,"storage_bytes":4096,"bytes_synced":0}},"instances":{"9f182703-bfd7-11ee-897f-822b15a0bd8c":{"rows_read":0,"rows_written":0,"storage_bytes":4096,"bytes_synced":0}},"total":{"rows_read":0,"rows_written":0,"storage_bytes":4096,"bytes_synced":0}}
+{
+  "database": {
+    "uuid": "4f0d8f65-e2e8-4ce8-8af5-6da211188b35",
+    "instances": [
+      {
+        "uuid": "9f182703-bfd7-11ee-897f-822b15a0bd8c",
+        "usage": {
+          "rows_read": 0,
+          "rows_written": 0,
+          "storage_bytes": 4096,
+          "bytes_synced": 0
+        }
+      }
+    ],
+    "usage": {
+      "rows_read": 0,
+      "rows_written": 0,
+      "storage_bytes": 4096,
+      "bytes_synced": 0
+    }
+  },
+  "instances": {
+    "9f182703-bfd7-11ee-897f-822b15a0bd8c": {
+      "rows_read": 0,
+      "rows_written": 0,
+      "storage_bytes": 4096,
+      "bytes_synced": 0
+    }
+  },
+  "total": {
+    "rows_read": 0,
+    "rows_written": 0,
+    "storage_bytes": 4096,
+    "bytes_synced": 0
+  }
+}
