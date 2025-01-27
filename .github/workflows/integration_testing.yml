@@ -23,5 +23,8 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Run integration tests
+        env:
+          TURSO_TOKEN: ${{ secrets.TURSO_TOKEN }}
+          TURSO_ORGANIZATION: ${{ secrets.TURSO_ORGANIZATION }}
         continue-on-error: false
         run: ./gradlew integrationTest
