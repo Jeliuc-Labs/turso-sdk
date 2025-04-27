@@ -1,3 +1,4 @@
+import net.thebugmc.gradle.sonatypepublisher.PublishingType
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.kotlin.dsl.invoke
 
@@ -144,6 +145,16 @@ centralPortal {
     username = sonatypeUsername
     password = sonatypePassword
     name = "turso-sdk-jvm"
+
+    sourcesJarTask = tasks.create<Jar>("sourcesEmptyJar") {
+        archiveClassifier = "sources"
+    }
+
+    javadocJarTask = tasks.create<Jar>("javadocEmptyJar") {
+        archiveClassifier = "javadoc"
+    }
+
+    publishingType = PublishingType.AUTOMATIC
 
     pom {
         name = "Turso Platform SDK"

@@ -17,8 +17,8 @@ Add package versions in `gradle.properties`
 Example:
 
 ```
-ktorVersion=2.3.9
-dateTimeVersion=0.6.0-RC.2
+ktorVersion=3.1.2
+dateTimeVersion=0.6.2
 logbackVersion=1.5.1
 tursoSdkVersion=0.2.0 // currently published version
 ```
