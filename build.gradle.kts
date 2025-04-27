@@ -146,13 +146,15 @@ centralPortal {
     password = sonatypePassword
     name = "turso-sdk-jvm"
 
-    sourcesJarTask = tasks.create<Jar>("sourcesEmptyJar") {
-        archiveClassifier = "sources"
-    }
+    sourcesJarTask =
+        tasks.create<Jar>("sourcesEmptyJar") {
+            archiveClassifier = "sources"
+        }
 
-    javadocJarTask = tasks.create<Jar>("javadocEmptyJar") {
-        archiveClassifier = "javadoc"
-    }
+    javadocJarTask =
+        tasks.create<Jar>("javadocEmptyJar") {
+            archiveClassifier = "javadoc"
+        }
 
     publishingType = PublishingType.AUTOMATIC
 
