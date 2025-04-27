@@ -73,15 +73,15 @@ class DatabasesIntegrationTest {
                 )
             }
 
-        assertIs<CreateDatabaseResponse>(createDatabaseResponse, "Not create database response")
+        assertIs<CreateDatabaseResponse>(createDatabaseResponse, "Not a create database response")
 
         val listOfAvailableDatabases =
             runBlocking {
                 client.databases.list(organization)
             }
 
-        assertIs<ListDatabasesResponse>(listOfAvailableDatabases, "Not list databases response")
-        assertNotNull(listOfAvailableDatabases.databases.firstOrNull { it.name == newDatabaseName }, "New database is not in the list")
+        assertIs<ListDatabasesResponse>(listOfAvailableDatabases, "Not a list databases response")
+        assertNotNull(listOfAvailableDatabases.databases.firstOrNull { it.name == newDatabaseName }, "New database has not been enlisted")
 
         val retrievedResponse =
             runBlocking {
@@ -91,8 +91,8 @@ class DatabasesIntegrationTest {
                 )
             }
 
-        assertIs<RetrieveDatabaseResponse>(retrievedResponse, "Not retrieve database response")
-        assertEquals(newDatabaseName, retrievedResponse.database.name, "Incorrect db name retrieved")
+        assertIs<RetrieveDatabaseResponse>(retrievedResponse, "Not a retrieve database response")
+        assertEquals(newDatabaseName, retrievedResponse.database.name, "Retrieved db name is incorrect")
 
         val configuration =
             runBlocking {
@@ -135,13 +135,13 @@ class DatabasesIntegrationTest {
             }
 
         assertIs<DatabaseUsageResponse>(retrievedUsage, "Not a usage response")
-
-        val statsResponse =
-            runBlocking {
-                client.databases.stats(organization, newDatabaseName)
-            }
-
-        assertIs<StatsResponse>(statsResponse, "Not a stats response")
+// TODO remove. Turso says endpoint is deprecated and will not come back.
+//        val statsResponse =
+//            runBlocking {
+//                client.databases.stats(organization, newDatabaseName)
+//            }
+//
+//        assertIs<StatsResponse>(statsResponse, "Not a stats response")
 
         val instances =
             runBlocking {
