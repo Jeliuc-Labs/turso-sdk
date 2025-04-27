@@ -1,10 +1,10 @@
 {
   "database": {
-    "DbId": "8e78c7e0-c517-11ee-9386-e26d5524e301",
-    "Hostname": "new-database-a2xchip.turso.io",
+    "DbId": "623d693d-5fac-43a1-8129-39338f66f252",
+    "Hostname": "my-database-a2xchip.aws-eu-west-1.turso.io",
     "IssuedCertCount": 0,
     "IssuedCertLimit": 0,
-    "Name": "new-database"
+    "Name": "my-database"
   },
   "password": "",
   "username": "a2xchip"
