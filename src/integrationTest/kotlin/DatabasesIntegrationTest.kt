@@ -14,7 +14,6 @@ import com.jeliuc.turso.sdk.model.InstanceResponse
 import com.jeliuc.turso.sdk.model.ListDatabasesResponse
 import com.jeliuc.turso.sdk.model.ListInstancesResponse
 import com.jeliuc.turso.sdk.model.RetrieveDatabaseResponse
-import com.jeliuc.turso.sdk.model.StatsResponse
 import com.jeliuc.turso.sdk.model.UpdateConfigurationRequest
 import com.jeliuc.turso.sdk.resource.databases
 import io.ktor.client.engine.cio.CIO
