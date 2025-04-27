@@ -20,7 +20,7 @@ Example:
 ktorVersion=3.1.2
 dateTimeVersion=0.6.2
 logbackVersion=1.5.1
-tursoSdkVersion=0.2.0 // currently published version
+tursoSdkVersion=0.3.0 // currently published version
 ```
 
 ### Add dependencies
