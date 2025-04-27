@@ -134,17 +134,6 @@ publishing {
             from(components["java"])
         }
     }
-
-    repositories {
-        maven {
-            url = uri(spaceMavenRepositoryUrl)
-            name = "space"
-            credentials {
-                username = System.getenv("SPACE_USERNAME") ?: spaceUsername
-                password = System.getenv("SPACE_PASSWORD") ?: spacePassword
-            }
-        }
-    }
 }
 
 signing {
