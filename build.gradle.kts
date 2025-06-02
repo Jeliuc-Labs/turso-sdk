@@ -60,7 +60,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime-jvm:$dateTimeVersion")
 
     add("integrationTestImplementation", kotlin("test"))
-    add("integrationTestImplementation", "org.junit.jupiter:junit-jupiter:5.12.2")
+    add("integrationTestImplementation", "org.junit.jupiter:junit-jupiter:5.13.0")
     add("integrationTestRuntimeOnly", "org.junit.platform:junit-platform-launcher")
 }
 
