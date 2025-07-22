@@ -105,7 +105,6 @@ class DatabasesIntegrationTest {
                 blockReads = false,
                 blockWrites = false,
                 sizeLimit = "1M",
-                allowAttach = false,
             )
 
         val updateConfigurationResponse =
