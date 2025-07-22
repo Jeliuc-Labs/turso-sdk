@@ -235,7 +235,6 @@ class DatabasesTest {
                     blockReads = true,
                     blockWrites = false,
                     sizeLimit = "20M",
-                    allowAttach = true,
                 )
             val configuration = client(mockEngine()).databases.updateConfiguration("test", "test-database", configurationUpdate)
             assertIs<ConfigurationResponse>(configuration)
