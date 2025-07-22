@@ -83,7 +83,6 @@ data class RetrieveDatabaseResponse(
 @Serializable
 data class ConfigurationResponse(
     @SerialName("size_limit") val sizeLimit: String,
-    @SerialName("allow_attach") val allowAttach: Boolean,
     @SerialName("block_reads") val blockReads: Boolean,
     @SerialName("block_writes") val blockWrites: Boolean,
 )
@@ -93,7 +92,6 @@ data class UpdateConfigurationRequest(
     @SerialName("block_reads") val blockReads: Boolean,
     @SerialName("block_writes") val blockWrites: Boolean,
     @SerialName("size_limit") val sizeLimit: String,
-    @SerialName("allow_attach") val allowAttach: Boolean,
 )
 
 @Serializable
