@@ -12,6 +12,7 @@ val sonatypeUsername: String by project
 val sonatypePassword: String by project
 val sdkVersion: String by project
 val junitVersion: String by project
+val dokkaVersion: String by project
 
 group = "com.jeliuc"
 version = System.getenv("SDK_VERSION") ?: sdkVersion
@@ -19,11 +20,12 @@ version = System.getenv("SDK_VERSION") ?: sdkVersion
 plugins {
     `kotlin-dsl`
     kotlin("jvm") version "2.2.20"
-    kotlin("plugin.serialization").version("2.1.0")
+    kotlin("plugin.serialization").version("2.2.20")
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
-    id("org.jetbrains.dokka") version "2.1.0"
-    id("org.jetbrains.dokka-javadoc") version "2.0.0"
+
+    id("org.jetbrains.dokka") version providers.gradleProperty("dokkaVersion").get()
+    id("org.jetbrains.dokka-javadoc") version providers.gradleProperty("dokkaVersion").get()
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
 
     `maven-publish`
@@ -51,7 +53,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
 
-    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.0.0")
+    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:${providers.gradleProperty("dokkaVersion").get()}")
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
@@ -102,8 +104,8 @@ sourceSets.test {
 
 buildscript {
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:2.0.0")
-        classpath("org.jetbrains.dokka:versioning-plugin:2.0.0")
+        classpath("org.jetbrains.dokka:dokka-base:${providers.gradleProperty("dokkaVersion").get()}")
+        classpath("org.jetbrains.dokka:versioning-plugin:${providers.gradleProperty("dokkaVersion").get()}")
     }
 }
 
