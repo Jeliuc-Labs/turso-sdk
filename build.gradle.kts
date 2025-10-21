@@ -23,7 +23,7 @@ plugins {
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
     id("org.jetbrains.dokka") version "2.1.0"
-    id("org.jetbrains.dokka-javadoc") version "2.0.0"
+    id("org.jetbrains.dokka-javadoc") version "2.1.0"
     id("net.thebugmc.gradle.sonatype-central-portal-publisher") version "1.2.4"
 
     `maven-publish`
@@ -51,7 +51,7 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.ktor:ktor-client-mock:$ktorVersion")
 
-    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.0.0")
+    dokkaHtmlPlugin("org.jetbrains.dokka:versioning-plugin:2.1.0")
 
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-cio:$ktorVersion")
@@ -102,8 +102,8 @@ sourceSets.test {
 
 buildscript {
     dependencies {
-        classpath("org.jetbrains.dokka:dokka-base:2.0.0")
-        classpath("org.jetbrains.dokka:versioning-plugin:2.0.0")
+        classpath("org.jetbrains.dokka:dokka-base:2.1.0")
+        classpath("org.jetbrains.dokka:versioning-plugin:2.1.0")
     }
 }
 
