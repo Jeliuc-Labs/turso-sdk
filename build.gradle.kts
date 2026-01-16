@@ -19,7 +19,7 @@ version = System.getenv("SDK_VERSION") ?: sdkVersion
 
 plugins {
     `kotlin-dsl`
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.0"
     kotlin("plugin.serialization").version("2.2.20")
 
     id("org.jlleitschuh.gradle.ktlint").version("12.0.3")
