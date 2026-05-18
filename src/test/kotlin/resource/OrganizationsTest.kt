@@ -332,13 +332,13 @@ class OrganizationsTest {
     @Test
     fun `can add a member to an organization`() {
         runBlocking {
-            client(mockEngine()).organizations.members.add("test", CreateMember("Alex", MemberRole.ADMIN))
+            client(mockEngine()).organizations.members.add("test", CreateMember(username ="Alex", role = MemberRole.ADMIN))
                 .let { response ->
                     assertIs<CreateMemberResponse>(response)
                 }
 
             assertThrows<IllegalArgumentException> {
-                client(mockEngine()).organizations.members.add("test", CreateMember("Alex", MemberRole.OWNER))
+                client(mockEngine()).organizations.members.add("test", CreateMember(username = "Alex", role = MemberRole.OWNER))
             }
         }
     }
@@ -373,7 +373,7 @@ class OrganizationsTest {
     @Test
     fun `can create an organization invite`() {
         runBlocking {
-            client(mockEngine()).organizations.invites.create("test", CreateMember("Alex", MemberRole.ADMIN))
+            client(mockEngine()).organizations.invites.create("test", CreateMember(username = "Alex", role = MemberRole.ADMIN))
                 .let { response ->
                     assertIs<CreateInviteResponse>(response)
                 }
