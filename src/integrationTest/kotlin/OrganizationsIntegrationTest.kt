@@ -5,11 +5,13 @@
 
 package com.jeliuc.turso.sdk
 
+import com.jeliuc.turso.sdk.model.CreateMember
 import com.jeliuc.turso.sdk.model.InvoicesResponse
 import com.jeliuc.turso.sdk.model.ListAuditLogsResponse
 import com.jeliuc.turso.sdk.model.ListInvitesResponse
 import com.jeliuc.turso.sdk.model.ListMembersResponse
 import com.jeliuc.turso.sdk.model.MemberResponse
+import com.jeliuc.turso.sdk.model.MemberRole
 import com.jeliuc.turso.sdk.model.Organization
 import com.jeliuc.turso.sdk.model.OrganizationDatabaseUsageResponse
 import com.jeliuc.turso.sdk.model.OrganizationPlansResponse
@@ -99,6 +101,26 @@ class OrganizationsIntegrationTest {
             }
 
         assertIs<ListInvitesResponse>(invitations)
+    }
+
+    @Test
+    @Ignore("The free plan we currently use doesn't support this endpoint")
+    fun `can send and delete invitation`() {
+        val email = "turso_user@jeliuc.com"
+        val invite = CreateMember(role = MemberRole.MEMBER, email = email)
+        val inviteResponse =
+            runBlocking {
+                getClient().organizations.invites.create(organization, invite)
+            }
+
+        assertIs<ListInvitesResponse>(inviteResponse)
+
+        val deleteInviteResponse =
+            runBlocking {
+                getClient().organizations.invites.delete(organization, email)
+            }
+
+        assertIs<Unit>(deleteInviteResponse)
     }
 
     @Test

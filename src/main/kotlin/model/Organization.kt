@@ -162,8 +162,9 @@ enum class MemberRole {
 
 @Serializable
 data class CreateMember(
-    @SerialName("username") val username: String,
     @SerialName("role") val role: MemberRole,
+    @SerialName("username") val username: String? = null,
+    @SerialName("email") val email: String? = null,
 ) {
     init {
         require(MemberRole.OWNER != role) { "Owner role is not allowed" }
