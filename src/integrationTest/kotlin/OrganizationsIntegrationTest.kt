@@ -92,7 +92,6 @@ class OrganizationsIntegrationTest {
     }
 
     @Test
-    @Ignore("The free plan we currently use doesn't support this endpoint")
     fun `can list invitations`() {
         val invitations =
             runBlocking {

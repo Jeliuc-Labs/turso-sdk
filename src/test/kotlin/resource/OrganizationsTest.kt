@@ -186,7 +186,7 @@ private fun mockEngine() =
 
                     HttpMethod.Post -> {
                         respond(
-                            Fixture.content("$fixturesBasePath/invite/create.json"),
+                            Fixture.content("$fixturesBasePath/invite/created.json"),
                             headers = headersOf("Content-Type" to listOf(ContentType.Application.Json.toString())),
                         )
                     }
