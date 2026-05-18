@@ -168,6 +168,7 @@ data class CreateMember(
 ) {
     init {
         require(MemberRole.OWNER != role) { "Owner role is not allowed" }
+        require(username == null || email == null) { "User username or email. Don't specify both." }
     }
 }
 
