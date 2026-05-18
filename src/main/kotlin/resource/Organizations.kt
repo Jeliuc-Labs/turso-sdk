@@ -152,10 +152,18 @@ class Organizations(val client: TursoClient) : ResponseHandler() {
 
     internal object Path {
         private const val BASE_PATH = "/v1/organizations"
+        private const val BASE_PATH2 = "/v2/organizations"
 
         fun organizations() = BASE_PATH
 
-        fun organizations(organizationName: String) = "$BASE_PATH/$organizationName"
+        fun organizations(
+            organizationName: String,
+            version: Int = 1,
+        ) = if (1 == version) {
+            "$BASE_PATH/$organizationName"
+        } else {
+            "$BASE_PATH2/$organizationName"
+        }
 
         fun plans(organizationName: String) = organizations(organizationName) + "/plans"
 
@@ -318,7 +326,7 @@ class Invites(val client: TursoClient) : ResponseHandler() {
         }
 
     internal object Path {
-        fun invites(organizationName: String) = "${Organizations.Path.organizations(organizationName)}/invites"
+        fun invites(organizationName: String) = "${Organizations.Path.organizations(organizationName, 2)}/invites"
 
         fun delete(
             organizationName: String,

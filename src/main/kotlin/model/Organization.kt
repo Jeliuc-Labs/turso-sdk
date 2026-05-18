@@ -205,21 +205,22 @@ data class ListInvitesResponse(
 
 @Serializable
 data class Invite(
-    @SerialName("ID") val id: Int,
-    @SerialName("CreatedAt") val createdAt: Instant,
-    @SerialName("UpdatedAt") val updatedAt: Instant,
-    @SerialName("DeletedAt") val deletedAt: Instant,
-    @SerialName("Role") val role: MemberRole,
-    @SerialName("Email") val email: String,
-    @SerialName("OrganizationID") val organizationID: Int,
-    @SerialName("Token") val token: String,
-    @SerialName("Organization") val organization: Organization,
-    @SerialName("Accepted") val accepted: Boolean,
+    @SerialName("id") val id: Int,
+    @SerialName("email") val email: String,
+    @SerialName("role") val role: MemberRole,
+    @SerialName("created_at") val createdAt: Instant,
+)
+
+@Serializable
+data class CreatedInvite(
+    @SerialName("email") val email: String,
+    @SerialName("role") val role: MemberRole,
+    @SerialName("organization") val organization: String,
 )
 
 @Serializable
 data class CreateInviteResponse(
-    @SerialName("invited") val invited: Invite,
+    @SerialName("invited") val invited: CreatedInvite,
 )
 
 @Serializable
