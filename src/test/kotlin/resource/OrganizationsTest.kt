@@ -332,7 +332,7 @@ class OrganizationsTest {
     @Test
     fun `can add a member to an organization`() {
         runBlocking {
-            client(mockEngine()).organizations.members.add("test", CreateMember(username ="Alex", role = MemberRole.ADMIN))
+            client(mockEngine()).organizations.members.add("test", CreateMember(username = "Alex", role = MemberRole.ADMIN))
                 .let { response ->
                     assertIs<CreateMemberResponse>(response)
                 }
